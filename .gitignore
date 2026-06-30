@@ -1,0 +1,23 @@
+
+# Virtual environment
+venv/
+
+# Python
+__pycache__/
+*.pyc
+
+# AI models
+models/
+
+# Runtime data
+incoming/
+archive/
+crops/
+logs/
+
+# VS Code
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
