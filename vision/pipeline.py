@@ -13,7 +13,7 @@ from vision.detector import (
 )
 
 from vision.classifier import classify
-from vision.species import SPECIES_NL
+from vision.species import SPECIES_INFO
 
 
 def detect_and_classify(image_path):
@@ -49,7 +49,7 @@ def detect_and_classify(image_path):
 
         prediction = classify(crop)
 
-        prediction["species"] = SPECIES_NL.get(
+        prediction["species"] = SPECIES_INFO.get(
             prediction["species"],
             prediction["species"]
         )

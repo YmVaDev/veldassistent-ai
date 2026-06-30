@@ -1,5 +1,5 @@
 
-SPECIES_NL = {
+SPECIES_INFO = {
     "Great tit": "Koolmees",
     "Blue tit": "Pimpelmees",
     "European robin": "Roodborst",

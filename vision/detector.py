@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 
 
-def letterbox(image, new_shape=(416, 416), color=(114, 114, 114)):
+def letterbox(image, new_shape=(384, 384), color=(114, 114, 114)):
     h, w = image.shape[:2]
 
     r = min(new_shape[0] / h, new_shape[1] / w)
@@ -57,7 +57,8 @@ def preprocess(image):
 import onnxruntime as ort
 
 
-MODEL = "/opt/oostakkerbos/models/birds/detector/bird_crop_detector_accurate_yolox_tiny.onnx"
+from config import MODEL_DIR
+MODEL = MODEL_DIR / "birds" / "detector" / "bird_crop_detector_accurate_yolox_tiny.onnx"
 
 session = ort.InferenceSession(MODEL)
 
@@ -66,10 +67,12 @@ def inference(image):
 
     tensor, ratio, pad = preprocess(image)
 
+    input_name = session.get_inputs()[0].name
+
     output = session.run(
         None,
         {
-            "images": tensor
+            input_name: tensor
         }
     )[0]
 
@@ -115,7 +118,7 @@ def debug_boxes(output):
         )
 
 def generate_grids_and_strides(
-    input_size=416,
+    input_size=384,
     strides=(8, 16, 32),
 ):
     grids = []

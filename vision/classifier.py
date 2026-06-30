@@ -3,8 +3,9 @@ import numpy as np
 import onnxruntime as ort
 from PIL import Image
 
-MODEL = "/opt/oostakkerbos/models/birds/onnx/convnext_v1_tiny_eu_common.onnx"
-LABELS = "/opt/oostakkerbos/models/birds/onnx/convnext_v1_tiny_eu_common_labels.txt"
+from config import MODEL_DIR
+MODEL = MODEL_DIR / "birds" / "detector" / "bird_crop_detector_accurate_yolox_tiny.onnx"
+LABELS = MODEL_DIR / "birds" / "onnx" / "convnext_v1_tiny_eu_common_labels.txt"
 
 session = ort.InferenceSession(MODEL)
 
@@ -32,7 +33,7 @@ def classify(image):
     outputs = session.run(
         None,
         {
-            "input": x
+            "images": x
         }
     )
 
