@@ -4,7 +4,7 @@ import time
 import requests
 
 LABELS = Path("models/birds/onnx/convnext_v1_tiny_eu_common_labels.txt")
-OUTPUT = Path("data/species.json")
+OUTPUT = Path("birds/species.json")
 
 species = {}
 

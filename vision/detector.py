@@ -4,7 +4,6 @@ import numpy as np
 
 from config import DETECTOR_SIZE
 
-
 def letterbox(image, new_shape=(DETECTOR_SIZE, DETECTOR_SIZE), color=(114, 114, 114)):
     h, w = image.shape[:2]
 

@@ -7,7 +7,7 @@ import json
 from config import BASE_DIR
 
 with open(
-    BASE_DIR / "data" / "species.json",
+    BASE_DIR / "models" / "birds" / "classifier" / "species.json",
     encoding="utf-8"
 ) as f:
     species_map = json.load(f)
