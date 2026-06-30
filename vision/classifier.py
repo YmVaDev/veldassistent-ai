@@ -4,7 +4,9 @@ import onnxruntime as ort
 from PIL import Image
 
 from config import MODEL_DIR
-MODEL = MODEL_DIR / "birds" / "detector" / "bird_crop_detector_accurate_yolox_tiny.onnx"
+from config import CLASSIFIER_SIZE
+
+MODEL = MODEL_DIR / "birds" / "onnx" / "convnext_v1_tiny_eu_common.onnx"
 LABELS = MODEL_DIR / "birds" / "onnx" / "convnext_v1_tiny_eu_common_labels.txt"
 
 session = ort.InferenceSession(MODEL)
@@ -20,7 +22,7 @@ def classify(image):
 
     img = Image.fromarray(image)
 
-    img = img.resize((384, 384), Image.Resampling.BICUBIC)
+    img = img.resize((CLASSIFIER_SIZE, CLASSIFIER_SIZE), Image.Resampling.BICUBIC)
 
     x = np.asarray(img).astype(np.float32)
 
@@ -30,20 +32,34 @@ def classify(image):
 
     x = np.expand_dims(x, axis=0)
 
+    print("Input:", session.get_inputs()[0].shape)
+
+    print("Classifier verwacht:", session.get_inputs()[0].shape)
+    print("Classifier tensor:", x.shape)
+
     outputs = session.run(
         None,
         {
-            "images": x
+            "input": x
         }
     )
 
+    print("Aantal outputs:", len(outputs))
+    print("Classifier tensor:", x.shape)
+    print("Expected:", session.get_inputs()[0].shape)
+
+    for i, out in enumerate(outputs):
+        print(i, out.shape, out.dtype)
+
     logits = outputs[0]
 
-    idx = int(np.argmax(logits))
+    idx = int(np.argmax(logits[0]))
 
     score = float(logits[0][idx])
 
+    english = labels[idx]
+
     return {
-        "species": labels[idx],
-        "score": score,
+        "species": english,
+        "score": score
     }

@@ -3,6 +3,15 @@ import uuid
 import os
 import cv2
 
+import json
+from config import BASE_DIR
+
+with open(
+    BASE_DIR / "data" / "species.json",
+    encoding="utf-8"
+) as f:
+    species_map = json.load(f)
+
 from vision.detector import (
     inference,
     decode_outputs,
@@ -13,8 +22,6 @@ from vision.detector import (
 )
 
 from vision.classifier import classify
-from vision.species import SPECIES_INFO
-
 
 def detect_and_classify(image_path):
 
@@ -47,23 +54,38 @@ def detect_and_classify(image_path):
 
     for det, crop in zip(detections, crops):
 
-        prediction = classify(crop)
-
-        prediction["species"] = SPECIES_INFO.get(
-            prediction["species"],
-            prediction["species"]
-        )
-
         filename = f"crops/{uuid.uuid4().hex}.jpg"
 
         web_path_original = image_path.replace ("/opt/oostakkerbos","")
 
         cv2.imwrite(filename, crop)
 
+        prediction = classify(crop)
+
+        english = prediction["species"]
+
+        species = species_map.get(
+            english,
+            {
+                "la": None,
+                "gbif": None
+            }
+        )
+
+        prediction["species"] = {
+            "en": english,
+            "la": species["la"],
+            "gbif": species["gbif"]
+        }
+
         prediction["score"] = round(float(prediction["score"]), 1)
 
         results.append({
-            "species": prediction["species"],
+            "species": {
+                "en": english,
+                "la": species["la"],
+                "gbif": species["gbif"]
+            },
             "score": prediction["score"],
             "box": det["box"],
             "crop_path": filename,

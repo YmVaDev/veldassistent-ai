@@ -1,0 +1,2830 @@
+{
+    "African blue tit": {
+        "la": "Cyanistes teneriffae (R.P.Lesson, 1831)",
+        "gbif": 165920799
+    },
+    "African desert warbler": {
+        "la": "Curruca deserti",
+        "gbif": 100174421
+    },
+    "Algerian nuthatch": {
+        "la": "Sitta ledanti Vielliard 1976",
+        "gbif": 119245271
+    },
+    "Alpine accentor": {
+        "la": "Prunella collaris (Scopoli, 1769)",
+        "gbif": 165911713
+    },
+    "Alpine chough": {
+        "la": "Pyrrhocorax graculus",
+        "gbif": 116896722
+    },
+    "Alpine swift": {
+        "la": "Hirundo melba (Linnaeus, 1758)",
+        "gbif": 143705702
+    },
+    "American bittern": {
+        "la": "Botaurus lentiginosus (Rackett, 1813)",
+        "gbif": 160796328
+    },
+    "American black duck": {
+        "la": null,
+        "gbif": null
+    },
+    "American golden plover": {
+        "la": "Charadrius dominicus (Mueller, 1776)",
+        "gbif": 121513293
+    },
+    "American robin": {
+        "la": "Turdus migratorius",
+        "gbif": 104139761
+    },
+    "American wigeon": {
+        "la": null,
+        "gbif": null
+    },
+    "Aquatic warbler": {
+        "la": "Acrocephalus paludicola (Vieillot, 1817)",
+        "gbif": 114134110
+    },
+    "Arabian babbler": {
+        "la": "Turdoides squamiceps",
+        "gbif": 133158304
+    },
+    "Arabian green bee-eater": {
+        "la": "Merops cyanophrys (Cabanis & Heine, 1860)",
+        "gbif": 184544642
+    },
+    "Arabian warbler": {
+        "la": "Sylvia leucomelaena (Hemprich & Ehrenberg, 1833)",
+        "gbif": 5231306
+    },
+    "Arctic redpoll": {
+        "la": "Acanthis hornemanni (Holböll, 1843)",
+        "gbif": 102096992
+    },
+    "Arctic tern": {
+        "la": "Sterna paradisaea Pontoppidan, 1763",
+        "gbif": 144096950
+    },
+    "Arctic warbler": {
+        "la": "Phylloscopus borealis (Blasius, 1858)",
+        "gbif": 176634038
+    },
+    "Armenian gull": {
+        "la": "Larus armenicus Buturlin 1934",
+        "gbif": 114099595
+    },
+    "Asian brown flycatcher": {
+        "la": "Muscicapa latirostris",
+        "gbif": 100154889
+    },
+    "Asian crimson-winged finch": {
+        "la": "Rhodopechys sanguineus (Gould, 1838)",
+        "gbif": 165829283
+    },
+    "Asian desert warbler": {
+        "la": "Sylvia nana",
+        "gbif": 104135817
+    },
+    "Atlantic canary": {
+        "la": "Serinus canaria (Linnaeus, 1758)",
+        "gbif": 165911987
+    },
+    "Atlantic puffin": {
+        "la": "Fratercula arctica (Linnaeus, 1758)",
+        "gbif": 165902959
+    },
+    "Atlas pied flycatcher": {
+        "la": "Ficedula speculigera (Bonaparte, 1850)",
+        "gbif": 165915198
+    },
+    "Atlas wheatear": {
+        "la": "Oenanthe seebohmi (Dixon, 1882)",
+        "gbif": 165913361
+    },
+    "Audouins gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Azure tit": {
+        "la": "Cyanistes cyanus",
+        "gbif": 133153548
+    },
+    "Azure-winged magpie": {
+        "la": "Cyanopica cyanus",
+        "gbif": 133155298
+    },
+    "Baikal teal": {
+        "la": null,
+        "gbif": null
+    },
+    "Baillons crake": {
+        "la": null,
+        "gbif": null
+    },
+    "Bairds sandpiper": {
+        "la": null,
+        "gbif": null
+    },
+    "Balearic shearwater": {
+        "la": "Puffinus mauretanicus",
+        "gbif": 133143369
+    },
+    "Balearic warbler": {
+        "la": "Sylvia balearica",
+        "gbif": 133156641
+    },
+    "Band-rumped storm petrel": {
+        "la": "Oceanodroma castro",
+        "gbif": 104144944
+    },
+    "Bar-headed goose": {
+        "la": null,
+        "gbif": null
+    },
+    "Bar-tailed godwit": {
+        "la": "Limosa lapponica",
+        "gbif": 100171642
+    },
+    "Bar-tailed lark": {
+        "la": "Ammomanes cinctura",
+        "gbif": 133154282
+    },
+    "Barbary partridge": {
+        "la": "Alectoris barbara",
+        "gbif": 104150530
+    },
+    "Barn owl": {
+        "la": "Tyto alba (Scopoli, 1769)",
+        "gbif": 160796399
+    },
+    "Barn swallow": {
+        "la": "Hirundo rustica Linnaeus 1758",
+        "gbif": 304185321
+    },
+    "Barnacle goose": {
+        "la": "Branta leucopsis (Bechstein, 1803)",
+        "gbif": 160796487
+    },
+    "Barolo shearwater": {
+        "la": "Puffinus baroli",
+        "gbif": 133143286
+    },
+    "Barred warbler": {
+        "la": "Sylvia nisoria",
+        "gbif": 116897729
+    },
+    "Barrows goldeneye": {
+        "la": null,
+        "gbif": null
+    },
+    "Basra reed warbler": {
+        "la": "Acrocephalus griseldis (Hartlaub, 1891)",
+        "gbif": 176641111
+    },
+    "Bearded reedling": {
+        "la": "Panurus biarmicus (Linnaeus, 1758)",
+        "gbif": 119253574
+    },
+    "Bearded vulture": {
+        "la": "Gypaetus barbatus (Linnaeus, 1758)",
+        "gbif": 144098076
+    },
+    "Belted kingfisher": {
+        "la": "Megaceryle alcyon",
+        "gbif": 133136426
+    },
+    "Berthelots pipit": {
+        "la": null,
+        "gbif": null
+    },
+    "Bimaculated lark": {
+        "la": "Melanocorypha bimaculata (Menetries, 1832)",
+        "gbif": 114110273
+    },
+    "Black francolin": {
+        "la": "Francolinus francolinus (Linnaeus, 1766)",
+        "gbif": 144105232
+    },
+    "Black grouse": {
+        "la": "Lyrurus tetrix (Linnaeus, 1758)",
+        "gbif": 176613960
+    },
+    "Black guillemot": {
+        "la": "Cepphus grylle (Linnaeus, 1758)",
+        "gbif": 176606072
+    },
+    "Black kite": {
+        "la": "Milvus migrans",
+        "gbif": 116903454
+    },
+    "Black lark": {
+        "la": "Melanocorypha yeltoniensis (Forster, 1768)",
+        "gbif": 144097773
+    },
+    "Black redstart": {
+        "la": "Phoenicurus ochruros",
+        "gbif": 104130944
+    },
+    "Black scoter": {
+        "la": null,
+        "gbif": null
+    },
+    "Black stork": {
+        "la": "Ardea nigra (Linnaeus, 1758)",
+        "gbif": 185020603
+    },
+    "Black tern": {
+        "la": "Chlidonias nigra",
+        "gbif": 116901413
+    },
+    "Black wheatear": {
+        "la": "Oenanthe leucura (Gmelin, 1789)",
+        "gbif": 102100559
+    },
+    "Black woodpecker": {
+        "la": "Dryocopus martius",
+        "gbif": 116907967
+    },
+    "Black-bellied sandgrouse": {
+        "la": "Pterocles orientalis",
+        "gbif": 133140640
+    },
+    "Black-billed cuckoo": {
+        "la": "Coccyzus erythropthalmus",
+        "gbif": 133139588
+    },
+    "Black-browed albatross": {
+        "la": "Thalassarche melanophris",
+        "gbif": 133143627
+    },
+    "Black-crowned night heron": {
+        "la": "Nycticorax nycticorax",
+        "gbif": 100144048
+    },
+    "Black-crowned sparrow-lark": {
+        "la": "Eremopterix nigriceps (Gould, 1839)",
+        "gbif": 165920477
+    },
+    "Black-crowned tchagra": {
+        "la": "Tchagra senegalus",
+        "gbif": 104116337
+    },
+    "Black-headed bunting": {
+        "la": "Emberiza melanocephala Scopoli 1769",
+        "gbif": 302565932
+    },
+    "Black-headed gull": {
+        "la": "black-headed gull deltacoronavirus",
+        "gbif": 209781956
+    },
+    "Black-legged kittiwake": {
+        "la": "Rissa tridactyla",
+        "gbif": 100149703
+    },
+    "Black-necked grebe": {
+        "la": "Podiceps nigricollis",
+        "gbif": 104144068
+    },
+    "Black-tailed godwit": {
+        "la": "Limosa limosa",
+        "gbif": 133140502
+    },
+    "Black-throated accentor": {
+        "la": "Prunella atrogularis (Brandt, 1844)",
+        "gbif": 176652625
+    },
+    "Black-throated loon": {
+        "la": "Gavia arctica (Linnaeus, 1758)",
+        "gbif": 165902940
+    },
+    "Black-throated thrush": {
+        "la": "Turdus atrogularis Jarocki, 1819",
+        "gbif": 180174976
+    },
+    "Black-winged kite": {
+        "la": "Elanus caeruleus (Desfontaines, 1789)",
+        "gbif": 144097004
+    },
+    "Black-winged pratincole": {
+        "la": "Glareola nordmanni",
+        "gbif": 133141261
+    },
+    "Black-winged stilt": {
+        "la": "Himantopus himantopus (Linnaeus 1758)",
+        "gbif": 302565855
+    },
+    "Blackstart": {
+        "la": "Cercomela melanura",
+        "gbif": 116899597
+    },
+    "Blue rock thrush": {
+        "la": "Monticola solitarius (Linnaeus, 1758)",
+        "gbif": 102104969
+    },
+    "Blue-cheeked bee-eater": {
+        "la": "Merops persicus Pallas, 1773",
+        "gbif": 180177002
+    },
+    "Blue-winged teal": {
+        "la": null,
+        "gbif": null
+    },
+    "Bluethroat": {
+        "la": "Luscinia svecica (Linnaeus, 1758)",
+        "gbif": 102100494
+    },
+    "Blyths pipit": {
+        "la": null,
+        "gbif": null
+    },
+    "Blyths reed warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Bohemian waxwing": {
+        "la": "Bombycilla garrulus",
+        "gbif": 104124473
+    },
+    "Bolles pigeon": {
+        "la": null,
+        "gbif": null
+    },
+    "Bonapartes gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Bonellis eagle": {
+        "la": null,
+        "gbif": null
+    },
+    "Booted eagle": {
+        "la": "Falco pennatus (Gmelin, 1788)",
+        "gbif": 143706024
+    },
+    "Booted warbler": {
+        "la": "Iduna caligata",
+        "gbif": 104135432
+    },
+    "Boreal owl": {
+        "la": "Strix funerea (Linnaeus, 1758)",
+        "gbif": 143705778
+    },
+    "Brambling": {
+        "la": "Fringilla montifringilla Linnaeus, 1758",
+        "gbif": 102097566
+    },
+    "Brant": {
+        "la": "Proceratophrys branti",
+        "gbif": 119585119
+    },
+    "Bridled tern": {
+        "la": "Onychoprion anaethetus Scopoli, 1786",
+        "gbif": 185022802
+    },
+    "Broad-billed sandpiper": {
+        "la": "Calidris falcinellus",
+        "gbif": 133140487
+    },
+    "Brown booby": {
+        "la": "Sula leucogaster",
+        "gbif": 133142152
+    },
+    "Brown fish owl": {
+        "la": "Ketupa zeylonensis (Gmelin, 1788)",
+        "gbif": 176617638
+    },
+    "Brown shrike": {
+        "la": "Lanius cristatus Linnaeus 1758",
+        "gbif": 114123753
+    },
+    "Brown-necked raven": {
+        "la": "Corvus ruficollis",
+        "gbif": 100147125
+    },
+    "Brown-throated martin": {
+        "la": "Riparia paludicola",
+        "gbif": 100148926
+    },
+    "Buff-bellied pipit": {
+        "la": "Anthus rubescens",
+        "gbif": 100153307
+    },
+    "Buff-breasted sandpiper": {
+        "la": "Ereunetes subruficollis",
+        "gbif": 100171503
+    },
+    "Bufflehead": {
+        "la": null,
+        "gbif": null
+    },
+    "Bulwers petrel": {
+        "la": null,
+        "gbif": null
+    },
+    "Cackling goose": {
+        "la": "Branta hutchinsii",
+        "gbif": 104149341
+    },
+    "Calandra lark": {
+        "la": "Melanocorypha calandra Calandra Lark",
+        "gbif": 304189855
+    },
+    "Canada goose": {
+        "la": "Canada goose coronavirus",
+        "gbif": 179744073
+    },
+    "Canary Islands chiffchaff": {
+        "la": "Phylloscopus canariensis (Hartwig, 1886)",
+        "gbif": 165919131
+    },
+    "Canary Islands stonechat": {
+        "la": "Saxicola dacotiae",
+        "gbif": 100155261
+    },
+    "Canvasback": {
+        "la": null,
+        "gbif": null
+    },
+    "Carrion crow": {
+        "la": "Corvus corone",
+        "gbif": 133155101
+    },
+    "Caspian gull": {
+        "la": "Larus cachinnans",
+        "gbif": 104108263
+    },
+    "Caspian plover": {
+        "la": "Charadrius asiaticus Pallas, 1773",
+        "gbif": 165904750
+    },
+    "Caspian snowcock": {
+        "la": "Tetraogallus caspius",
+        "gbif": 100160622
+    },
+    "Caspian tern": {
+        "la": "Hydroprogne caspia",
+        "gbif": 133140896
+    },
+    "Cattle egret": {
+        "la": "Bubulcus coromandus (Boddaert, 1783)",
+        "gbif": 6066393
+    },
+    "Caucasian grouse": {
+        "la": "Lyrurus mlokosiewiczi (Taczanowski, 1875)",
+        "gbif": 165930762
+    },
+    "Caucasian snowcock": {
+        "la": "Tetraogallus caucasicus (Pallas, 1811)",
+        "gbif": 165755944
+    },
+    "Cettis warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Chestnut bunting": {
+        "la": "Emberiza rutila",
+        "gbif": 116897574
+    },
+    "Chukar partridge": {
+        "la": "Alectoris chukar",
+        "gbif": 104150532
+    },
+    "Cinereous bunting": {
+        "la": "Emberiza cineracea C. L. Brehm, 1855",
+        "gbif": 119238354
+    },
+    "Cinereous vulture": {
+        "la": "Aegypius monachus (Linnaeus, 1766)",
+        "gbif": 114093087
+    },
+    "Cirl bunting": {
+        "la": "Emberiza cirlus Linnaeus, 1766",
+        "gbif": 165910780
+    },
+    "Citril finch": {
+        "la": "Carduelis citrinella (Pallas, 1764)",
+        "gbif": 176652842
+    },
+    "Citrine wagtail": {
+        "la": "Motacilla citreola",
+        "gbif": 133148567
+    },
+    "Clamorous reed warbler": {
+        "la": "Acrocephalus stentoreus (Ehrenberg, 1833)",
+        "gbif": 119253765
+    },
+    "Coal tit": {
+        "la": "Periparus ater",
+        "gbif": 104131682
+    },
+    "Collared flycatcher": {
+        "la": "Ficedula albicollis",
+        "gbif": 133157704
+    },
+    "Collared pratincole": {
+        "la": "Glareola pratincola (Linnaeus, 1766)",
+        "gbif": 165903762
+    },
+    "Common blackbird": {
+        "la": "Common blackbird circovirus",
+        "gbif": 249323464
+    },
+    "Common bulbul": {
+        "la": "Pycnonotus barbatus (Desfontaines, 1789)",
+        "gbif": 165919703
+    },
+    "Common buttonquail": {
+        "la": "Turnix sylvaticus (Desfontaines, 1787)",
+        "gbif": 176606202
+    },
+    "Common buzzard": {
+        "la": "Common buzzard alphaherpesvirus",
+        "gbif": 179715393
+    },
+    "Common chaffinch": {
+        "la": "Fringilla coelebs Linnaeus, 1758",
+        "gbif": 144105578
+    },
+    "Common chiffchaff": {
+        "la": "Phylloscopus collybita (Vieillot, 1817)",
+        "gbif": 114135439
+    },
+    "Common crane": {
+        "la": "Grus grus (Linnaeus, 1758)",
+        "gbif": 155309028
+    },
+    "Common cuckoo": {
+        "la": "Cuculus canorus Linnaeus 1758",
+        "gbif": 114105164
+    },
+    "Common eider": {
+        "la": null,
+        "gbif": null
+    },
+    "Common firecrest": {
+        "la": "Regulus ignicapilla (Temminck, 1820)",
+        "gbif": 165916533
+    },
+    "Common goldeneye": {
+        "la": null,
+        "gbif": null
+    },
+    "Common grasshopper warbler": {
+        "la": "Locustella naevia (Boddaert, 1783)",
+        "gbif": 176639377
+    },
+    "Common greenshank": {
+        "la": "Tringa nebularia (Gunnerus, 1767)",
+        "gbif": 165903913
+    },
+    "Common gull": {
+        "la": "common gull deltacoronavirus",
+        "gbif": 209990657
+    },
+    "Common house martin": {
+        "la": "Hirundo urbica (Linnaeus, 1758)",
+        "gbif": 143705563
+    },
+    "Common kestrel": {
+        "la": "Falco tinnunculus Linnaeus 1758",
+        "gbif": 304185188
+    },
+    "Common kingfisher": {
+        "la": "Alcedo atthis (Linnaeus, 1758)",
+        "gbif": 114103481
+    },
+    "Common linnet": {
+        "la": "Linaria cannabina (Linnaeus, 1758)",
+        "gbif": 165911917
+    },
+    "Common loon": {
+        "la": "Gavia immer (Brunnich, 1764)",
+        "gbif": 144105147
+    },
+    "Common merganser": {
+        "la": "Mergus merganser",
+        "gbif": 133142215
+    },
+    "Common moorhen": {
+        "la": "Common moorhen coronavirus HKU21",
+        "gbif": 10406826
+    },
+    "Common murre": {
+        "la": null,
+        "gbif": null
+    },
+    "Common nighthawk": {
+        "la": "Chordeiles minor",
+        "gbif": 133135758
+    },
+    "Common nightingale": {
+        "la": "Luscinia megarhynchos (Brehm, 1831)",
+        "gbif": 113266077
+    },
+    "Common pheasant": {
+        "la": "Phasianus colchicus",
+        "gbif": 116895672
+    },
+    "Common pochard": {
+        "la": "Aythya ferina Common Pochard",
+        "gbif": 303470863
+    },
+    "Common quail": {
+        "la": "Coturnix coturnix (Linnaeus, 1758)",
+        "gbif": 165907573
+    },
+    "Common raven": {
+        "la": "Corvus corax",
+        "gbif": 304185285
+    },
+    "Common redpoll": {
+        "la": "Acanthis flammea",
+        "gbif": 100148037
+    },
+    "Common redshank": {
+        "la": "Tringa totanus",
+        "gbif": 116901109
+    },
+    "Common redstart": {
+        "la": "Phoenicurus phoenicurus",
+        "gbif": 304185366
+    },
+    "Common reed bunting": {
+        "la": "Emberiza schoeniclus (Linnaeus, 1758)",
+        "gbif": 114115359
+    },
+    "Common reed warbler": {
+        "la": "Acrocephalus scirpaceus (Hermann, 1804)",
+        "gbif": 165918891
+    },
+    "Common ringed plover": {
+        "la": "Charadrius hiaticula Linnaeus, 1758",
+        "gbif": 165904891
+    },
+    "Common rock thrush": {
+        "la": "Monticola saxatilis (Linnaeus, 1766)",
+        "gbif": 165915433
+    },
+    "Common rosefinch": {
+        "la": "Carpodacus erythrinus (Pallas, 1770)",
+        "gbif": 114117593
+    },
+    "Common sandpiper": {
+        "la": "Tringa hypoleucos (Linnaeus, 1758)",
+        "gbif": 144032026
+    },
+    "Common scoter": {
+        "la": "Anas nigra (Linnaeus, 1758)",
+        "gbif": 121507710
+    },
+    "Common shelduck": {
+        "la": null,
+        "gbif": null
+    },
+    "Common snipe": {
+        "la": "Gallinago gallinago",
+        "gbif": 100171527
+    },
+    "Common starling": {
+        "la": "Common starling circovirus",
+        "gbif": 249323460
+    },
+    "Common swift": {
+        "la": "Apus apus (Linnaeus 1758)",
+        "gbif": 304185207
+    },
+    "Common tern": {
+        "la": "Sterna hirundo",
+        "gbif": 116901264
+    },
+    "Common whitethroat": {
+        "la": "Curruca communis",
+        "gbif": 100174403
+    },
+    "Common wood pigeon": {
+        "la": "Columba palumbus",
+        "gbif": 133138795
+    },
+    "Corn bunting": {
+        "la": "Miliaria calandra Corn Bunting",
+        "gbif": 304189846
+    },
+    "Corn crake": {
+        "la": "Crex crex",
+        "gbif": 116906995
+    },
+    "Corsican finch": {
+        "la": "Carduelis corsicana (Koenig, 1899)",
+        "gbif": 165785701
+    },
+    "Corsican nuthatch": {
+        "la": "Sitta whiteheadi Sharpe, 1884",
+        "gbif": 144101998
+    },
+    "Corys shearwater": {
+        "la": null,
+        "gbif": null
+    },
+    "Cream-colored courser": {
+        "la": "Cursorius cursor",
+        "gbif": 100148711
+    },
+    "Crested honey buzzard": {
+        "la": "Pernis ptilorhynchus (Temminck, 1821)",
+        "gbif": 144099448
+    },
+    "Crested lark": {
+        "la": "Galerida cristata Crested Lark",
+        "gbif": 304189853
+    },
+    "Crested tit": {
+        "la": "Lophophanes cristatus",
+        "gbif": 100157698
+    },
+    "Cretzschmars bunting": {
+        "la": null,
+        "gbif": null
+    },
+    "Crowned sandgrouse": {
+        "la": "Pterocles coronatus Lichtenstein & Mhc, 1823",
+        "gbif": 165904635
+    },
+    "Curlew sandpiper": {
+        "la": "Ereunetes ferrugineus",
+        "gbif": 100171433
+    },
+    "Cyprus scops owl": {
+        "la": "Otus cyprius Madarász, 1901",
+        "gbif": 165653253
+    },
+    "Cyprus warbler": {
+        "la": "Sylvia melanothorax Tristram, 1872",
+        "gbif": 2492953
+    },
+    "Cyprus wheatear": {
+        "la": "Oenanthe cypriaca (Homeyer, 1884)",
+        "gbif": 119254552
+    },
+    "Dalmatian pelican": {
+        "la": "Pelecanus crispus Bruch 1832",
+        "gbif": 114146718
+    },
+    "Dark chanting goshawk": {
+        "la": "Melierax metabates Heuglin, 1861",
+        "gbif": 176613261
+    },
+    "Dartford warbler": {
+        "la": "Curruca undata",
+        "gbif": 100174497
+    },
+    "Dead Sea sparrow": {
+        "la": "Passer moabiticus Tristram, 1864",
+        "gbif": 102101652
+    },
+    "Demoiselle crane": {
+        "la": "Grus virgo (Linnaeus, 1758)",
+        "gbif": 165903106
+    },
+    "Desert finch": {
+        "la": "Rhodospiza obsoleta (Lichtenstein, 1823)",
+        "gbif": 119256942
+    },
+    "Desert lark": {
+        "la": "Ammomanes deserti (Lichtenstein, 1823)",
+        "gbif": 119250884
+    },
+    "Desert sparrow": {
+        "la": "Passer simplex (Lichenstein, 1823)",
+        "gbif": 176635382
+    },
+    "Desert wheatear": {
+        "la": "Oenanthe deserti",
+        "gbif": 133158919
+    },
+    "Double-spurred spurfowl": {
+        "la": "Pternistis bicalcaratus (Linnaeus, 1766)",
+        "gbif": 165907767
+    },
+    "Dunlin": {
+        "la": null,
+        "gbif": null
+    },
+    "Dunnock": {
+        "la": "Prunella modularis",
+        "gbif": 133147575
+    },
+    "Dunns lark": {
+        "la": null,
+        "gbif": null
+    },
+    "Duponts lark": {
+        "la": null,
+        "gbif": null
+    },
+    "Dusky thrush": {
+        "la": "Turdus eunomus",
+        "gbif": 133155872
+    },
+    "Dusky warbler": {
+        "la": "Phylloscopus fuscatus (Blyth, 1842)",
+        "gbif": 176633924
+    },
+    "Eastern Bonellis warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Eastern Orphean warbler": {
+        "la": "Sylvia crassirostris Cretzschmar, 1830",
+        "gbif": 7342065
+    },
+    "Eastern black-eared wheatear": {
+        "la": "Oenanthe melanoleuca (Güldenstädt, 1775)",
+        "gbif": 165913330
+    },
+    "Eastern imperial eagle": {
+        "la": "Aquila heliaca Savigny, 1809",
+        "gbif": 113259611
+    },
+    "Eastern olivaceous warbler": {
+        "la": "Iduna opaca",
+        "gbif": 104135441
+    },
+    "Eastern rock nuthatch": {
+        "la": "Sitta tephronota Sharpe, 1872",
+        "gbif": 176629525
+    },
+    "Eastern subalpine warbler": {
+        "la": "Curruca cantillans (Pallas, 1764)",
+        "gbif": 165917748
+    },
+    "Eastern yellow wagtail": {
+        "la": "Motacilla tschutschensis JF Gmelin, 1789",
+        "gbif": 165816352
+    },
+    "Egyptian goose": {
+        "la": "Alopochen aegyptiaca Linnaeus, 1766",
+        "gbif": 185021222
+    },
+    "Egyptian nightjar": {
+        "la": "Caprimulgus aegyptius",
+        "gbif": 133135568
+    },
+    "Egyptian vulture": {
+        "la": "Neophron percnopterus (Linnaeus, 1758)",
+        "gbif": 165901272
+    },
+    "Eleonoras falcon": {
+        "la": null,
+        "gbif": null
+    },
+    "Eurasian blackcap": {
+        "la": "Eurasian blackcap circovirus",
+        "gbif": 249323458
+    },
+    "Eurasian blue tit": {
+        "la": "Cyanistes caeruleus",
+        "gbif": 100157685
+    },
+    "Eurasian bullfinch": {
+        "la": "Pyrrhula pyrrhula",
+        "gbif": 133145195
+    },
+    "Eurasian collared dove": {
+        "la": "Streptopelia decaocto (Frivaldszky, 1838)",
+        "gbif": 119254934
+    },
+    "Eurasian coot": {
+        "la": "Fulica atra Linnaeus 1758",
+        "gbif": 119240104
+    },
+    "Eurasian crag martin": {
+        "la": "Ptyonoprogne rupestris (Scopoli, 1769)",
+        "gbif": 165919532
+    },
+    "Eurasian curlew": {
+        "la": null,
+        "gbif": null
+    },
+    "Eurasian dotterel": {
+        "la": "Charadrius morinellus (Linnaeus, 1758)",
+        "gbif": 143705940
+    },
+    "Eurasian eagle-owl": {
+        "la": "Bubo bubo",
+        "gbif": 104146929
+    },
+    "Eurasian golden oriole": {
+        "la": "Oriolus oriolus",
+        "gbif": 104115527
+    },
+    "Eurasian hobby": {
+        "la": "Falco subbuteo",
+        "gbif": 133166101
+    },
+    "Eurasian hoopoe": {
+        "la": "Upupa epops",
+        "gbif": 133137699
+    },
+    "Eurasian jay": {
+        "la": "Eurasian jay circovirus",
+        "gbif": 249323457
+    },
+    "Eurasian magpie": {
+        "la": "Pica pica (Linnaeus 1758)",
+        "gbif": 302565923
+    },
+    "Eurasian nuthatch": {
+        "la": "Sitta europaea",
+        "gbif": 116896381
+    },
+    "Eurasian oystercatcher": {
+        "la": "Eurasian oystercatcher coronavirus",
+        "gbif": 102430536
+    },
+    "Eurasian penduline tit": {
+        "la": "Remiz pendulinus",
+        "gbif": 133152245
+    },
+    "Eurasian pygmy owl": {
+        "la": "Glaucidium passerinum",
+        "gbif": 133135787
+    },
+    "Eurasian scops owl": {
+        "la": "Otus scops",
+        "gbif": 104147311
+    },
+    "Eurasian siskin": {
+        "la": "Spinus spinus",
+        "gbif": 133144995
+    },
+    "Eurasian skylark": {
+        "la": "Alauda arvensis",
+        "gbif": 133153885
+    },
+    "Eurasian sparrowhawk": {
+        "la": "Accipiter nisus (Linnaeus, 1758)",
+        "gbif": 114093064
+    },
+    "Eurasian spoonbill": {
+        "la": "Platalea leucorodia",
+        "gbif": 133142035
+    },
+    "Eurasian stone-curlew": {
+        "la": "Burhinus oedicnemus (Linnaeus, 1758)",
+        "gbif": 165905183
+    },
+    "Eurasian teal": {
+        "la": "Anas crecca x Spatula querquedula",
+        "gbif": 159939025
+    },
+    "Eurasian three-toed woodpecker": {
+        "la": "Picoides tridactylus",
+        "gbif": 100161940
+    },
+    "Eurasian tree sparrow": {
+        "la": "Eurasian tree sparrow deltacoronavirus",
+        "gbif": 304904141
+    },
+    "Eurasian treecreeper": {
+        "la": "Certhia familiaris Linnaeus 1758",
+        "gbif": 119244851
+    },
+    "Eurasian whimbrel": {
+        "la": "Numenius phaeopus (Linnaeus, 1758)",
+        "gbif": 165904526
+    },
+    "Eurasian wigeon": {
+        "la": null,
+        "gbif": null
+    },
+    "Eurasian woodcock": {
+        "la": "Scolopax rusticola",
+        "gbif": 104108883
+    },
+    "Eurasian wren": {
+        "la": "Troglodytes troglodytes (Linnaeus, 1758)",
+        "gbif": 165916006
+    },
+    "Eurasian wryneck": {
+        "la": "Jynx torquilla",
+        "gbif": 104143395
+    },
+    "European bee-eater": {
+        "la": "European bee-eater circovirus",
+        "gbif": 194561407
+    },
+    "European golden plover": {
+        "la": "Pluvialis apricaria",
+        "gbif": 100163923
+    },
+    "European goldfinch": {
+        "la": "European goldfinch polyomavirus",
+        "gbif": 304901024
+    },
+    "European green woodpecker": {
+        "la": "Picus viridis Linnaeus 1758",
+        "gbif": 304185213
+    },
+    "European greenfinch": {
+        "la": "Loxia chloris (Linnaeus, 1758)",
+        "gbif": 143705516
+    },
+    "European herring gull": {
+        "la": null,
+        "gbif": null
+    },
+    "European honey buzzard": {
+        "la": "Pernis apivorus (Linnaeus, 1758)",
+        "gbif": 165901355
+    },
+    "European nightjar": {
+        "la": "Caprimulgus europaeus Linnaeus 1758",
+        "gbif": 114098397
+    },
+    "European pied flycatcher": {
+        "la": "Ficedula hypoleuca",
+        "gbif": 100153938
+    },
+    "European robin": {
+        "la": "Erithacus rubecula (Linnaeus, 1758)",
+        "gbif": 119254332
+    },
+    "European roller": {
+        "la": "European roller astrovirus",
+        "gbif": 156843315
+    },
+    "European serin": {
+        "la": "Serinus serinus",
+        "gbif": 104119943
+    },
+    "European shag": {
+        "la": "Gulosus aristotelis (Linnaeus, 1761)",
+        "gbif": 176605514
+    },
+    "European stonechat": {
+        "la": "Saxicola rubicola",
+        "gbif": 100155296
+    },
+    "European storm petrel": {
+        "la": "Hydrobates pelagicus (Linnaeus, 1758)",
+        "gbif": 144098224
+    },
+    "European turtle dove": {
+        "la": "Streptopelia turtur (Linnaeus, 1758)",
+        "gbif": 119254951
+    },
+    "Eyebrowed thrush": {
+        "la": "Turdus obscurus J. F. Gmelin, 1789",
+        "gbif": 119254132
+    },
+    "Fan-tailed raven": {
+        "la": "Corvus rhipidurus Hartert 1918",
+        "gbif": 114112595
+    },
+    "Feas petrel": {
+        "la": null,
+        "gbif": null
+    },
+    "Feral pigeon": {
+        "la": "Feral pigeon astrovirus",
+        "gbif": 102434580
+    },
+    "Ferruginous duck": {
+        "la": "Aythya nyroca",
+        "gbif": 116904972
+    },
+    "Fieldfare": {
+        "la": "Turdus pilaris Linnaeus, 1758",
+        "gbif": 176633803
+    },
+    "Finschs wheatear": {
+        "la": null,
+        "gbif": null
+    },
+    "Forsters tern": {
+        "la": "Sterna forsteri Nuttall, 1834",
+        "gbif": 159938093
+    },
+    "Franklins gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Fulvous babbler": {
+        "la": "Argya fulva (Desfontaines, 1789)",
+        "gbif": 165916731
+    },
+    "Gadwall": {
+        "la": null,
+        "gbif": null
+    },
+    "Garden warbler": {
+        "la": "Sylvia borin",
+        "gbif": 100174528
+    },
+    "Garganey": {
+        "la": null,
+        "gbif": null
+    },
+    "Glaucous gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Glossy ibis": {
+        "la": "Tantalus falcinellus (Linnaeus, 1766)",
+        "gbif": 185020649
+    },
+    "Goldcrest": {
+        "la": "Cupressus macrocarpa 'Goldcrest'",
+        "gbif": 237300187
+    },
+    "Golden eagle": {
+        "la": "Aquila bivia Emslie & Czaplewski, 1999",
+        "gbif": 121503253
+    },
+    "Golden pheasant": {
+        "la": "Chrysolophus pictus (Linnaeus, 1758)",
+        "gbif": 176614050
+    },
+    "Graceful prinia": {
+        "la": "Prinia gracilis (Lichtenstein 1823)",
+        "gbif": 304187333
+    },
+    "Gray-cheeked thrush": {
+        "la": "Catharus minimus",
+        "gbif": 133156611
+    },
+    "Great bittern": {
+        "la": "Ardea stellaris (Linnaeus, 1758)",
+        "gbif": 143705810
+    },
+    "Great black-backed gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Great bustard": {
+        "la": "Otis tarda Great Bustard",
+        "gbif": 303470852
+    },
+    "Great cormorant": {
+        "la": "Phalacrocorax carbo (Linnaeus, 1758)",
+        "gbif": 180173234
+    },
+    "Great crested grebe": {
+        "la": null,
+        "gbif": null
+    },
+    "Great egret": {
+        "la": null,
+        "gbif": null
+    },
+    "Great grey owl": {
+        "la": "Strix nebulosa",
+        "gbif": 116894231
+    },
+    "Great grey shrike": {
+        "la": "Lanius sphenocercus",
+        "gbif": 116897088
+    },
+    "Great reed warbler": {
+        "la": "Acrocephalus arundinaceus (Linnaeus, 1758)",
+        "gbif": 102102838
+    },
+    "Great rosefinch": {
+        "la": "Carpodacus rubicilla",
+        "gbif": 133144791
+    },
+    "Great shearwater": {
+        "la": "Ardenna gravis",
+        "gbif": 100164440
+    },
+    "Great skua": {
+        "la": "Stercorarius skua (Brünnich, 1764)",
+        "gbif": 222464727
+    },
+    "Great snipe": {
+        "la": "Gallinago media (Latham, 1787)",
+        "gbif": 119246275
+    },
+    "Great spotted cuckoo": {
+        "la": "Clamator glandarius",
+        "gbif": 116905905
+    },
+    "Great spotted woodpecker": {
+        "la": "Picoides major",
+        "gbif": 116907761
+    },
+    "Great tit": {
+        "la": "Great tit siadenovirus B",
+        "gbif": 188514787
+    },
+    "Great white pelican": {
+        "la": "Pelecanus onocrotalus",
+        "gbif": 133142011
+    },
+    "Greater flamingo": {
+        "la": "Phoenicopterus ruber",
+        "gbif": 104142737
+    },
+    "Greater hoopoe-lark": {
+        "la": "Alaemon alaudipes",
+        "gbif": 133154403
+    },
+    "Greater painted-snipe": {
+        "la": "Rostratula benghalensis (Linnaeus, 1758)",
+        "gbif": 176608039
+    },
+    "Greater sand plover": {
+        "la": "Charadrius leschenaultii Lesson 1826",
+        "gbif": 119255113
+    },
+    "Greater scaup": {
+        "la": null,
+        "gbif": null
+    },
+    "Greater short-toed lark": {
+        "la": "Calandrella brachydactyla (Leisler, 1814)",
+        "gbif": 165920669
+    },
+    "Greater spotted eagle": {
+        "la": "Clanga clanga (Pallas, 1811)",
+        "gbif": 165901673
+    },
+    "Greater white-fronted goose": {
+        "la": null,
+        "gbif": null
+    },
+    "Greater yellowlegs": {
+        "la": "Tringa melanoleuca (J.F.Gmelin, 1789)",
+        "gbif": 165903910
+    },
+    "Green sandpiper": {
+        "la": "Tringa ochropus",
+        "gbif": 116901129
+    },
+    "Green warbler": {
+        "la": "Phylloscopus nitidus",
+        "gbif": 133152166
+    },
+    "Greenish warbler": {
+        "la": "Phylloscopus trochiloides (Sundevall, 1837)",
+        "gbif": 102103302
+    },
+    "Grey heron": {
+        "la": null,
+        "gbif": null
+    },
+    "Grey hypocolius": {
+        "la": "Hypocolius ampelinus Bonaparte, 1850",
+        "gbif": 144102376
+    },
+    "Grey partridge": {
+        "la": "Perdix perdix Grey Partridge",
+        "gbif": 304189792
+    },
+    "Grey plover": {
+        "la": "Pluvialis squatarola (Linnaeus, 1758)",
+        "gbif": 114099359
+    },
+    "Grey wagtail": {
+        "la": "Motacilla cinerea Tunstall, 1771",
+        "gbif": 144101713
+    },
+    "Grey-headed woodpecker": {
+        "la": "Picus canus J.F.Gmelin, 1788",
+        "gbif": 165931753
+    },
+    "Grey-necked bunting": {
+        "la": "Emberiza buchanani Blyth 1845",
+        "gbif": 114115158
+    },
+    "Greylag goose": {
+        "la": null,
+        "gbif": null
+    },
+    "Griffon vulture": {
+        "la": "Griffon vulture papillomavirus",
+        "gbif": 179691208
+    },
+    "Gull-billed tern": {
+        "la": "Gelochelidon nilotica (J.F.Gmelin, 1789)",
+        "gbif": 202600880
+    },
+    "Gyrfalcon": {
+        "la": "Falco rusticolus Linnaeus, 1758",
+        "gbif": 165931726
+    },
+    "Harlequin duck": {
+        "la": "Histrionicus histrionicus (Linnaeus, 1758)",
+        "gbif": 165930930
+    },
+    "Hawfinch": {
+        "la": "Hawfinch circovirus",
+        "gbif": 249323455
+    },
+    "Hazel grouse": {
+        "la": "Tetrastes bonasia (Linnaeus, 1758)",
+        "gbif": 114108293
+    },
+    "Helmeted guineafowl": {
+        "la": "Numida meleagris (Linnaeus, 1758)",
+        "gbif": 114106290
+    },
+    "Hen harrier": {
+        "la": "Circus cyaneus (Linnaeus, 1766)",
+        "gbif": 165901126
+    },
+    "Hermit thrush": {
+        "la": "Catharus guttatus (Pallas, 1811)",
+        "gbif": 202601679
+    },
+    "Hooded crow": {
+        "la": "Trichomonadida sp. hooded crow/Tehran/2014",
+        "gbif": 156213918
+    },
+    "Hooded merganser": {
+        "la": "Lophodytes cucullatus (Linnaeus, 1758)",
+        "gbif": 160796440
+    },
+    "Hooded wheatear": {
+        "la": "Oenanthe monacha (Temminck, 1825)",
+        "gbif": 114127418
+    },
+    "Horned grebe": {
+        "la": "Podiceps auritus Horned Grebe",
+        "gbif": 303470825
+    },
+    "Horned lark": {
+        "la": "Eremophila alpestris (Linnaeus, 1758)",
+        "gbif": 202601449
+    },
+    "Houbara bustard": {
+        "la": "Chlamydotis undulata (Jacquin, 1784)",
+        "gbif": 165905619
+    },
+    "House bunting": {
+        "la": "Emberiza sahari",
+        "gbif": 133145711
+    },
+    "House crow": {
+        "la": null,
+        "gbif": null
+    },
+    "House sparrow": {
+        "la": "Helicobacter sp. 'house sparrow 1'",
+        "gbif": 156750799
+    },
+    "Humes leaf warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Iberian chiffchaff": {
+        "la": "Phylloscopus ibericus Ticehurst, 1937",
+        "gbif": 165919100
+    },
+    "Iberian grey shrike": {
+        "la": "Lanius meridionalis (Temminck, 1820)",
+        "gbif": 144098416
+    },
+    "Iceland gull": {
+        "la": "Larus glaucoides",
+        "gbif": 104108313
+    },
+    "Icterine warbler": {
+        "la": "Hippolais icterina",
+        "gbif": 100143233
+    },
+    "Iraq babbler": {
+        "la": "Turdoides altirostris",
+        "gbif": 133158335
+    },
+    "Isabelline shrike": {
+        "la": "Lanius isabellinus",
+        "gbif": 100149435
+    },
+    "Isabelline wheatear": {
+        "la": "Oenanthe isabellina (Temminck, 1829)",
+        "gbif": 114127402
+    },
+    "Italian sparrow": {
+        "la": "Passer italiae",
+        "gbif": 133145029
+    },
+    "Ivory gull": {
+        "la": "Pagophila eburnea (Phipps, 1774)",
+        "gbif": 160796134
+    },
+    "Jack snipe": {
+        "la": "Lymnocryptes minimus (Brünnich, 1764)",
+        "gbif": 165904137
+    },
+    "Kentish plover": {
+        "la": "Charadrius alexandrinus Linnaeus, 1758",
+        "gbif": 165904820
+    },
+    "Killdeer": {
+        "la": "Charadrius vociferus Linnaeus, 1758",
+        "gbif": 181869694
+    },
+    "King eider": {
+        "la": "Anas spectabilis (Linnaeus, 1758)",
+        "gbif": 143618236
+    },
+    "Kittlitzs plover": {
+        "la": null,
+        "gbif": null
+    },
+    "Krupers nuthatch": {
+        "la": null,
+        "gbif": null
+    },
+    "Kurdish wheatear": {
+        "la": "Oenanthe xanthoprymna (Hemprich & Ehrenberg, 1833)",
+        "gbif": 165819113
+    },
+    "Lady Amhersts pheasant": {
+        "la": "Chrysolophus amherstiae Leadbeater, 1829",
+        "gbif": 185021690
+    },
+    "Lanceolated warbler": {
+        "la": "Locustella lanceolata",
+        "gbif": 116897785
+    },
+    "Lanner falcon": {
+        "la": "Falco biarmicus Temminck 1825",
+        "gbif": 114105558
+    },
+    "Lapland longspur": {
+        "la": "Calcarius lapponicus",
+        "gbif": 104120588
+    },
+    "Lappet-faced vulture": {
+        "la": "Torgos tracheliotos",
+        "gbif": 100143187
+    },
+    "Laughing dove": {
+        "la": "Streptopelia senegalensis",
+        "gbif": 116904618
+    },
+    "Laughing gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Laurel pigeon": {
+        "la": "Columba junoniae Hartert, 1916",
+        "gbif": 273121306
+    },
+    "Leachs storm petrel": {
+        "la": null,
+        "gbif": null
+    },
+    "Least sandpiper": {
+        "la": null,
+        "gbif": null
+    },
+    "Lesser black-backed gull": {
+        "la": "Larus fuscus Linnaeus, 1758",
+        "gbif": 185022833
+    },
+    "Lesser crested tern": {
+        "la": "Sterna bengalensis Lesson 1831",
+        "gbif": 114099839
+    },
+    "Lesser grey shrike": {
+        "la": "Lanius minor J. F. Gmelin, 1788",
+        "gbif": 114123805
+    },
+    "Lesser kestrel": {
+        "la": "Falco naumanni Fleischer, 1818",
+        "gbif": 100482526
+    },
+    "Lesser scaup": {
+        "la": null,
+        "gbif": null
+    },
+    "Lesser spotted eagle": {
+        "la": "Clanga pomarina (C.L.Brehm 1831)",
+        "gbif": 302565886
+    },
+    "Lesser spotted woodpecker": {
+        "la": "Dendrocopos minor (Linnaeus, 1758)",
+        "gbif": 114147714
+    },
+    "Lesser white-fronted goose": {
+        "la": "Anser erythropus (Linnaeus, 1758)",
+        "gbif": 165931403
+    },
+    "Lesser whitethroat": {
+        "la": "Sylvia curruca",
+        "gbif": 133156786
+    },
+    "Lesser yellowlegs": {
+        "la": "Scolopax flavipes (Gmelin, 1789)",
+        "gbif": 143705961
+    },
+    "Levaillants woodpecker": {
+        "la": null,
+        "gbif": null
+    },
+    "Levant sparrowhawk": {
+        "la": "Accipiter brevipes",
+        "gbif": 133143665
+    },
+    "Lichtensteins sandgrouse": {
+        "la": null,
+        "gbif": null
+    },
+    "Little auk": {
+        "la": "Alle alle",
+        "gbif": 116901665
+    },
+    "Little bittern": {
+        "la": "Little bittern circovirus",
+        "gbif": 194279517
+    },
+    "Little bunting": {
+        "la": "Emberiza pusilla Pallas 1776",
+        "gbif": 114115350
+    },
+    "Little bustard": {
+        "la": "Tetrax tetrax (Linnaeus, 1758)",
+        "gbif": 114108830
+    },
+    "Little crake": {
+        "la": "Zapornia parva",
+        "gbif": 183993434
+    },
+    "Little curlew": {
+        "la": "Numenius minutus",
+        "gbif": 116900972
+    },
+    "Little egret": {
+        "la": null,
+        "gbif": null
+    },
+    "Little grebe": {
+        "la": null,
+        "gbif": null
+    },
+    "Little gull": {
+        "la": "Hydrocoloeus minutus (Pallas, 1776)",
+        "gbif": 202600833
+    },
+    "Little owl": {
+        "la": "Athene noctua",
+        "gbif": 116894347
+    },
+    "Little ringed plover": {
+        "la": "Charadrius dubius",
+        "gbif": 116901799
+    },
+    "Little stint": {
+        "la": "Tringa minuta (Leisler, 1812)",
+        "gbif": 144032019
+    },
+    "Little swift": {
+        "la": "Apus affinis",
+        "gbif": 104106714
+    },
+    "Little tern": {
+        "la": "Sternula albifrons",
+        "gbif": 104108533
+    },
+    "Long-billed dowitcher": {
+        "la": "Limnodromus scolopaceus (Say, 1823)",
+        "gbif": 176606990
+    },
+    "Long-billed pipit": {
+        "la": "Anthus similis (Jerdon, 1840)",
+        "gbif": 165911354
+    },
+    "Long-eared owl": {
+        "la": "Asio otus",
+        "gbif": 133136308
+    },
+    "Long-legged buzzard": {
+        "la": "Buteo rufinus (Cretzschmar, 1829)",
+        "gbif": 165902128
+    },
+    "Long-tailed duck": {
+        "la": null,
+        "gbif": null
+    },
+    "Long-tailed jaeger": {
+        "la": "Stercorarius longicaudus Vieillot, 1819",
+        "gbif": 202601033
+    },
+    "Long-tailed tit": {
+        "la": "Aegithalos caudatus",
+        "gbif": 104114122
+    },
+    "Long-toed stint": {
+        "la": "Calidris subminuta (Middendorff, 1853)",
+        "gbif": 180177823
+    },
+    "MacQueens bustard": {
+        "la": null,
+        "gbif": null
+    },
+    "Madeira firecrest": {
+        "la": "Regulus madeirensis",
+        "gbif": 100169890
+    },
+    "Mallard": {
+        "la": "Leucozonia trinidadensis Mallard & Robin, 2005",
+        "gbif": 298975632
+    },
+    "Manx shearwater": {
+        "la": "Ceratophyllus fionnus Usher, 1968",
+        "gbif": 1417177
+    },
+    "Marbled duck": {
+        "la": "Marmaronetta angustirostris (Ménétries, 1832)",
+        "gbif": 180178931
+    },
+    "Marmoras warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Marsh owl": {
+        "la": "Asio capensis",
+        "gbif": 133136559
+    },
+    "Marsh sandpiper": {
+        "la": "Tringa stagnatilis (Bechstein, 1803)",
+        "gbif": 119246311
+    },
+    "Marsh tit": {
+        "la": "Poecile palustris (Linnaeus, 1758)",
+        "gbif": 114128991
+    },
+    "Marsh warbler": {
+        "la": "Acrocephalus palustris (Bechstein, 1798)",
+        "gbif": 114134112
+    },
+    "Masked shrike": {
+        "la": "Lanius nubicus",
+        "gbif": 104116147
+    },
+    "Meadow pipit": {
+        "la": "Anthus pratensis (Linnaeus 1758)",
+        "gbif": 304185308
+    },
+    "Mediterranean gull": {
+        "la": "Ichthyaetus melanocephalus",
+        "gbif": 133141066
+    },
+    "Mediterranean short-toed lark": {
+        "la": "Alaudala rufescens (Vieillot, 1819)",
+        "gbif": 165920582
+    },
+    "Melodious warbler": {
+        "la": "Hippolais polyglotta",
+        "gbif": 100143236
+    },
+    "Menetriess warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Merlin": {
+        "la": "Moonvirus merlin",
+        "gbif": 156784078
+    },
+    "Middle spotted woodpecker": {
+        "la": "Dendrocoptes medius",
+        "gbif": 104143417
+    },
+    "Mistle thrush": {
+        "la": "Turdus viscivorus Linnaeus 1758",
+        "gbif": 114141399
+    },
+    "Mongolian finch": {
+        "la": "Eremopsaltria mongolica (Swinhoe 1870)",
+        "gbif": 119256944
+    },
+    "Montagus harrier": {
+        "la": null,
+        "gbif": null
+    },
+    "Mountain chiffchaff": {
+        "la": "Phylloscopus sindianus",
+        "gbif": 133151995
+    },
+    "Mourning wheatear": {
+        "la": "Oenanthe lugens (Lichtenstein & Mhc, 1823)",
+        "gbif": 165913227
+    },
+    "Moussiers redstart": {
+        "la": null,
+        "gbif": null
+    },
+    "Moustached warbler": {
+        "la": "Acrocephalus melanopogon (Temminck, 1823)",
+        "gbif": 165918840
+    },
+    "Mute swan": {
+        "la": "Mute swan feces associated aveparvovirus",
+        "gbif": 196039048
+    },
+    "Namaqua dove": {
+        "la": "Oena capensis",
+        "gbif": 116904738
+    },
+    "Naumanns thrush": {
+        "la": null,
+        "gbif": null
+    },
+    "Nile Valley sunbird": {
+        "la": "Hedydipna metallica",
+        "gbif": 100156060
+    },
+    "Northern bald ibis": {
+        "la": "Upupa eremita (Linnaeus, 1758)",
+        "gbif": 143705807
+    },
+    "Northern fulmar": {
+        "la": "Fulmarus glacialis",
+        "gbif": 133143542
+    },
+    "Northern gannet": {
+        "la": "Morus bassanus",
+        "gbif": 100174316
+    },
+    "Northern goshawk": {
+        "la": "Falco gentilis (Linnaeus, 1758)",
+        "gbif": 121502891
+    },
+    "Northern harrier": {
+        "la": "Circus hudsonius (Linnaeus, 1766)",
+        "gbif": 180176704
+    },
+    "Northern hawk-owl": {
+        "la": "Surnia ulula",
+        "gbif": 133135774
+    },
+    "Northern lapwing": {
+        "la": "Tringa vanellus (Linnaeus, 1758)",
+        "gbif": 143705938
+    },
+    "Northern pintail": {
+        "la": null,
+        "gbif": null
+    },
+    "Northern shoveler": {
+        "la": null,
+        "gbif": null
+    },
+    "Northern wheatear": {
+        "la": "Oenanthe oenanthe (Linnaeus 1758)",
+        "gbif": 304185363
+    },
+    "Nubian nightjar": {
+        "la": "Caprimulgus nubicus M.H.K.Lichtenstein, 1823",
+        "gbif": 102110512
+    },
+    "Olive-backed pipit": {
+        "la": "Anthus hodgsoni",
+        "gbif": 133148911
+    },
+    "Olive-tree warbler": {
+        "la": "Hippolais olivetorum (Strickland, 1837)",
+        "gbif": 165918814
+    },
+    "Oriental cuckoo": {
+        "la": "Cuculus optatus",
+        "gbif": 133138957
+    },
+    "Oriental skylark": {
+        "la": "Alauda gulgula",
+        "gbif": 100143306
+    },
+    "Oriental turtle dove": {
+        "la": "Oriental turtle dovepox virus",
+        "gbif": 209763147
+    },
+    "Ortolan bunting": {
+        "la": "Emberiza hortulana",
+        "gbif": 133145730
+    },
+    "Osprey": {
+        "la": null,
+        "gbif": null
+    },
+    "Pacific golden plover": {
+        "la": "Pluvialis fulva (J.F.Gmelin, 1789)",
+        "gbif": 165904910
+    },
+    "Paddyfield warbler": {
+        "la": "Acrocephalus agricola (Jerdon, 1845)",
+        "gbif": 114134040
+    },
+    "Pale rockfinch": {
+        "la": "Carpospiza brachydactyla",
+        "gbif": 100158982
+    },
+    "Palestine sunbird": {
+        "la": "Cinnyris osea Bonaparte 1856",
+        "gbif": 304187312
+    },
+    "Pallass grasshopper warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Pallass gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Pallass leaf warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Pallass reed bunting": {
+        "la": null,
+        "gbif": null
+    },
+    "Pallid harrier": {
+        "la": "Circus macrourus",
+        "gbif": 100142976
+    },
+    "Pallid scops owl": {
+        "la": "Otus brucei (Hume, 1872)",
+        "gbif": 165901393
+    },
+    "Pallid swift": {
+        "la": "Apus pallidus",
+        "gbif": 133136792
+    },
+    "Parasitic jaeger": {
+        "la": "Stercorarius parasiticus",
+        "gbif": 133141276
+    },
+    "Parrot crossbill": {
+        "la": "Loxia pytyopsittacus Borkhausen 1793",
+        "gbif": 119257287
+    },
+    "Pechora pipit": {
+        "la": "Anthus gustavi Swinhoe, 1863",
+        "gbif": 165911029
+    },
+    "Pectoral sandpiper": {
+        "la": "Calidris melanotos",
+        "gbif": 133140436
+    },
+    "Peregrine falcon": {
+        "la": null,
+        "gbif": null
+    },
+    "Pharaoh eagle-owl": {
+        "la": "Bubo ascalaphus Savigny 1809",
+        "gbif": 114154662
+    },
+    "Pied avocet": {
+        "la": "Pied avocet picornavirus",
+        "gbif": 304904041
+    },
+    "Pied kingfisher": {
+        "la": "Ceryle rudis (Linnaeus, 1758)",
+        "gbif": 165900217
+    },
+    "Pied wheatear": {
+        "la": "Oenanthe pleschanka (Lepechin, 1770)",
+        "gbif": 119254574
+    },
+    "Pied-billed grebe": {
+        "la": "Podilymbus podiceps (Linnaeus, 1758)",
+        "gbif": 159935940
+    },
+    "Pin-tailed sandgrouse": {
+        "la": "Pterocles alchata (Linnaeus, 1766)",
+        "gbif": 165904681
+    },
+    "Pin-tailed snipe": {
+        "la": "Gallinago stenura",
+        "gbif": 133140386
+    },
+    "Pine bunting": {
+        "la": "Emberiza leucocephalos",
+        "gbif": 100147715
+    },
+    "Pine grosbeak": {
+        "la": "Pinicola enucleator (Linnaeus, 1758)",
+        "gbif": 180552723
+    },
+    "Pink-footed goose": {
+        "la": "Anser brachyrhynchus Baillon, 1834",
+        "gbif": 165931420
+    },
+    "Plain swift": {
+        "la": "Apus unicolor",
+        "gbif": 133136782
+    },
+    "Pomarine jaeger": {
+        "la": "Lestris pomarinus (Temminck, 1815)",
+        "gbif": 121513029
+    },
+    "Purple heron": {
+        "la": "Ardea purpurea",
+        "gbif": 133141998
+    },
+    "Purple sandpiper": {
+        "la": "Calidris maritima (Brünnich, 1764)",
+        "gbif": 160796186
+    },
+    "Pygmy cormorant": {
+        "la": "Phalacrocorax pygmeus",
+        "gbif": 116907128
+    },
+    "Raddes accentor": {
+        "la": null,
+        "gbif": null
+    },
+    "Raddes warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Razorbill": {
+        "la": "Alca torda",
+        "gbif": 100143554
+    },
+    "Red crossbill": {
+        "la": "Loxia curvirostra",
+        "gbif": 116899698
+    },
+    "Red kite": {
+        "la": "Milvus milvus",
+        "gbif": 133142966
+    },
+    "Red knot": {
+        "la": "Calidris canutus",
+        "gbif": 116901025
+    },
+    "Red phalarope": {
+        "la": "Phalaropus fulicarius",
+        "gbif": 104108855
+    },
+    "Red-backed shrike": {
+        "la": "Lanius collurio",
+        "gbif": 104116051
+    },
+    "Red-billed chough": {
+        "la": "Pyrrhocorax pyrrhocorax",
+        "gbif": 116896729
+    },
+    "Red-breasted flycatcher": {
+        "la": "Ficedula parva (Bechstein, 1792)",
+        "gbif": 119254434
+    },
+    "Red-breasted goose": {
+        "la": "Branta ruficollis",
+        "gbif": 100143663
+    },
+    "Red-breasted merganser": {
+        "la": "Mergus serrator Linnaeus, 1758",
+        "gbif": 144101294
+    },
+    "Red-crested pochard": {
+        "la": "Netta rufina",
+        "gbif": 116905156
+    },
+    "Red-flanked bluetail": {
+        "la": "Tarsiger cyanurus (Pallas, 1773)",
+        "gbif": 180174346
+    },
+    "Red-footed falcon": {
+        "la": "Falco vespertinus",
+        "gbif": 104112821
+    },
+    "Red-fronted serin": {
+        "la": "Red-fronted serin circovirus",
+        "gbif": 249323479
+    },
+    "Red-headed bunting": {
+        "la": "Emberiza bruniceps Brandt 1841",
+        "gbif": 114115154
+    },
+    "Red-knobbed coot": {
+        "la": "Fulica cristata",
+        "gbif": 133141520
+    },
+    "Red-legged partridge": {
+        "la": "Alectoris rufa",
+        "gbif": 116894833
+    },
+    "Red-necked grebe": {
+        "la": null,
+        "gbif": null
+    },
+    "Red-necked nightjar": {
+        "la": "Caprimulgus ruficollis Temminck, 1820",
+        "gbif": 180178702
+    },
+    "Red-necked phalarope": {
+        "la": "Phalaropus lobatus (Linnaeus, 1758)",
+        "gbif": 165904008
+    },
+    "Red-necked stint": {
+        "la": "Red-necked stint gallivirus",
+        "gbif": 179723788
+    },
+    "Red-rumped swallow": {
+        "la": "Cecropis daurica (Laxmann 1769)",
+        "gbif": 302565956
+    },
+    "Red-rumped wheatear": {
+        "la": "Oenanthe moesta (Lichtenstein, 1823)",
+        "gbif": 114127416
+    },
+    "Red-tailed shrike": {
+        "la": "Lanius phoenicuroides Schalow, 1875",
+        "gbif": 165690481
+    },
+    "Red-tailed wheatear": {
+        "la": "Oenanthe chrysopygia (de Filippi, 1863)",
+        "gbif": 176654619
+    },
+    "Red-throated loon": {
+        "la": "Gavia stellata",
+        "gbif": 100148707
+    },
+    "Red-throated pipit": {
+        "la": "Anthus cervinus (Pallas, 1811)",
+        "gbif": 165911054
+    },
+    "Red-throated thrush": {
+        "la": "Turdus ruficollis Pallas, 1776",
+        "gbif": 180174992
+    },
+    "Red-wattled lapwing": {
+        "la": "Vanellus indicus (Boddaert, 1783)",
+        "gbif": 165904965
+    },
+    "Redhead": {
+        "la": null,
+        "gbif": null
+    },
+    "Redwing": {
+        "la": "Turdus iliacus Linnaeus 1766",
+        "gbif": 114141240
+    },
+    "Richards pipit": {
+        "la": null,
+        "gbif": null
+    },
+    "Ring ouzel": {
+        "la": "Turdus torquatus Linnaeus 1758",
+        "gbif": 114141392
+    },
+    "Ring-billed gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Ring-necked duck": {
+        "la": null,
+        "gbif": null
+    },
+    "River warbler": {
+        "la": "Locustella fluviatilis (Wolf, 1810)",
+        "gbif": 165918769
+    },
+    "Rock bunting": {
+        "la": "Emberiza cia",
+        "gbif": 116897541
+    },
+    "Rock martin": {
+        "la": "Ptyonoprogne fuligula",
+        "gbif": 133153067
+    },
+    "Rock partridge": {
+        "la": "Alectoris graeca (Meisner, 1804)",
+        "gbif": 165907674
+    },
+    "Rock pigeon": {
+        "la": "Petrophassa rufipennis Collett, 1898",
+        "gbif": 176621017
+    },
+    "Rock pipit": {
+        "la": "Anthus petrosus (Montagu, 1798)",
+        "gbif": 165911064
+    },
+    "Rock ptarmigan": {
+        "la": "Lagopus muta",
+        "gbif": 104151733
+    },
+    "Rock sparrow": {
+        "la": "Petronia petronia",
+        "gbif": 116898780
+    },
+    "Rook": {
+        "la": null,
+        "gbif": null
+    },
+    "Roseate tern": {
+        "la": "Sterna dougallii Montagu, 1813",
+        "gbif": 165903184
+    },
+    "Rosss gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Rosy starling": {
+        "la": "Turdus roseus (Linnaeus, 1758)",
+        "gbif": 144031893
+    },
+    "Rough-legged buzzard": {
+        "la": "Buteo lagopus (Pontoppidan, 1763)",
+        "gbif": 176612534
+    },
+    "Royal tern": {
+        "la": "Thalasseus maximus",
+        "gbif": 100149787
+    },
+    "Ruddy duck": {
+        "la": "Oxyura jamaicensis",
+        "gbif": 104149690
+    },
+    "Ruddy shelduck": {
+        "la": null,
+        "gbif": null
+    },
+    "Ruddy turnstone": {
+        "la": "Ruddy turnstone calicivirus",
+        "gbif": 179725903
+    },
+    "Ruff": {
+        "la": "Chaetozone ruffi",
+        "gbif": 119596898
+    },
+    "Rufous-tailed scrub robin": {
+        "la": "Erythropygia galactotes (Temminck, 1820)",
+        "gbif": 5788860
+    },
+    "Ruppells vulture": {
+        "la": null,
+        "gbif": null
+    },
+    "Ruppells warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Rustic bunting": {
+        "la": "Emberiza rustica Pallas, 1776",
+        "gbif": 176643360
+    },
+    "Sabines gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Saker falcon": {
+        "la": "Falco cherrug J. E. Gray, 1834",
+        "gbif": 114105561
+    },
+    "Sand martin": {
+        "la": "Riparia diluta (Sharpe & Wyatt, 1893)",
+        "gbif": 176639097
+    },
+    "Sand partridge": {
+        "la": "Ammoperdix heyi",
+        "gbif": 133168559
+    },
+    "Sanderling": {
+        "la": null,
+        "gbif": null
+    },
+    "Sandwich tern": {
+        "la": "Thalasseus sandvicensis",
+        "gbif": 133140845
+    },
+    "Sardinian warbler": {
+        "la": "Sylvia melanocephala (J. F. Gmelin, 1789)",
+        "gbif": 119253428
+    },
+    "Savis warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Sedge warbler": {
+        "la": "Acrocephalus schoenobaenus",
+        "gbif": 133150206
+    },
+    "See-see partridge": {
+        "la": "Ammoperdix griseogularis (Brandt, 1843)",
+        "gbif": 176614693
+    },
+    "Semicollared flycatcher": {
+        "la": "Ficedula semitorquata (Homeyer, 1885)",
+        "gbif": 119254453
+    },
+    "Semipalmated plover": {
+        "la": "Charadrius semipalmatus",
+        "gbif": 133140699
+    },
+    "Semipalmated sandpiper": {
+        "la": null,
+        "gbif": null
+    },
+    "Senegal coucal": {
+        "la": "Centropus senegalensis (Linnaeus, 1766)",
+        "gbif": 165905929
+    },
+    "Senegal thick-knee": {
+        "la": "Burhinus senegalensis (Swainson, 1837)",
+        "gbif": 165905167
+    },
+    "Sharp-tailed sandpiper": {
+        "la": "Sharp-tailed sandpiper Picornavirus B-like",
+        "gbif": 179724123
+    },
+    "Short-billed dowitcher": {
+        "la": "Limnodromus griseus (J.F.Gmelin, 1789)",
+        "gbif": 180177623
+    },
+    "Short-eared owl": {
+        "la": "Strix flammea (Pontoppidan, 1763)",
+        "gbif": 121502711
+    },
+    "Short-toed snake eagle": {
+        "la": "Circaetus gallicus (J. F. Gmelin, 1788)",
+        "gbif": 114093188
+    },
+    "Short-toed treecreeper": {
+        "la": "Certhia brachydactyla C.L.Brehm, 1820",
+        "gbif": 180173910
+    },
+    "Siberian accentor": {
+        "la": "Prunella montanella (Pallas, 1776)",
+        "gbif": 180174688
+    },
+    "Siberian crane": {
+        "la": "Leucogeranus leucogeranus Siberian Crane",
+        "gbif": 303470835
+    },
+    "Siberian jay": {
+        "la": "Perisoreus infaustus (Linnaeus, 1758)",
+        "gbif": 165922276
+    },
+    "Siberian rubythroat": {
+        "la": "Calliope calliope",
+        "gbif": 133158062
+    },
+    "Siberian sand plover": {
+        "la": "Charadrius mongolus Pallas, 1776",
+        "gbif": 165904766
+    },
+    "Siberian stonechat": {
+        "la": "Saxicola maurus",
+        "gbif": 100155288
+    },
+    "Siberian thrush": {
+        "la": "Geokichla sibirica",
+        "gbif": 156256950
+    },
+    "Sichuan tit": {
+        "la": "Poecile weigoldicus",
+        "gbif": 133153743
+    },
+    "Sinai rosefinch": {
+        "la": "Carpodacus synoicus (Temminck, 1825)",
+        "gbif": 165911299
+    },
+    "Slender-billed gull": {
+        "la": "Chroicocephalus genei (Brème, 1839)",
+        "gbif": 180178169
+    },
+    "Smew": {
+        "la": "Mergellus albellus",
+        "gbif": 100143731
+    },
+    "Snow bunting": {
+        "la": "Plectrophenax nivalis",
+        "gbif": 100144452
+    },
+    "Snow goose": {
+        "la": null,
+        "gbif": null
+    },
+    "Snowy owl": {
+        "la": "Bubo scandiacus",
+        "gbif": 104146971
+    },
+    "Sociable lapwing": {
+        "la": "Vanellus gregarius Sociable Lapwing",
+        "gbif": 303470871
+    },
+    "Solitary sandpiper": {
+        "la": "Tringa solitaria",
+        "gbif": 116901134
+    },
+    "Sombre tit": {
+        "la": "Poecile lugubris (Temminck, 1820)",
+        "gbif": 114128987
+    },
+    "Song thrush": {
+        "la": "Song thrush polyomavirus",
+        "gbif": 304901019
+    },
+    "Sooty falcon": {
+        "la": "Falco concolor",
+        "gbif": 133166080
+    },
+    "Sooty gull": {
+        "la": "Ichthyaetus hemprichii (Bruch, 1853)",
+        "gbif": 165685676
+    },
+    "Sooty shearwater": {
+        "la": "Sooty Shearwater megrivirus 1",
+        "gbif": 221223959
+    },
+    "Sooty tern": {
+        "la": "Sterna fuscata (Linnaeus, 1766)",
+        "gbif": 121512849
+    },
+    "Sora": {
+        "la": null,
+        "gbif": null
+    },
+    "Spanish imperial eagle": {
+        "la": "Aquila adalberti C.L.Brehm, 1861",
+        "gbif": 180176823
+    },
+    "Spanish sparrow": {
+        "la": "Passer hispaniolensis",
+        "gbif": 116898841
+    },
+    "Spectacled warbler": {
+        "la": "Curruca conspicillata",
+        "gbif": 104135746
+    },
+    "Spotless starling": {
+        "la": "Sturnus unicolor Temminck, 1820",
+        "gbif": 2489104
+    },
+    "Spotted crake": {
+        "la": "Porzana porzana",
+        "gbif": 100169460
+    },
+    "Spotted flycatcher": {
+        "la": "Spotted flycatcher polyomavirus",
+        "gbif": 304901018
+    },
+    "Spotted nutcracker": {
+        "la": "Nucifraga caryocatactes (Linnaeus, 1758)",
+        "gbif": 165921523
+    },
+    "Spotted redshank": {
+        "la": "Tringa erythropus (Pallas, 1764)",
+        "gbif": 114100353
+    },
+    "Spotted sandgrouse": {
+        "la": "Pterocles senegallus",
+        "gbif": 100167569
+    },
+    "Spotted sandpiper": {
+        "la": "Tringa macularia (Linnaeus, 1766)",
+        "gbif": 121513436
+    },
+    "Spur-winged lapwing": {
+        "la": "Vanellus spinosus",
+        "gbif": 100145517
+    },
+    "Squacco heron": {
+        "la": "Ardeola ralloides",
+        "gbif": 100143989
+    },
+    "Stellers eider": {
+        "la": "Polysticta stelleri (Pallas, 1769)",
+        "gbif": 152438201
+    },
+    "Steppe eagle": {
+        "la": "Aquila nipalensis",
+        "gbif": 133143718
+    },
+    "Stilt sandpiper": {
+        "la": "Tringa himantopus (Bonaparte, 1826)",
+        "gbif": 143705955
+    },
+    "Stock dove": {
+        "la": "Columba oenas Linnaeus, 1758",
+        "gbif": 165905473
+    },
+    "Streaked scrub warbler": {
+        "la": "Scotocerca inquieta (Cretzschmar, 1830)",
+        "gbif": 165745311
+    },
+    "Striated heron": {
+        "la": "Ardea striata (Linnaeus, 1758)",
+        "gbif": 185020745
+    },
+    "Striolated bunting": {
+        "la": "Emberiza striolata",
+        "gbif": 133145714
+    },
+    "Surf scoter": {
+        "la": "Melanitta perspicillata",
+        "gbif": 133142473
+    },
+    "Swainsons thrush": {
+        "la": null,
+        "gbif": null
+    },
+    "Swinhoes storm petrel": {
+        "la": null,
+        "gbif": null
+    },
+    "Sykess warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Syrian serin": {
+        "la": "Serinus syriacus Bonaparte, 1851",
+        "gbif": 165746457
+    },
+    "Syrian woodpecker": {
+        "la": "Dendrocopos syriacus",
+        "gbif": 133167494
+    },
+    "Taiga bean goose": {
+        "la": "Anser fabalis",
+        "gbif": 133142833
+    },
+    "Taiga flycatcher": {
+        "la": "Ficedula albicilla (Pallas, 1811)",
+        "gbif": 165915212
+    },
+    "Tawny eagle": {
+        "la": "Aquila rapax (Temminck, 1828)",
+        "gbif": 165901715
+    },
+    "Tawny owl": {
+        "la": "tawny owl-associated circovirus",
+        "gbif": 197185867
+    },
+    "Tawny pipit": {
+        "la": "Anthus campestris (Linnaeus, 1758)",
+        "gbif": 273183277
+    },
+    "Temmincks lark": {
+        "la": null,
+        "gbif": null
+    },
+    "Temmincks stint": {
+        "la": "Temminck's stint calicivirus",
+        "gbif": 202590746
+    },
+    "Tenerife blue chaffinch": {
+        "la": "Fringilla teydea Webb, Berthelot & Moquin-Tandon, 1836",
+        "gbif": 165911140
+    },
+    "Terek sandpiper": {
+        "la": "Xenus cinereus",
+        "gbif": 133140380
+    },
+    "Theklas lark": {
+        "la": null,
+        "gbif": null
+    },
+    "Thick-billed lark": {
+        "la": "Ramphocoris clotbey (Bonaparte, 1850)",
+        "gbif": 165920536
+    },
+    "Thick-billed murre": {
+        "la": null,
+        "gbif": null
+    },
+    "Thick-billed warbler": {
+        "la": "Iduna aedon (Pallas, 1776)",
+        "gbif": 6101024
+    },
+    "Thrush nightingale": {
+        "la": "Luscinia luscinia",
+        "gbif": 100154102
+    },
+    "Tibetan sand plover": {
+        "la": "Charadrius atrifrons Wagler, 1829",
+        "gbif": 165904756
+    },
+    "Tree pipit": {
+        "la": "Anthus trivialis (Linnaeus, 1758)",
+        "gbif": 273183349
+    },
+    "Tristrams starling": {
+        "la": null,
+        "gbif": null
+    },
+    "Tristrams warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Trocaz pigeon": {
+        "la": "Columba trocaz Heineken 1829",
+        "gbif": 114101197
+    },
+    "Trumpeter finch": {
+        "la": "Bucanetes githagineus (M.H.K.Lichtenstein, 1823)",
+        "gbif": 102096912
+    },
+    "Tufted duck": {
+        "la": null,
+        "gbif": null
+    },
+    "Tundra bean goose": {
+        "la": "Anser serrirostris Gould, 1852",
+        "gbif": 180179124
+    },
+    "Tundra swan": {
+        "la": null,
+        "gbif": null
+    },
+    "Turkestan short-toed lark": {
+        "la": "Alaudala heinei (Homeyer, 1873)",
+        "gbif": 258095019
+    },
+    "Twite": {
+        "la": null,
+        "gbif": null
+    },
+    "Two-barred crossbill": {
+        "la": "Loxia leucoptera Gmelin, 1789",
+        "gbif": 144098666
+    },
+    "Two-barred warbler": {
+        "la": "Phylloscopus plumbeitarsus (Sundevall, 1837)",
+        "gbif": 176634043
+    },
+    "Unknown": {
+        "la": null,
+        "gbif": null
+    },
+    "Upchers warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Upland sandpiper": {
+        "la": "Bartramia longicauda",
+        "gbif": 116900877
+    },
+    "Ural owl": {
+        "la": "Strix uralensis",
+        "gbif": 104147429
+    },
+    "Veery": {
+        "la": "Catharus fuscescens (Stephens, 1817)",
+        "gbif": 159937137
+    },
+    "Velvet scoter": {
+        "la": null,
+        "gbif": null
+    },
+    "Verreauxs eagle": {
+        "la": null,
+        "gbif": null
+    },
+    "Wallcreeper": {
+        "la": "Certhia muraria (Linnaeus, 1766)",
+        "gbif": 185018270
+    },
+    "Water pipit": {
+        "la": "Anthus spinoletta",
+        "gbif": 116898507
+    },
+    "Water rail": {
+        "la": "Rallus aquaticus",
+        "gbif": 133141778
+    },
+    "Western Bonellis warbler": {
+        "la": null,
+        "gbif": null
+    },
+    "Western Orphean warbler": {
+        "la": "Sylvia hortensis",
+        "gbif": 133156705
+    },
+    "Western black-eared wheatear": {
+        "la": "Oenanthe hispanica (Linnaeus, 1758)",
+        "gbif": 165913323
+    },
+    "Western capercaillie": {
+        "la": "Tetrao urogallus Linnaeus, 1758",
+        "gbif": 143705905
+    },
+    "Western jackdaw": {
+        "la": "Western jackdaw circovirus",
+        "gbif": 249323450
+    },
+    "Western marsh harrier": {
+        "la": "Circus aeruginosus",
+        "gbif": 304185269
+    },
+    "Western olivaceous warbler": {
+        "la": "Iduna opaca (Cabanis, 1851)",
+        "gbif": 180175435
+    },
+    "Western reef heron": {
+        "la": "Egretta gularis",
+        "gbif": 100144014
+    },
+    "Western rock nuthatch": {
+        "la": "Sitta neumayer Michahelles, 1830",
+        "gbif": 176629522
+    },
+    "Western sandpiper": {
+        "la": "Calidris mauri",
+        "gbif": 116901052
+    },
+    "Western subalpine warbler": {
+        "la": "Curruca inornata",
+        "gbif": 166379734
+    },
+    "Western swamphen": {
+        "la": "Porphyrio porphyrio (Linnaeus, 1758)",
+        "gbif": 102093695
+    },
+    "Western yellow wagtail": {
+        "la": "Motacilla flava",
+        "gbif": 133148537
+    },
+    "Whinchat": {
+        "la": "Saxicola rubetra (Linnaeus, 1758)",
+        "gbif": 119254384
+    },
+    "Whiskered tern": {
+        "la": "Chlidonias hybrida",
+        "gbif": 104108096
+    },
+    "White stork": {
+        "la": "Ciconia ciconia",
+        "gbif": 116902418
+    },
+    "White wagtail": {
+        "la": "Motacilla alba Linnaeus, 1758",
+        "gbif": 165911510
+    },
+    "White-backed woodpecker": {
+        "la": "Picus leucotos (Bechstein, 1802)",
+        "gbif": 143705688
+    },
+    "White-cheeked tern": {
+        "la": "Sterna repressa Hartert & Ejo, 1916",
+        "gbif": 165903157
+    },
+    "White-crowned wheatear": {
+        "la": "Oenanthe leucopyga",
+        "gbif": 100155111
+    },
+    "White-eared bulbul": {
+        "la": "Pycnonotus leucotis (Gould, 1836)",
+        "gbif": 176634506
+    },
+    "White-eyed gull": {
+        "la": "Ichthyaetus leucophthalmus",
+        "gbif": 104108211
+    },
+    "White-faced storm petrel": {
+        "la": "Procellaria marina (Latham, 1790)",
+        "gbif": 121506825
+    },
+    "White-headed duck": {
+        "la": "Oxyura leucocephala (Scopoli, 1769)",
+        "gbif": 159938838
+    },
+    "White-rumped sandpiper": {
+        "la": null,
+        "gbif": null
+    },
+    "White-rumped swift": {
+        "la": "Aerodramus spodiopygius",
+        "gbif": 133137166
+    },
+    "White-spectacled bulbul": {
+        "la": "Pycnonotus xanthopygos",
+        "gbif": 133151128
+    },
+    "White-tailed eagle": {
+        "la": "White-tailed eagle picornavirus",
+        "gbif": 304904040
+    },
+    "White-tailed lapwing": {
+        "la": "Vanellus leucurus",
+        "gbif": 100145498
+    },
+    "White-throated dipper": {
+        "la": "Cinclus cinclus (Linnaeus, 1758)",
+        "gbif": 119243280
+    },
+    "White-throated kingfisher": {
+        "la": "Halcyon smyrnensis",
+        "gbif": 133136849
+    },
+    "White-throated robin": {
+        "la": "Irania gutturalis (Guerin-Meneville, 1843)",
+        "gbif": 119254514
+    },
+    "White-winged lark": {
+        "la": "Melanocorypha leucoptera",
+        "gbif": 100143376
+    },
+    "White-winged redstart": {
+        "la": "Phoenicurus erythrogastrus",
+        "gbif": 104130929
+    },
+    "White-winged scoter": {
+        "la": "Melanitta deglandi (Bonaparte, 1850)",
+        "gbif": 176608153
+    },
+    "White-winged snowfinch": {
+        "la": "Montifringilla nivalis",
+        "gbif": 133145136
+    },
+    "White-winged tern": {
+        "la": "Chlidonias leucopterus (Temminck 1815)",
+        "gbif": 302565864
+    },
+    "Whites thrush": {
+        "la": null,
+        "gbif": null
+    },
+    "Whooper swan": {
+        "la": null,
+        "gbif": null
+    },
+    "Willow ptarmigan": {
+        "la": "Lagopus lagopus",
+        "gbif": 133167276
+    },
+    "Willow tit": {
+        "la": "Poecile montanus (Conrad von Baldenstein 1827)",
+        "gbif": 304185334
+    },
+    "Willow warbler": {
+        "la": "Phylloscopus trochilus",
+        "gbif": 100160888
+    },
+    "Wilsons phalarope": {
+        "la": null,
+        "gbif": null
+    },
+    "Wilsons storm petrel": {
+        "la": "Oceanites oceanicus (Kuhl, 1820)",
+        "gbif": 160796100
+    },
+    "Wood sandpiper": {
+        "la": "Tringa glareola",
+        "gbif": 116901106
+    },
+    "Wood warbler": {
+        "la": "Phylloscopus sibilatrix (Bechstein, 1793)",
+        "gbif": 114135508
+    },
+    "Woodchat shrike": {
+        "la": "Lanius senator",
+        "gbif": 133165728
+    },
+    "Woodlark": {
+        "la": "Maechidius woodlarkianus Heller 1914",
+        "gbif": 168648173
+    },
+    "Yelkouan shearwater": {
+        "la": "Puffinus yelkouan (Acerbi, 1827)",
+        "gbif": 165902692
+    },
+    "Yellow-billed cuckoo": {
+        "la": "Coccyzus americanus (Linnaeus, 1758)",
+        "gbif": 165905764
+    },
+    "Yellow-billed loon": {
+        "la": "Gavia adamsii (G.R.Gray, 1859)",
+        "gbif": 165902935
+    },
+    "Yellow-breasted bunting": {
+        "la": "Emberiza aureola",
+        "gbif": 116897572
+    },
+    "Yellow-browed bunting": {
+        "la": "Emberiza chrysophrys Pallas 1776",
+        "gbif": 119238283
+    },
+    "Yellow-browed warbler": {
+        "la": "Phylloscopus inornatus",
+        "gbif": 100160840
+    },
+    "Yellow-legged gull": {
+        "la": null,
+        "gbif": null
+    },
+    "Yellow-throated sparrow": {
+        "la": "Gymnoris xanthocollis (Burton, 1838)",
+        "gbif": 165912032
+    },
+    "Yellowhammer": {
+        "la": "Emberiza citrinella Linnaeus 1758",
+        "gbif": 114115257
+    },
+    "Zinos petrel": {
+        "la": null,
+        "gbif": null
+    },
+    "Zitting cisticola": {
+        "la": "Cisticola juncidis (Rafinesque, 1810)",
+        "gbif": 165918377
+    }
+}

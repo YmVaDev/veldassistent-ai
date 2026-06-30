@@ -2,8 +2,10 @@
 import cv2
 import numpy as np
 
+from config import DETECTOR_SIZE
 
-def letterbox(image, new_shape=(384, 384), color=(114, 114, 114)):
+
+def letterbox(image, new_shape=(DETECTOR_SIZE, DETECTOR_SIZE), color=(114, 114, 114)):
     h, w = image.shape[:2]
 
     r = min(new_shape[0] / h, new_shape[1] / w)
@@ -118,7 +120,7 @@ def debug_boxes(output):
         )
 
 def generate_grids_and_strides(
-    input_size=384,
+    input_size=DETECTOR_SIZE,
     strides=(8, 16, 32),
 ):
     grids = []
