@@ -1,7 +1,7 @@
 from pathlib import Path
 from PIL import Image
 
-UPLOAD_DIR = Path("/home/oostakkerbos/uploads")
+UPLOAD_DIR = Path("/home/oostakkerbos/incoming")
 
 photos = list(UPLOAD_DIR.glob("*.jpg"))
 

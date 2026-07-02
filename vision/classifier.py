@@ -71,7 +71,6 @@ class Classifier:
             "score": score
         }
 
-classifier = Classifier("birds")
 
-def classify(image):
-    return classifier.classify(image)
+
+

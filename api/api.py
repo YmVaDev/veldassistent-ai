@@ -27,4 +27,4 @@ def analyze():
             "error": "Geen foto's gevonden"
         }
 
-    return router.analyze("hibird", photos[0])
+    return router.analyze("Ranger", photos[0])

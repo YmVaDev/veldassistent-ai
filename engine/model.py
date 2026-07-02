@@ -14,13 +14,16 @@ from vision.detector import (
     crop_detections,
 )
 
-from vision.classifier import classify
+from vision.classifier import (
+    Classifier
+)
 
 class AIModel:
 
     def __init__(self, model_name: str):
         self.model_id = model_name
         self.detector = Detector(model_name)
+        self.classifier = Classifier(model_name)
 
         with open(
             BASE_DIR / "models" / self.model_id / "classifier" / "species.json",
@@ -65,7 +68,7 @@ class AIModel:
 
             cv2.imwrite(filename, crop)
 
-            prediction = classify(crop)
+            prediction = self.classifier.classify(crop)
 
             english = prediction["species"]
 

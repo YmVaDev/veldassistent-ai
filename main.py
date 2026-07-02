@@ -6,8 +6,6 @@ from engine.model import AIModel
 
 app = FastAPI()
 
-bird_model = AIModel("birds")
-
 class AnalyzeRequest(BaseModel):
     image_path: str
 
