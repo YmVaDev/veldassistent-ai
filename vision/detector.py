@@ -1,10 +1,45 @@
 
 import cv2
 import numpy as np
+import onnxruntime as ort
+from config import MODEL_DIR
+from vision.model_config import load_model_config
 
-from config import DETECTOR_SIZE
+class Detector:
 
-def letterbox(image, new_shape=(DETECTOR_SIZE, DETECTOR_SIZE), color=(114, 114, 114)):
+    def __init__(self, model_name):
+
+        self.config = load_model_config(model_name)
+
+        self.input_size = self.config["detector"]["size"]
+
+        model = (
+            MODEL_DIR
+            / model_name
+            / self.config["detector"]["model"]
+        )
+
+        self.session = ort.InferenceSession(model)
+
+    def inference(self, image):
+
+        tensor, ratio, pad = preprocess(
+            image,
+            self.input_size
+        )
+
+        input_name = self.session.get_inputs()[0].name
+
+        output = self.session.run(
+            None,
+            {
+                input_name: tensor
+            }
+        )[0]
+
+        return output, ratio, pad
+
+def letterbox(image, new_shape, color=(114, 114, 114)):
     h, w = image.shape[:2]
 
     r = min(new_shape[0] / h, new_shape[1] / w)
@@ -41,8 +76,8 @@ def letterbox(image, new_shape=(DETECTOR_SIZE, DETECTOR_SIZE), color=(114, 114, 
     return resized, r, (dw, dh)
 
 
-def preprocess(image):
-    img, ratio, pad = letterbox(image)
+def preprocess(image, input_size):
+    img, ratio, pad = letterbox(image, (input_size, input_size))
 
     img = img.astype(np.float32)
 
@@ -54,30 +89,6 @@ def preprocess(image):
 
     return img, ratio, pad
 
-
-import onnxruntime as ort
-
-
-from config import MODEL_DIR
-MODEL = MODEL_DIR / "birds" / "detector" / "bird_crop_detector_accurate_yolox_tiny.onnx"
-
-session = ort.InferenceSession(MODEL)
-
-
-def inference(image):
-
-    tensor, ratio, pad = preprocess(image)
-
-    input_name = session.get_inputs()[0].name
-
-    output = session.run(
-        None,
-        {
-            input_name: tensor
-        }
-    )[0]
-
-    return output, ratio, pad
 
 def objectness(output):
 
@@ -119,7 +130,7 @@ def debug_boxes(output):
         )
 
 def generate_grids_and_strides(
-    input_size=DETECTOR_SIZE,
+    input_size,
     strides=(8, 16, 32),
 ):
     grids = []
@@ -151,9 +162,9 @@ def generate_grids_and_strides(
 
     return grids, expanded_strides
 
-def decode_outputs(output):
+def decode_outputs(output, input_size):
 
-    grids, expanded_strides = generate_grids_and_strides()
+    grids, expanded_strides = generate_grids_and_strides(input_size)
 
     predictions = output[0].copy()
 

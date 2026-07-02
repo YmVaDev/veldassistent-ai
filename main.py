@@ -1,25 +1,24 @@
 
-
 from fastapi import FastAPI
 from pydantic import BaseModel
-
-from vision.pipeline import detect_and_classify
+from engine.engine import Engine
+from engine.model import AIModel
 
 app = FastAPI()
 
+bird_model = AIModel("birds")
 
 class AnalyzeRequest(BaseModel):
     image_path: str
 
+from engine.loader import load_models
 
-@app.get("/")
-def root():
-    return {
-        "status": "ok",
-        "service": "Oostakkerbos AI"
-    }
+engine = Engine()
 
+for model in load_models():
+    engine.add_model(model)
 
 @app.post("/analyze")
 def analyze(request: AnalyzeRequest):
-    return detect_and_classify(request.image_path)
+    return engine.process(request.image_path)
+

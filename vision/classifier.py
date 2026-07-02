@@ -2,23 +2,17 @@
 import numpy as np
 import onnxruntime as ort
 from PIL import Image
-
-
-from vision.model_config import load_model_config
-CONFIG = load_model_config("birds")
-
 from config import MODEL_DIR
-from config import CLASSIFIER_SIZE
-
+from vision.model_config import load_model_config
 
 class Classifier:
 
     def __init__(self, model_name):
 
-        config = load_model_config(model_name)
+        self.config = load_model_config(model_name)
 
-        model = MODEL_DIR / model_name / config["classifier_model"]
-        labels = MODEL_DIR / model_name / config["labels"]
+        model = MODEL_DIR / model_name / self.config["classifier"]["model"]
+        labels = MODEL_DIR / model_name / self.config["classifier"]["labels"]
 
         self.session = ort.InferenceSession(model)
 
@@ -33,7 +27,9 @@ class Classifier:
 
         img = Image.fromarray(image)
 
-        img = img.resize((CLASSIFIER_SIZE, CLASSIFIER_SIZE), Image.Resampling.BICUBIC)
+        self.input_size = self.config["classifier"]["size"]
+
+        img = img.resize((self.input_size, self.input_size), Image.Resampling.BICUBIC)
 
         x = np.asarray(img).astype(np.float32)
 
