@@ -15,5 +15,3 @@ photos = list(UPLOAD_DIR.glob("*.jpg"))
 
 print(f"📸 {len(photos)} JPG-bestanden gevonden.\n")
 
-for photo in photos:
-    print("➡️", photo.name)
