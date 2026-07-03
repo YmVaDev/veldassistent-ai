@@ -1,88 +1,109 @@
+
 from pathlib import Path
 import json
-import time
-import requests
 
-LABELS = Path("models/birds/onnx/convnext_v1_tiny_eu_common_labels.txt")
-OUTPUT = Path("birds/species.json")
+from openpyxl import load_workbook
+
+LABELS = Path("models/birds/classifier/convnext_v1_tiny_eu_common_labels.txt")
+BIRDBASE = Path("models/birds/classifier/birdbase_v2025.1.xlsx")
+MAPPING = Path("models/birds/classifier/birdbase_mapping.json")
+OUTPUT = Path("models/birds/classifier/species.json")
+
+print("BirdBase laden...")
+
+wb = load_workbook(BIRDBASE, data_only=True)
+ws = wb["Data"]
+
+# ---------------------------------------------------------------------
+# BirdBase in geheugen laden
+# ---------------------------------------------------------------------
+
+birdbase = {}
+
+for row in ws.iter_rows(min_row=3, values_only=True):
+
+    english = str(row[1]).strip()
+
+    habitat = row[48]
+
+    birdbase[english] = {
+        "birdbaseId": row[0],
+        "scientificName": row[2],
+        "habitat": row[48],
+        "diet": row[50]
+    }
+
+print(f"{len(birdbase)} BirdBase soorten geladen.")
+
+# ---------------------------------------------------------------------
+# Mapping laden
+# ---------------------------------------------------------------------
+
+mapping = json.loads(
+    MAPPING.read_text(encoding="utf-8")
+)
+
+# ---------------------------------------------------------------------
+# species.json bouwen
+# ---------------------------------------------------------------------
 
 species = {}
 
+matched = 0
+missing = []
+
 labels = LABELS.read_text(encoding="utf-8").splitlines()
 
-for i, english in enumerate(labels, start=1):
+for i, label in enumerate(labels, start=1):
 
-    english = english.strip()
+    label = label.strip()
 
-    if not english:
+    if not label:
         continue
 
-    print(f"[{i}/{len(labels)}] {english}")
+    print(f"[{i}/{len(labels)}] {label}")
 
-    try:
+    if label == "Unknown":
 
-        search = requests.get(
-            "https://api.gbif.org/v1/species/search",
-            params={
-                "q": english,
-                "limit": 10
-            },
-            timeout=15
-        ).json()
-
-        result = None
-
-        for item in search.get("results", []):
-
-            if item.get("rank") != "SPECIES":
-                continue
-
-            if item.get("taxonomicStatus") == "ACCEPTED":
-                result = item
-                break
-
-            if result is None:
-                result = item
-
-        if result is None:
-
-            print("   ❌ Niet gevonden")
-
-            species[english] = {
-                "la": None,
-                "gbif": None
-            }
-
-            continue
-
-        gbif = result["key"]
-        latin = result["scientificName"]
-
-        species[english] = {
-            "la": latin,
-            "gbif": gbif
+        species[label] = {
+            "birdbaseId": None,
+            "scientificName": None,
+            "habitat": None,
+            "diet": None
         }
 
-        print(f"   ✅ {latin}")
+        continue
 
-    except Exception as e:
+    # Gebruik de mapping indien aanwezig
+    birdbase_name = mapping.get(label, label)
 
-        print(f"   ❌ {e}")
+    data = birdbase.get(birdbase_name)
 
-        species[english] = {
-            "la": None,
-            "gbif": None
+    if data:
+
+        species[label] = data
+        matched += 1
+
+        print(f"   ✅ {data['scientificName']}")
+
+    else:
+
+        print("   ❌ Niet gevonden")
+
+        species[label] = {
+            "birdbaseId": None,
+            "scientificName": None,
+            "habitat": None,
+            "diet": None
         }
 
-    time.sleep(0.1)
+        missing.append(label)
 
-# Altijd toevoegen
-species["Unknown"] = {
-    "la": None,
-    "gbif": None
-}
+# ---------------------------------------------------------------------
+# Opslaan
+# ---------------------------------------------------------------------
 
-OUTPUT.parent.mkdir(exist_ok=True)
+OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 
 OUTPUT.write_text(
     json.dumps(
@@ -93,8 +114,17 @@ OUTPUT.write_text(
     encoding="utf-8"
 )
 
-print("")
+print()
 print("================================")
 print(f"Soorten verwerkt : {len(species)}")
-print(f"JSON opgeslagen  : {OUTPUT}")
+print(f"Gevonden          : {matched}")
+print(f"Niet gevonden     : {len(missing)}")
+print(f"JSON opgeslagen   : {OUTPUT}")
 print("================================")
+
+if missing:
+
+    print("\nNiet gevonden:")
+
+    for s in missing:
+        print(" -", s)
