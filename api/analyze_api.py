@@ -17,7 +17,7 @@ def analyze(photo_path):
 
 if __name__ == "__main__":
 
-    UPLOAD_DIR = Path("/home/oostakkerbos/uploads")
+    UPLOAD_DIR = Path("/home/oostakkerbos/incoming")
 
     photos = list(UPLOAD_DIR.glob("*.jpg"))
 

@@ -18,7 +18,7 @@ def root():
 @app.get("/analyze")
 def analyze():
 
-    upload_dir = Path("/home/oostakkerbos/uploads")
+    upload_dir = Path("/home/oostakkerbos/incoming")
 
     photos = list(upload_dir.glob("*.jpg"))
 

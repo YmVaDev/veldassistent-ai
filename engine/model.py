@@ -31,9 +31,9 @@ class AIModel:
         ) as f:
             self.species_map = json.load(f)
 
-    def process(self, image_path):
+    def process(self, src_path):
 
-        image = cv2.imread(image_path)
+        image = cv2.imread(src_path)
 
         output, ratio, pad = self.detector.inference(image)
 
@@ -64,7 +64,7 @@ class AIModel:
 
             filename = f"crops/{uuid.uuid4().hex}.jpg"
 
-            web_path_original = image_path.replace ("/opt/oostakkerbos","")
+            web_path_original = src_path.replace ("/opt/oostakkerbos","")
 
             cv2.imwrite(filename, crop)
 
@@ -75,15 +75,18 @@ class AIModel:
             species = self.species_map.get(
                 english,
                 {
-                    "la": None,
-                    "gbif": None
+                    "birdbaseId": None,
+                    "scientificName": None,
+                    "habitat": None,
+                    "diet": None
                 }
             )
 
             prediction["species"] = {
-                "en": english,
-                "la": species["la"],
-                "gbif": species["gbif"]
+                "birdbaseId": species["birdbaseId"],
+                "scientificName": species["scientificName"],
+                "habitat": species["habitat"],
+                "diet": species["diet"]
             }
 
             prediction["score"] = round(float(prediction["score"]), 1)
@@ -91,8 +94,10 @@ class AIModel:
             results.append({
                 "species": {
                     "en": english,
-                    "la": species["la"],
-                    "gbif": species["gbif"]
+                    "birdbaseId": species["birdbaseId"],
+                    "scientificName": species["scientificName"],
+                    "habitat": species["habitat"],
+                    "diet": species["diet"]
                 },
                 "score": prediction["score"],
                 "box": det["box"],

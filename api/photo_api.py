@@ -1,7 +1,7 @@
 
 from pathlib import Path
 
-UPLOAD_DIR = Path("/home/oostakkerbos/uploads")
+UPLOAD_DIR = Path("/home/oostakkerbos/incoming")
 
 print("🌳 Oostakkerbos AI Core\n")
 

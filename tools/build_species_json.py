@@ -4,7 +4,7 @@ import json
 
 from openpyxl import load_workbook
 
-LABELS = Path("models/birds/classifier/convnext_v1_tiny_eu_common_labels.txt")
+LABELS = Path("models/birds/classifier/labels.txt")
 BIRDBASE = Path("models/birds/classifier/birdbase_v2025.1.xlsx")
 MAPPING = Path("models/birds/classifier/birdbase_mapping.json")
 OUTPUT = Path("models/birds/classifier/species.json")
@@ -30,7 +30,8 @@ for row in ws.iter_rows(min_row=3, values_only=True):
         "birdbaseId": row[0],
         "scientificName": row[2],
         "habitat": row[48],
-        "diet": row[50]
+        "diet": row[50],
+        "seen": "No"
     }
 
 print(f"{len(birdbase)} BirdBase soorten geladen.")
@@ -94,7 +95,8 @@ for i, label in enumerate(labels, start=1):
             "birdbaseId": None,
             "scientificName": None,
             "habitat": None,
-            "diet": None
+            "diet": None,
+            "seen": "No"
         }
 
         missing.append(label)
