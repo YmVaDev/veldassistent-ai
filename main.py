@@ -2,11 +2,9 @@
 from pathlib import Path
 import os
 import time
-
 from fastapi import FastAPI
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
-
 from engine.engine import Engine
 from engine.loader import load_models
 

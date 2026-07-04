@@ -58,11 +58,14 @@ class Classifier:
         for i, out in enumerate(outputs):
             print(i, out.shape, out.dtype)
 
-        logits = outputs[0]
+        logits = outputs[0][0]
 
-        idx = int(np.argmax(logits[0]))
+        exp = np.exp(logits - np.max(logits))
+        probs = exp / np.sum(exp)
 
-        score = float(logits[0][idx])
+        idx = int(np.argmax(probs))
+
+        score = float(probs[idx]) * 100
 
         english = self.labels[idx]
 

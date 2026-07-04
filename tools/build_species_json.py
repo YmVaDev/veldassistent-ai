@@ -31,7 +31,10 @@ for row in ws.iter_rows(min_row=3, values_only=True):
         "scientificName": row[2],
         "habitat": row[48],
         "diet": row[50],
-        "seen": "No"
+        "count": 0,
+        "best_score": 0,
+        "first_seen": None,
+        "last_seen": None
     }
 
 print(f"{len(birdbase)} BirdBase soorten geladen.")
@@ -70,7 +73,11 @@ for i, label in enumerate(labels, start=1):
             "birdbaseId": None,
             "scientificName": None,
             "habitat": None,
-            "diet": None
+            "diet": None,
+            "count": None,
+            "best_score": None,
+            "first_seen": None,
+            "last_seen": None
         }
 
         continue
@@ -96,7 +103,10 @@ for i, label in enumerate(labels, start=1):
             "scientificName": None,
             "habitat": None,
             "diet": None,
-            "seen": "No"
+            "count": None,
+            "best_score": None,
+            "first_seen": None,
+            "last_seen": None
         }
 
         missing.append(label)

@@ -4,6 +4,7 @@ import os
 import cv2
 import json
 from config import BASE_DIR
+from datetime import datetime
 
 from vision.detector import (
     Detector,
@@ -60,17 +61,23 @@ class AIModel:
 
         os.makedirs("crops", exist_ok=True)
 
+        COUNT_THRESHOLD = 85.0
+
+        changed = False
+        counted_species = set()
+
+        web_path_original = src_path.replace("/opt/oostakkerbos", "")
+
         for det, crop in zip(detections, crops):
 
             filename = f"crops/{uuid.uuid4().hex}.jpg"
-
-            web_path_original = src_path.replace ("/opt/oostakkerbos","")
 
             cv2.imwrite(filename, crop)
 
             prediction = self.classifier.classify(crop)
 
             english = prediction["species"]
+            prediction["score"] = round(float(prediction["score"]), 1)
 
             species = self.species_map.get(
                 english,
@@ -78,18 +85,46 @@ class AIModel:
                     "birdbaseId": None,
                     "scientificName": None,
                     "habitat": None,
-                    "diet": None
+                    "diet": None,
+                    "count": 0,
+                    "best_score": 0,
+                    "first_seen": None,
+                    "last_seen": None,
                 }
             )
 
-            prediction["species"] = {
-                "birdbaseId": species["birdbaseId"],
-                "scientificName": species["scientificName"],
-                "habitat": species["habitat"],
-                "diet": species["diet"]
-            }
+            # Alleen bestaande soorten bijwerken
+            if (
+                english in self.species_map
+                and prediction["score"] >= COUNT_THRESHOLD
+                and english not in counted_species
+            ):
 
-            prediction["score"] = round(float(prediction["score"]), 1)
+                now = datetime.now().isoformat(timespec="seconds")
+
+                species = self.species_map[english]
+
+                # Eén keer tellen per soort per foto
+                species["count"] = species.get("count", 0) + 1
+
+                # Eerste waarneming
+                if not species.get("first_seen"):
+                    species["first_seen"] = now
+
+                # Laatste waarneming
+                species["last_seen"] = now
+
+                # Hoogste AI-score ooit
+                if prediction["score"] > species.get("best_score", 0):
+                    species["best_score"] = prediction["score"]
+
+                counted_species.add(english)
+                changed = True
+
+                print("Soort:", english)
+                print("Bestaat:", english in self.species_map)
+                print("Score:", prediction["score"])
+                print("Threshold:", COUNT_THRESHOLD)
 
             results.append({
                 "species": {
@@ -97,7 +132,11 @@ class AIModel:
                     "birdbaseId": species["birdbaseId"],
                     "scientificName": species["scientificName"],
                     "habitat": species["habitat"],
-                    "diet": species["diet"]
+                    "diet": species["diet"],
+                    "count": species.get("count", 0),
+                    "best_score": species.get("best_score", 0),
+                    "first_seen": species.get("first_seen"),
+                    "last_seen": species.get("last_seen"),
                 },
                 "score": prediction["score"],
                 "box": det["box"],
@@ -105,23 +144,14 @@ class AIModel:
                 "crop_url": f"https://oostakkerbos.be/{filename}",
             })
 
-        api_response = {
-            "success": True,
-            "api_version": "1.0",
-
-            "observation": {
-                "camera": "Ranger",
-                "image": {
-                    "original_url": f"https://oostakkerbos.be{web_path_original}",
-                }
-            },
-
-            "summary": {
-                "count": len(results)
-            },
-
-            "detections": results
-        }
+        # Alleen opslaan als er iets gewijzigd is
+        if changed:
+            with open(
+                BASE_DIR / "models" / self.model_id / "classifier" / "species.json",
+                "w",
+                encoding="utf-8"
+            ) as f:
+                json.dump(self.species_map, f, indent=4, ensure_ascii=False)
 
         return {
             "observation": {
