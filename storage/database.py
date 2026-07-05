@@ -386,4 +386,99 @@ class Database:
             row["crop_url"] = f"https://oostakkerbos.be/{row['crop_path']}"
 
         return rows
+
+    def get_review(self, observation_id):
+
+        cursor = self.cursor()
+        cursor.execute("""
+            SELECT
+
+                o.id,
+                o.crop_path,
+                o.status,
+
+                p.species,
+                p.score,
+                p.rank
+
+            FROM observations o
+
+            JOIN predictions p
+                ON p.observation_id = o.id
+
+            WHERE
+                o.id = ?
+
+            ORDER BY
+                p.rank
+        """, (observation_id,))
+
+        rows = [
+            dict(row)
+            for row in cursor.fetchall()
+        ]
+
+        for row in rows:
+            row["crop_url"] = f"https://oostakkerbos.be/{row['crop_path']}"
+
+        return rows
+
+
+    def save_review(
+        self,
+        observation_id,
+        confirmed,
+        confirmed_species=None,
+        comment=None,
+        reviewed_by=None
+    ):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            INSERT INTO reviews
+            (
+                observation_id,
+                confirmed,
+                confirmed_species,
+                comment,
+                reviewed_by,
+                reviewed_at
+            )
+            VALUES (?, ?, ?, ?, ?, ?)
+        """, (
+            observation_id,
+            int(confirmed),
+            confirmed_species,
+            comment,
+            reviewed_by,
+            datetime.utcnow().isoformat()
+        ))
+
+        self.commit()
+
+        return cursor.lastrowid
+
+
+    def update_observation_status(
+        self,
+        observation_id,
+        status
+    ):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE observations
+            SET status = ?
+            WHERE id = ?
+        """, (
+            status,
+            observation_id
+        ))
+
+        self.commit()
+
+
+
         

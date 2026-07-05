@@ -139,6 +139,32 @@ def create_predictions(cursor):
     """)
 
 
+def create_reviews(cursor):
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS reviews (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            observation_id INTEGER NOT NULL,
+
+            confirmed INTEGER NOT NULL,
+
+            confirmed_species TEXT,
+
+            comment TEXT,
+
+            reviewed_by TEXT,
+
+            reviewed_at TEXT NOT NULL,
+
+            FOREIGN KEY(observation_id)
+                REFERENCES observations(id)
+
+        )
+    """)
+
+
 def create_scheme():
 
     db = Database()
@@ -151,6 +177,7 @@ def create_scheme():
     create_photos(cursor)
     create_observations(cursor)
     create_predictions(cursor)
+    create_reviews(cursor)
 
     db.commit()
 
