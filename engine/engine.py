@@ -3,6 +3,7 @@ import cv2
 from storage.database import Database
 from domain.photo import Photo
 from utils.photo_utils import get_photo_timestamp
+from storage.archive import archive_photo
 
 class Engine:
 
@@ -57,6 +58,10 @@ class Engine:
                         prediction
                     )
 
+            new_path = archive_photo(src_path)
+            photo.relative_path = new_path
+            self.db.update_photo(photo)
+
         print(f"Objects ontvangen: {len(objects)}")
 
         for obj in objects:
@@ -78,3 +83,4 @@ class Engine:
             "detections": detections,
             "objects": objects
         }
+

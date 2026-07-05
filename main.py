@@ -7,6 +7,9 @@ from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from engine.engine import Engine
 from engine.loader import load_models
+from storage.database import Database
+
+db = Database()
 
 app = FastAPI()
 
@@ -86,3 +89,15 @@ def shutdown():
 @app.get("/")
 def root():
     return {"status": "running"}
+
+
+@app.get("/observations/pending")
+def get_pending_observations():
+
+    return db.get_pending_observations()
+
+
+@app.get("/review/pending")
+def review_pending():
+
+    return db.get_pending_review()

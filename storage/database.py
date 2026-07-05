@@ -318,3 +318,72 @@ class Database:
         self.commit()
 
         print(f"{imported} species imported")
+
+    def update_photo(self, photo):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE photos
+            SET relative_path = ?
+            WHERE id = ?
+        """, (
+            photo.relative_path,
+            photo.id
+        ))
+
+        self.commit()
+
+
+    def get_pending_observations(self):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM observations
+            WHERE status = 'pending'
+            ORDER BY id DESC
+        """)
+
+        return [
+            dict(row)
+            for row in cursor.fetchall()
+        ]
+
+    def get_pending_review(self):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT
+
+                o.id,
+                o.crop_path,
+                o.status,
+
+                p.species,
+                p.score
+
+            FROM observations o
+
+            JOIN predictions p
+                ON p.observation_id = o.id
+
+            WHERE
+                o.status = 'pending'
+                AND p.rank = 1
+
+            ORDER BY o.id DESC
+        """)
+
+        rows = [
+            dict(row)
+            for row in cursor.fetchall()
+        ]
+
+        for row in rows:
+            row["crop_url"] = f"https://oostakkerbos.be/{row['crop_path']}"
+
+        return rows
+        
