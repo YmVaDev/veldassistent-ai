@@ -1,17 +1,13 @@
 
-from storage.repository import Repository
+from engine.loader import load_models
+from storage.database import Database
 
-repo = Repository()
+db = Database()
 
-model_id = repo.get_or_create_model(
-    "birds",
-    "bird",
-    "1.0"
-)
+for model in load_models():
 
-species = repo.get_species(
-    model_id,
-    "Hawfinch"
-)
+    print(f"Synchroniseren: {model.config['id']}")
 
-print(dict(species))
+    db.sync_model(model)
+
+print("Klaar!")

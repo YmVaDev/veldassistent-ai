@@ -4,6 +4,7 @@ import os
 import cv2
 import json
 from config import BASE_DIR
+from config import MODEL_DIR
 from datetime import datetime
 
 from vision.detector import (
@@ -14,23 +15,29 @@ from vision.detector import (
     scale_boxes,
     crop_detections,
 )
-
 from vision.classifier import Classifier
+from vision.model_config import load_model_config
+
+from domain.bounding_box import BoundingBox
+from domain.observation import Observation
 
 class AIModel:
 
     def __init__(self, model_name: str):
         self.model_id = model_name
+        self.config = load_model_config(model_name)
         self.detector = Detector(model_name)
         self.classifier = Classifier(model_name)
 
         with open(
-            BASE_DIR / "models" / self.model_id / "classifier" / "species.json",
+            MODEL_DIR / self.model_id / self.config["classifier"]["species"],
             encoding="utf-8"
         ) as f:
             self.species_map = json.load(f)
 
     def process(self, src_path):
+
+        observations = []
 
         image = cv2.imread(src_path)
 
@@ -75,7 +82,21 @@ class AIModel:
             prediction = self.classifier.classify(crop)
 
             prediction.score = round(float(prediction.score), 1)
+
             english = prediction.species
+
+            box = BoundingBox(*det["box"])
+
+            observation = Observation(
+                photo=None,
+                model_id=self.model_id,
+                box=box,
+                crop_path=filename
+            )
+
+            observation.predictions.append(prediction)
+
+            observations.append(observation)
 
             species = self.species_map.get(
                 english,
@@ -158,5 +179,6 @@ class AIModel:
                     "original_url": f"https://oostakkerbos.be{web_path_original}",
                 }
             },
-            "detections": results
+            "detections": results,
+            "objects": observations
         }

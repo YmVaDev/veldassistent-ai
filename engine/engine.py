@@ -1,14 +1,20 @@
 
+import cv2
+from storage.database import Database
+from domain.photo import Photo
+from utils.photo_utils import get_photo_timestamp
+
 class Engine:
 
     def __init__(self):
+        self.db = Database()
         self.models = []
 
     def add_model(self, model):
         self.models.append(model)
 
     def process(self, src_path):
-
+        objects = []
         detections = []
         observation = None
 
@@ -18,8 +24,46 @@ class Engine:
 
             if observation is None:
                 observation = result["observation"]
+                detections.extend(result["detections"])
+                objects.extend(result["objects"])
 
-            detections.extend(result["detections"])
+            camera_id = self.db.get_or_create_camera(
+                "Ranger",
+                "Oostakkerbos"
+            )
+
+            image = cv2.imread(src_path)
+            height, width = image.shape[:2]
+
+            photo = Photo(
+                camera_id=camera_id,
+                relative_path=src_path.replace("\\", "/"),
+                width=width,
+                height=height,
+                taken_at=get_photo_timestamp(src_path)
+            )
+
+            self.db.save_photo(photo)
+
+            for observation in objects:
+
+                observation.photo = photo
+
+                self.db.save_observation(observation)
+
+                for prediction in observation.predictions:
+                    self.db.save_prediction(
+                        observation.id,
+                        prediction
+                    )
+
+        print(f"Objects ontvangen: {len(objects)}")
+
+        for obj in objects:
+
+            print(obj)
+
+            print(obj.predictions)
 
         return {
             "success": True,
@@ -31,5 +75,6 @@ class Engine:
                 "count": len(detections)
             },
 
-            "detections": detections
+            "detections": detections,
+            "objects": objects
         }
