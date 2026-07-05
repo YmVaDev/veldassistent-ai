@@ -4,6 +4,7 @@ import onnxruntime as ort
 from PIL import Image
 from config import MODEL_DIR
 from vision.model_config import load_model_config
+from domain.prediction import Prediction
 
 class Classifier:
 
@@ -69,10 +70,10 @@ class Classifier:
 
         english = self.labels[idx]
 
-        return {
-            "species": english,
-            "score": score
-        }
+        return Prediction(
+            species=english,
+            score=score
+        )
 
 
 

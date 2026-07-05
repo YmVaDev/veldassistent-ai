@@ -15,9 +15,7 @@ from vision.detector import (
     crop_detections,
 )
 
-from vision.classifier import (
-    Classifier
-)
+from vision.classifier import Classifier
 
 class AIModel:
 
@@ -76,8 +74,8 @@ class AIModel:
 
             prediction = self.classifier.classify(crop)
 
-            english = prediction["species"]
-            prediction["score"] = round(float(prediction["score"]), 1)
+            prediction.score = round(float(prediction.score), 1)
+            english = prediction.species
 
             species = self.species_map.get(
                 english,
@@ -96,7 +94,7 @@ class AIModel:
             # Alleen bestaande soorten bijwerken
             if (
                 english in self.species_map
-                and prediction["score"] >= COUNT_THRESHOLD
+                and prediction.score >= COUNT_THRESHOLD
                 and english not in counted_species
             ):
 
@@ -115,7 +113,7 @@ class AIModel:
                 species["last_seen"] = now
 
                 # Hoogste AI-score ooit
-                if prediction["score"] > species.get("best_score", 0):
+                if prediction.score > species.get("best_score", 0):
                     species["best_score"] = prediction["score"]
 
                 counted_species.add(english)
@@ -123,7 +121,7 @@ class AIModel:
 
                 print("Soort:", english)
                 print("Bestaat:", english in self.species_map)
-                print("Score:", prediction["score"])
+                print("Score:", prediction.score)
                 print("Threshold:", COUNT_THRESHOLD)
 
             results.append({
@@ -138,7 +136,7 @@ class AIModel:
                     "first_seen": species.get("first_seen"),
                     "last_seen": species.get("last_seen"),
                 },
-                "score": prediction["score"],
+                "score": prediction.score,
                 "box": det["box"],
                 "crop_path": filename,
                 "crop_url": f"https://oostakkerbos.be/{filename}",
