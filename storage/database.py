@@ -4,12 +4,13 @@ import sqlite3
 import json
 from datetime import datetime
 from config import BASE_DIR
+from config import DATABASE_PATH
 
 class Database:
 
     def __init__(self, db_name="veldassistent.db"):
 
-        self.db_path = Path(db_name)
+        self.db_path = DATABASE_PATH
 
         self.connection = sqlite3.connect(
             self.db_path,
@@ -17,6 +18,10 @@ class Database:
         )
 
         self.connection.row_factory = sqlite3.Row
+
+        self.connection.execute(
+            "PRAGMA foreign_keys = ON"
+        )
 
     def cursor(self):
         return self.connection.cursor()
@@ -470,6 +475,18 @@ class Database:
         ))
 
         self.commit()
+
+    def has_review(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT 1
+            FROM reviews
+            WHERE observation_id = ?
+        """, (observation_id,))
+
+        return cursor.fetchone() is not None
 
 
 

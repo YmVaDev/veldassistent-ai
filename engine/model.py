@@ -24,13 +24,14 @@ from domain.observation import Observation
 class AIModel:
 
     def __init__(self, model_name: str):
-        self.model_id = model_name
+        self.model_name = model_name
+        self.database_id = None
         self.config = load_model_config(model_name)
         self.detector = Detector(model_name)
         self.classifier = Classifier(model_name)
 
         with open(
-            MODEL_DIR / self.model_id / self.config["classifier"]["species"],
+            MODEL_DIR / self.model_name / self.config["classifier"]["species"],
             encoding="utf-8"
         ) as f:
             self.species_map = json.load(f)
@@ -80,7 +81,7 @@ class AIModel:
 
             observation = Observation(
                 photo=None,
-                model_id=self.model_id,
+                model_id=self.database_id,
                 box=box,
                 crop_path=filename
             )
@@ -126,7 +127,7 @@ class AIModel:
 
                 # Hoogste AI-score ooit
                 if prediction.score > species.get("best_score", 0):
-                    species["best_score"] = prediction["score"]
+                    species["best_score"] = prediction.score
 
                 counted_species.add(english)
                 changed = True
@@ -152,7 +153,7 @@ class AIModel:
         # Alleen opslaan als er iets gewijzigd is
         if changed:
             with open(
-                BASE_DIR / "models" / self.model_id / "classifier" / "species.json",
+                MODEL_DIR / self.model_name / self.config["classifier"]["species"],
                 "w",
                 encoding="utf-8"
             ) as f:

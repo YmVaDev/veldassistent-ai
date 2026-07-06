@@ -3,6 +3,7 @@ from pathlib import Path
 import os
 import time
 from fastapi import FastAPI
+from fastapi import HTTPException
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from engine.engine import Engine
@@ -112,20 +113,34 @@ def review(
     body: ReviewRequest
 ):
 
-    review_id = db.save_review(
-        observation_id=observation_id,
-        confirmed=body.confirmed,
-        confirmed_species=body.confirmed_species,
-        comment=body.comment,
-        reviewed_by=body.reviewed_by
-    )
+    if db.has_review(observation_id):
+        raise HTTPException(
+            status_code=409,
+            detail="Observation has already been reviewed."
+        )
 
-    db.update_observation_status(
-        observation_id,
-        "reviewed"
-    )
+        review_id = db.save_review(
+            observation_id=observation_id,
+            confirmed=body.confirmed,
+            confirmed_species=body.confirmed_species,
+            comment=body.comment,
+            reviewed_by=body.reviewed_by
+        )
+
+        db.update_observation_status(
+            observation_id,
+            "reviewed"
+        )
+
+        return {
+            "success": True,
+            "review_id": review_id
+        }
+
+@app.get("/health")
+def health():
 
     return {
-        "success": True,
-        "review_id": review_id
+        "status": "ok",
+        "version": API_VERSION
     }

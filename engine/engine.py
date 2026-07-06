@@ -12,6 +12,7 @@ class Engine:
         self.models = []
 
     def add_model(self, model):
+        model.database_id = self.db.sync_model(model)
         self.models.append(model)
 
     def process(self, src_path):
@@ -25,56 +26,53 @@ class Engine:
 
             if observation is None:
                 observation = result["observation"]
-                detections.extend(result["detections"])
-                objects.extend(result["objects"])
 
-            camera_id = self.db.get_or_create_camera(
-                "Ranger",
-                "Oostakkerbos"
-            )
+            detections.extend(result["detections"])
+            objects.extend(result["objects"])
 
-            image = cv2.imread(src_path)
-            height, width = image.shape[:2]
+        camera_id = self.db.get_or_create_camera(
+            "Ranger",
+            "Oostakkerbos"
+        )
 
-            photo = Photo(
-                camera_id=camera_id,
-                relative_path=src_path.replace("\\", "/"),
-                width=width,
-                height=height,
-                taken_at=get_photo_timestamp(src_path)
-            )
+        image = cv2.imread(src_path)
+        height, width = image.shape[:2]
 
-            self.db.save_photo(photo)
+        photo = Photo(
+            camera_id=camera_id,
+            relative_path=src_path.replace("\\", "/"),
+            width=width,
+            height=height,
+            taken_at=get_photo_timestamp(src_path)
+        )
 
-            for observation in objects:
+        self.db.save_photo(photo)         
 
-                observation.photo = photo
+        for observation in objects:
 
-                self.db.save_observation(observation)
+            observation.photo = photo
 
-                for prediction in observation.predictions:
-                    self.db.save_prediction(
-                        observation.id,
-                        prediction
-                    )
+            self.db.save_observation(observation)
 
-            new_path = archive_photo(src_path)
-            photo.relative_path = new_path
-            self.db.update_photo(photo)
+            for prediction in observation.predictions:
+                self.db.save_prediction(
+                    observation.id,
+                    prediction
+                )
 
-        for obj in objects:
+        new_path = archive_photo(src_path)
+
+        photo.relative_path = new_path
+
+        self.db.update_photo(photo)
 
         return {
             "success": True,
-            "api_version": "1.0",
-
+            "api_version": API_VERSION,
             "observation": observation,
-
             "summary": {
                 "count": len(detections)
             },
-
             "detections": detections,
             "objects": objects
         }
-
