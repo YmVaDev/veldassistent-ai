@@ -62,13 +62,7 @@ class Engine:
             photo.relative_path = new_path
             self.db.update_photo(photo)
 
-        print(f"Objects ontvangen: {len(objects)}")
-
         for obj in objects:
-
-            print(obj)
-
-            print(obj.predictions)
 
         return {
             "success": True,

@@ -8,6 +8,6 @@ create_scheme()
 
 db.commit()
 
-print("Schema aangemaakt.")
+print("Scheme succes")
 
 db.close()

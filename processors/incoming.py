@@ -10,11 +10,7 @@ model = AIModel("birds")
 
 # Dit is jouw analysefunctie
 def process_incoming():
-
         result = model.process(str(image_path))
-
-        print(result)
-
 
 class FotoHandler(FileSystemEventHandler):
     def on_created(self, event):
@@ -35,7 +31,7 @@ observer = Observer()
 observer.schedule(FotoHandler(), incoming_map, recursive=False)
 observer.start()
 
-print("Map wordt gemonitord...")
+print("Folder is being watched...")
 
 try:
     while True:

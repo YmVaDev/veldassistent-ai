@@ -9,7 +9,7 @@ BIRDBASE = Path("models/birds/classifier/birdbase_v2025.1.xlsx")
 MAPPING = Path("models/birds/classifier/birdbase_mapping.json")
 OUTPUT = Path("models/birds/classifier/species.json")
 
-print("BirdBase laden...")
+print("Load BirdBase...")
 
 wb = load_workbook(BIRDBASE, data_only=True)
 ws = wb["Data"]
@@ -37,7 +37,7 @@ for row in ws.iter_rows(min_row=3, values_only=True):
         "last_seen": None
     }
 
-print(f"{len(birdbase)} BirdBase soorten geladen.")
+print(f"{len(birdbase)} BirdBase species loaded")
 
 # ---------------------------------------------------------------------
 # Mapping laden
@@ -128,15 +128,15 @@ OUTPUT.write_text(
 
 print()
 print("================================")
-print(f"Soorten verwerkt : {len(species)}")
-print(f"Gevonden          : {matched}")
-print(f"Niet gevonden     : {len(missing)}")
-print(f"JSON opgeslagen   : {OUTPUT}")
+print(f"Species loaded : {len(species)}")
+print(f"Found          : {matched}")
+print(f"Not found     : {len(missing)}")
+print(f"Saved to JSON   : {OUTPUT}")
 print("================================")
 
 if missing:
 
-    print("\nNiet gevonden:")
+    print("\nNot found:")
 
     for s in missing:
         print(" -", s)

@@ -47,20 +47,11 @@ class AIModel:
 
         scores, classes = calculate_scores(decoded)
 
-        print(f"Totaal aantal voorspellingen: {len(scores)}")
-        print(f"Hoogste score: {max(scores):.3f}")
-        print(f"Aantal scores > 0.20: {(scores > 0.20).sum()}")
-
         detections = nms_boxes(decoded, scores)
-
-        print(f"Aantal detecties na NMS: {len(detections)}")
 
         detections = scale_boxes(detections, ratio, pad)
 
         crops = crop_detections(image, detections)
-
-        print(f"Detecties: {len(detections)}")
-        print(f"Crops: {len(crops)}")
 
         results = []
 
@@ -139,11 +130,6 @@ class AIModel:
 
                 counted_species.add(english)
                 changed = True
-
-                print("Soort:", english)
-                print("Bestaat:", english in self.species_map)
-                print("Score:", prediction.score)
-                print("Threshold:", COUNT_THRESHOLD)
 
             results.append({
                 "species": {

@@ -15,7 +15,6 @@ class Database:
             self.db_path,
             check_same_thread=False
         )
-        print(self.db_path.resolve())
 
         self.connection.row_factory = sqlite3.Row
 
@@ -266,11 +265,6 @@ class Database:
             / "species.json"
         )
 
-        print("BASE_DIR:", BASE_DIR)
-        print("Model:", model_name)
-        print("Zoekt:", species_file)
-        print("Bestaat:", species_file.exists())
-
         if not species_file.exists():
             raise FileNotFoundError(species_file)
 
@@ -316,8 +310,6 @@ class Database:
             imported += 1
 
         self.commit()
-
-        print(f"{imported} species imported")
 
     def update_photo(self, photo):
 

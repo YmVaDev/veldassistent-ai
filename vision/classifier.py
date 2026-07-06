@@ -40,21 +40,12 @@ class Classifier:
 
         x = np.expand_dims(x, axis=0)
 
-        print("Input:", self.session.get_inputs()[0].shape)
-
-        print("Classifier verwacht:", self.session.get_inputs()[0].shape)
-        print("Classifier tensor:", x.shape)
-
         outputs = self.session.run(
             None,
             {
                 "input": x
             }
         )
-
-        print("Aantal outputs:", len(outputs))
-        print("Classifier tensor:", x.shape)
-        print("Expected:", self.session.get_inputs()[0].shape)
 
         for i, out in enumerate(outputs):
             print(i, out.shape, out.dtype)

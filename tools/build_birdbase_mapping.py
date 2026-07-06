@@ -41,7 +41,7 @@ def normalize(name: str) -> str:
     return " ".join(name.split())
 
 
-print("BirdBase laden...")
+print("Load BirdBase...")
 
 wb = load_workbook(BIRDBASE, data_only=True)
 ws = wb["Data"]
@@ -56,7 +56,7 @@ for row in ws.iter_rows(min_row=3, values_only=True):
     birdbase[english] = english
     normalized[normalize(english)] = english
 
-print(f"{len(birdbase)} BirdBase soorten geladen.\n")
+print(f"{len(birdbase)} BirdBase species loaded\n")
 
 mapping = {}
 missing = []
@@ -126,12 +126,12 @@ for label in labels:
 print()
 print("=" * 60)
 print(f"Labels        : {len(labels)}")
-print(f"Gematcht      : {len(mapping)}")
-print(f"Niet gevonden : {len(missing)}")
+print(f"Matched     : {len(mapping)}")
+print(f"Not found : {len(missing)}")
 print("=" * 60)
 
-print(f"\nMapping opgeslagen : {OUTPUT}")
-print(f"Niet gevonden      : {UNMATCHED}")
+print(f"\nMapping saved : {OUTPUT}")
+print(f"Not found      : {UNMATCHED}")
 
 OUTPUT.write_text(
     json.dumps(

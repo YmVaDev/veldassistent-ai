@@ -6,8 +6,8 @@ db = Database()
 
 for model in load_models():
 
-    print(f"Synchroniseren: {model.config['id']}")
+    print(f"Synchronizing: {model.config['id']}")
 
     db.sync_model(model)
 
-print("Klaar!")
+print("Ready!")

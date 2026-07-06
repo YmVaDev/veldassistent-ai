@@ -120,15 +120,6 @@ def debug_boxes(output):
 
         row = output[0, i]
 
-        print(
-            f"{i:4}",
-            f"score={scores[i]:.3f}",
-            f"cx={row[0]:.3f}",
-            f"cy={row[1]:.3f}",
-            f"w={row[2]:.3f}",
-            f"h={row[3]:.3f}",
-        )
-
 def generate_grids_and_strides(
     input_size,
     strides=(8, 16, 32),

@@ -26,7 +26,7 @@ for model in load_models():
 # Analysefunctie
 # -------------------------
 def process_incoming(src_path: str):
-    print(f"Nieuwe foto: {src_path}")
+    print(f"New photo: {src_path}")
 
     result = engine.process(src_path)
 
@@ -51,7 +51,7 @@ class FotoHandler(FileSystemEventHandler):
         try:
             process_incoming(event.src_path)
         except Exception as e:
-            print(f"Fout tijdens analyseren: {e}")
+            print(f"Exception while analyzing: {e}")
 
 
 # -------------------------

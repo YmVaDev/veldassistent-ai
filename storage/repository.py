@@ -70,11 +70,6 @@ class Repository:
             / "species.json"
         )
 
-        print("BASE_DIR:", BASE_DIR)
-        print("Model:", model_name)
-        print("Zoekt:", species_file)
-        print("Bestaat:", species_file.exists())
-
         if not species_file.exists():
             raise FileNotFoundError(species_file)
 
@@ -120,8 +115,6 @@ class Repository:
             imported += 1
 
         self.db.commit()
-
-        print(f"{imported} species imported")
 
     def get_species(self, model_id, english):
 
