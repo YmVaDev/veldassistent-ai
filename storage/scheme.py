@@ -54,8 +54,10 @@ def create_species(cursor):
 
             diet TEXT,
 
+            image_path TEXT,
+
             FOREIGN KEY(model_id)
-                REFERENCES models(id)
+            REFERENCES models(id)
 
         )
     """)

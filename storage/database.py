@@ -488,6 +488,59 @@ class Database:
 
         return cursor.fetchone() is not None
 
+    def get_species_image(self, species):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT image_path
+            FROM species
+            WHERE english = ?
+        """, (species,))
+
+        row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return row["image_path"]
+
+        print(species)
+        print(species["id"])
+        print(species["english"])
+        print(image_path)
+
+    def update_species_image(self, species_id, image_path):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE species
+            SET image_path = ?
+            WHERE id = ?
+        """, (
+            image_path,
+            species_id
+        ))
+
+        print("Updated rows:", cursor.rowcount)
+        self.commit()
+
+
+    def get_species(self, species_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM species
+            WHERE id = ?
+        """, (species_id,))
+
+        return cursor.fetchone()
+
+
+
 
 
         
