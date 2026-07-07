@@ -1,14 +1,14 @@
 
+import base64
 from pathlib import Path
 from openai import OpenAI
-import base64
 
 class OpenAIImageProvider:
 
     def __init__(self):
 
         self.client = OpenAI(
-            api_key="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"
+            api_key="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"
         )
 
     def generate(

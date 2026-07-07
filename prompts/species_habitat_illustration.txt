@@ -1,0 +1,39 @@
+
+European Nature Collection – Habitat Banner
+
+Style:
+Match the illustration style of the attached artwork perfectly.
+Minimalist flat vector.
+No outlines.
+No gradients.
+No shadows.
+No textures.
+Large clean colour shapes.
+Same colour palette.
+Same level of simplification.
+The habitat must adapt to the colour palette of the attached illustration.
+
+Habitat:
+HABITAT = {habitat}
+
+Create a scientifically accurate landscape set in the Belgian Kempen. Select the habitat that is most characteristic for the species within this region. The landscape must reflect where the species is most likely to be encountered in the Kempen.
+The habitat should be species-specific rather than generic. Different species should result in distinctly different landscapes while remaining recognizably Kempen.
+The landscape should immediately evoke the Belgian Kempen to someone familiar with the region.
+The habitat is the primary subject.
+Choose the species' preferred microhabitat within the Belgian Kempen. Do not default to the region's most iconic landscape. Instead, choose the habitat with the highest ecological suitability for the species.
+
+Ecological accuracy:
+Use only habitats naturally occurring in the Belgian Kempen.
+Choose the habitat that best matches the ecology of the species.
+Include only characteristic trees, shrubs and vegetation of that habitat.
+Avoid generic European landscapes.
+
+Composition:
+Create the artwork on a fixed 2400 × 800 pixel canvas (3:1 aspect ratio).
+The composition must be optimized for this format.
+Avoid placing important elements near the edges.
+Leave sufficient negative space for optional page titles or text overlays.
+Calm composition with generous negative space.
+Create depth using overlapping simplified shapes.
+
+

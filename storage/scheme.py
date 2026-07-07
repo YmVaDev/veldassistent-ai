@@ -54,7 +54,9 @@ def create_species(cursor):
 
             diet TEXT,
 
-            image_path TEXT,
+            species_image_path TEXT,
+            
+            habitat_image_path TEXT,
 
             FOREIGN KEY(model_id)
             REFERENCES models(id)
@@ -165,7 +167,6 @@ def create_reviews(cursor):
 
         )
     """)
-
 
 def create_scheme():
 

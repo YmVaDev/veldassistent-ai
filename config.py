@@ -16,3 +16,5 @@ DATABASE_PATH = BASE_DIR / "veldassistent.db"
 LOG_DIR = BASE_DIR / "logs"
 
 REFERENCE_IMAGE = BASE_DIR / "references" / "illustration_style.png"
+GENERATED_SPECIES_DIR = BASE_DIR / "generated" / "species"
+GENERATED_SPECIESHABITAT_DIR = BASE_DIR / "generated" / "habitats"

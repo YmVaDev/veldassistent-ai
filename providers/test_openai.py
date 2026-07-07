@@ -9,7 +9,7 @@ species = db.get_species(142)
 
 builder = PromptBuilder()
 
-prompt = builder.build_stage1(species)
+prompt = builder.build_species_illustration(species)
 
 provider = OpenAIImageProvider()
 

@@ -1,6 +1,5 @@
 
 from storage.database import Database
-from providers.image_provider import ImageProvider
 from services.illustration_pipeline import IllustrationPipeline
 
 class IllustrationService:
@@ -12,7 +11,10 @@ class IllustrationService:
 
     def generate_if_missing(self, species):
 
-        if species["image_path"]:
+        if (
+            species["species_image_path"]
+            and species["habitat_image_path"]
+        ):
             return
 
         print(f"Generating illustration for {species}")
@@ -25,16 +27,19 @@ class IllustrationService:
             .replace(" ", "_")
         )
 
-        image_path = f"generated/species/{filename}.webp"
+        species_path = f"generated/species/{filename}.webp"
+        habitat_path = f"generated/habitats/{filename}.webp"
 
         prompt = ""
 
-        image_path = self.pipeline.generate(
+        result = self.pipeline.generate(
             species,
-            image_path
+            species_path,
+            habitat_path
         )
-
-        self.db.update_species_image(
+        
+        self.db.update_species_images(
             species["id"],
-            image_path
+            result["species_image"],
+            result["habitat_image"]
         )

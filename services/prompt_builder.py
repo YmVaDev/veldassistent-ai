@@ -4,12 +4,12 @@ from config import BASE_DIR
 
 class PromptBuilder:
 
-    def build_stage1(self, species):
+    def build_species_illustration(self, species):
 
         template = (
             BASE_DIR
             / "prompts"
-            / "stage1.txt"
+            / "species_illustration.txt"
         ).read_text(
             encoding="utf-8"
         )
@@ -22,12 +22,12 @@ class PromptBuilder:
             external_id=species["external_id"],
         )
 
-    def build_stage2(self, species):
+    def build_habitat_illustration(self, species):
 
         return (
             BASE_DIR
             / "prompts"
-            / "stage2.txt"
+            / "species_habitat_illustration.txt"
         ).read_text(
             encoding="utf-8"
         )

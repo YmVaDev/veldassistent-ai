@@ -510,8 +510,12 @@ class Database:
         print(species["english"])
         print(image_path)
 
-    def update_species_image(self, species_id, image_path):
-
+    def update_species_images(
+        self,
+        species_id,
+        species_image_path,
+        habitat_image_path
+    ):
         cursor = self.cursor()
 
         cursor.execute("""
@@ -538,6 +542,26 @@ class Database:
         """, (species_id,))
 
         return cursor.fetchone()
+
+
+    def update_species_image_path(
+        self,
+        species_id,
+        species_image_path
+    ):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE species
+            SET species_image_path = ?
+            WHERE id = ?
+        """, (
+            species_image_path,
+            species_id
+        ))
+
+        self.commit()
 
 
 

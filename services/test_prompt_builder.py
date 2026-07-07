@@ -8,5 +8,5 @@ species = db.get_species(1)
 
 builder = PromptBuilder()
 
-print(builder.build_stage1(species))
-print(builder.build_stage2(species))
+print(builder.build_species_illustration(species))
+print(builder.build_habitat_illustration(species))
