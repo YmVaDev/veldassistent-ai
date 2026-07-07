@@ -4,7 +4,7 @@ from services.illustration_service import IllustrationService
 
 db = Database()
 
-species = db.get_species(22)
+species = db.get_species(151)
 
 service = IllustrationService(db)
 

@@ -1,0 +1,111 @@
+
+European Nature Collection – Style Guide v1.0
+
+Create a minimalist flat vector illustration of the folowing species in a consistent collection style:
+
+Species: {english}
+Scientific name: {scientific}
+Habitat: {habitat}
+Diet: {diet}
+
+
+Goal: Create an illustration that looks like it belongs to a premium European wildlife field guide. The emphasis is on simplicity, scientific accuracy, and consistency, not realism.
+
+Style requirements:
+Scientifically accurate anatomy, proportions, posture and natural colours.
+Instantly recognizable as the correct species.
+Extremely simplified design using only 6–10 large, clean colour shapes.
+No outlines.
+No gradients.
+No shadows.
+No textures.
+No feather, fur or scale details.
+Smooth organic vector shapes with rounded transitions.
+Calm, balanced composition.
+Modern Scandinavian-style flat illustration.
+
+Biological accuracy:
+Depict the requested sex, life stage and seasonal appearance accurately.
+If not specified, illustrate the most characteristic form for species identification.
+Use breeding plumage or breeding colours where appropriate.
+Use the aquatic breeding phase for amphibians whenever applicable.
+
+Species specific behavior:
+Depict the species in its most characteristic natural posture or behaviour, while maintaining the same composition and illustration style.
+Examples
+• Woodpeckers: clinging vertically to a tree trunk.
+• Nuthatches: climbing head-first down a tree trunk.
+• Kingfisher: perched on a branch above water.
+• Swallows: perched on a wire 
+• Herons: standing in shallow water.
+• Owls: perched upright on a fence post facing the front.
+• Ducks: floating on water.
+• Grebes: swimming.
+• Waders: standing in shallow water.
+• Raptors: perched on a fence post.
+• Larks and pipits: standing on the ground.
+• Tits, finches and sparrows: perched on a simple branch.
+Other species groups:
+No branch!
+
+Whenever appropriate, depict the species with a simple element that reinforces its natural ecology or identification, provided it does not distract from the subject.
+
+Examples
+• Owl with a small mouse.
+• Peregrine Falcon with a small passerine.
+• Common Kestrel with a vole.
+• White-tailed Eagle with a fish.
+• Kingfisher with a small fish.
+• Grey Heron with a fish.
+• Bee-eater with a bee.
+• Green Woodpecker on the ground with an ant.
+• Great Spotted Woodpecker on a tree trunk.
+• Fox carrying a vole.
+• Otter with a fish.
+The ecological element should remain secondary and highly simplified. It must never compete visually with the main subject. 
+
+Composition grid:
+• Use the same composition across the entire collection.
+• Square canvas (1:1).
+• Subject centered.
+• The animal should occupy approximately 75–80% of the canvas.
+• Leave generous white space around the subject.
+• Place the subject inside a soft light grey circle of identical size in every illustration.
+• Keep the eye approximately at the same height within the composition whenever possible.
+• Maintain consistent margins on all sides.
+• Use the same viewing angle for comparable species.
+• Depict each species in the viewing angle that best highlights its defining identification features while maintaining a consistent composition across the collection.
+The side profile is always facing left.
+
+Preferred viewpoints
+• Songbirds, pigeons, woodpeckers, kingfishers, bee-eaters, rollers: side profile.
+• Owls: frontal or slightly three-quarter frontal view.
+• Birds of prey: frontal or slightly three-quarter frontal view when perched.
+• Waterfowl: side profile.
+• Waders: side profile.
+• Herons and egrets: side profile.
+• Swifts and swallows: side profile or characteristic flight posture.
+• Woodpeckers: clinging vertically to a tree trunk.
+• Nuthatches: climbing head-first down a tree trunk.
+• Creepers: spiralling upwards on a tree trunk.
+• Perches, branches and tree trunks should be simple and unobtrusive, serving only to support the subject.
+• The overall visual weight should remain consistent throughout the collection.
+
+Collection consistency:
+Simplify the species to its essential identifying shapes while preserving scientific recognizability.
+Prioritize clean silhouette over detail. Every colour shape should have a clear purpose. If a detail does not improve species recognition, omit it.
+When simplifying a species, never simplify by removing its defining characteristics. Instead, merge details into larger, cleaner colour shapes.
+
+Quality requirements:
+Avoid common AI illustration artifacts.
+Do not add unnecessary details, decorative shapes or stylization.
+Every colour block must contribute to species recognition.
+Prefer fewer, larger shapes over many small ones.
+Keep edges clean and intentional.
+The illustration should feel timeless, calm and handcrafted rather than AI-generated.
+
+Reference image:
+Use the attached image only as a style reference. Match the illustration style, proportions, colour treatment and level of simplification exactly. Do not copy the species.
+
+Text:
+Do not add text to the illustration! Only generate the illustration!

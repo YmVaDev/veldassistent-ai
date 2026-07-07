@@ -4,11 +4,11 @@ from pathlib import Path
 class ImageProvider:
 
 	def generate(
-	    self,
-	    species,
 	    prompt,
-	    output_path
-	):
+	    output_path,
+	    reference_image=None,
+	    input_image=None
+	)
 
 	    print(f"Generating illustration for {species}")
 
