@@ -38,8 +38,12 @@ class IllustrationService:
             habitat_path
         )
         
-        self.db.update_species_images(
+        self.db.update_species_image_path(
             species["id"],
-            result["species_image"],
+            result["species_image"]
+        )
+
+        self.db.update_habitat_image_path(
+            species["id"],
             result["habitat_image"]
         )

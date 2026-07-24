@@ -22,7 +22,7 @@ class IllustrationPipeline:
             species_image_path
         )
 
-        habitat_image = self.generate_species_habitat_illustration(
+        habitat_image = self.generate_habitat_illustration(
             species,
             species_image,
             habitat_image_path

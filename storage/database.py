@@ -564,6 +564,26 @@ class Database:
         self.commit()
 
 
+    def update_habitat_image_path(
+        self,
+        species_id,
+        habitat_image_path
+    ):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE species
+            SET habitat_image_path = ?
+            WHERE id = ?
+        """, (
+            habitat_image_path,
+            species_id
+        ))
+
+        self.commit()
+
+
 
 
 
