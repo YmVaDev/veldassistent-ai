@@ -598,8 +598,171 @@ class Database:
 
         self.commit()
 
+    def get_observation(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM observations
+            WHERE id = ?
+        """, (observation_id,))
+
+        row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return dict(row)
 
 
+    def get_latest_observations(self, limit=20):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM observations
+            ORDER BY created_at DESC
+            LIMIT ?
+        """, (limit,))
+
+        return [
+            dict(row)
+            for row in cursor.fetchall()
+        ]
 
 
-        
+    def get_species_for_observation(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT species.*
+            FROM reviews
+            JOIN species
+                ON reviews.confirmed_species_id = species.id
+            WHERE reviews.observation_id = ?
+        """, (observation_id,))
+
+        return cursor.fetchone()
+
+    def get_observation_image(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT crop_path
+            FROM observations
+            WHERE id = ?
+        """, (observation_id,))
+
+        return cursor.fetchone()
+
+    def get_public_observations(self, limit=20, offset=0):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM observations
+            ORDER BY id DESC
+            LIMIT ? OFFSET ?
+        """, (limit, offset))
+
+        return cursor.fetchall()
+
+    def count_public_observations(self):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT COUNT(*)
+            FROM observations
+        """)
+
+        return cursor.fetchone()[0]
+
+    def get_species_by_observation(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT s.*
+            FROM species s
+            JOIN reviews r
+            ON r.confirmed_species_id = s.id
+            WHERE r.observation_id = ?
+        """, (observation_id,))
+
+        return cursor.fetchone()
+
+
+    def get_observation(self, observation_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM observations
+            WHERE id = ?
+        """, (observation_id,))
+
+        return cursor.fetchone()
+
+    def get_species(self):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM species
+            ORDER BY english
+        """)
+
+        return cursor.fetchall()
+
+    def get_species_by_id(self, species_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM species
+            WHERE id = ?
+        """, (species_id,))
+
+        return cursor.fetchone()
+
+    def get_observations_by_species(self, species_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT
+                o.id AS observation_id,
+                p.relative_path AS photo_path,
+                o.created_at,
+                r.confirmed_species_id,
+                s.english,
+                s.species_image_path,
+                s.habitat_image_path
+
+            FROM observations o
+
+            JOIN photos p
+                ON p.id = o.photo_id
+
+            JOIN reviews r
+                ON r.observation_id = o.id
+
+            JOIN species s
+                ON s.id = r.confirmed_species_id
+
+            WHERE r.confirmed_species_id = ?
+
+            ORDER BY o.created_at DESC
+        """, (species_id,))
+
+        return cursor.fetchall()
+            

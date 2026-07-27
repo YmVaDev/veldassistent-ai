@@ -1,4 +1,5 @@
 
+from api.public import router as public_router
 from pathlib import Path
 import os
 import time
@@ -10,11 +11,15 @@ from engine.engine import Engine
 from engine.loader import load_models
 from storage.database import Database
 from api.models import ReviewRequest
-
 from services.illustration_service import IllustrationService
+from api.serializers import serialize_observation
+from fastapi import Query
+from api.serializers import serialize_species
 
 db = Database()
 app = FastAPI()
+app.include_router(public_router)
+
 illustration_service = IllustrationService(db)
 
 # -------------------------
@@ -165,3 +170,64 @@ def health():
         "status": "ok",
         "version": API_VERSION
     }
+
+@app.get("/api/observations")
+def observations(
+    page: int = Query(1, ge=1),
+    limit: int = Query(20, ge=1, le=100)
+):
+
+    offset = (page - 1) * limit
+
+    rows = db.get_public_observations(
+        limit,
+        offset
+    )
+
+    total = db.count_public_observations()
+
+    return {
+        "page": page,
+        "limit": limit,
+        "total": total,
+        "items": [
+            serialize_observation(row, db)
+            for row in rows
+        ]
+    }
+
+@app.get("/api/observations/{observation_id}")
+def observation_detail(observation_id: int):
+
+    row = db.get_observation(observation_id)
+
+    if not row:
+        raise HTTPException(
+            status_code=404,
+            detail="Observation not found"
+        )
+
+    return serialize_observation(row, db)
+
+@app.get("/api/species")
+def species():
+
+    rows = db.get_species()
+
+    return [
+        serialize_species(row)
+        for row in rows
+    ]
+
+@app.get("/api/species/{species_id}")
+def species_detail(species_id: int):
+
+    row = db.get_species_by_id(species_id)
+
+    if not row:
+        raise HTTPException(
+            status_code=404,
+            detail="Species not found"
+        )
+
+    return serialize_species(row)

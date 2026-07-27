@@ -1,23 +1,10 @@
 
-def get_species(self, species_id):
+from storage.database import Database
+from config import MEDIA_URL
 
-    cursor = self.cursor()
+db = Database()
 
-    print("SEARCHING SPECIES:", species_id)
+image = db.get_observation_image(1)
 
-    cursor.execute("""
-        SELECT *
-        FROM species
-    """)
+print(MEDIA_URL + image["crop_path"])
 
-    print("ALL SPECIES:")
-    for row in cursor.fetchall():
-        print(dict(row))
-
-    cursor.execute("""
-        SELECT *
-        FROM species
-        WHERE id = ?
-    """, (species_id,))
-
-    return cursor.fetchone()
