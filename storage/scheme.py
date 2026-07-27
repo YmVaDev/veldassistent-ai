@@ -154,7 +154,7 @@ def create_reviews(cursor):
 
             confirmed INTEGER NOT NULL,
 
-            confirmed_species TEXT,
+            confirmed_species_id INTEGER,
 
             comment TEXT,
 
@@ -164,6 +164,9 @@ def create_reviews(cursor):
 
             FOREIGN KEY(observation_id)
                 REFERENCES observations(id)
+
+            FOREIGN KEY(confirmed_species_id)
+                REFERENCES species(id)
 
         )
     """)
@@ -187,6 +190,7 @@ def create_scheme():
     db.close()
 
     print("Database scheme ready")
+
 
 
 

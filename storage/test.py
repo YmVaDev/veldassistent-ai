@@ -1,23 +1,23 @@
 
-from storage.database import Database
+def get_species(self, species_id):
 
-db = Database()
+    cursor = self.cursor()
 
-db.update_species_image_path(
-    1,
-    "generated/species/test.webp"
-)
+    print("SEARCHING SPECIES:", species_id)
 
-db.update_habitat_image_path(
-    1,
-    "generated/habitats/test.webp"
-)
+    cursor.execute("""
+        SELECT *
+        FROM species
+    """)
 
-species = db.get_species(1)
+    print("ALL SPECIES:")
+    for row in cursor.fetchall():
+        print(dict(row))
 
-print(dict(species))
+    cursor.execute("""
+        SELECT *
+        FROM species
+        WHERE id = ?
+    """, (species_id,))
 
-print(species["species_image_path"])
-
-print(dict(species))
-
+    return cursor.fetchone()

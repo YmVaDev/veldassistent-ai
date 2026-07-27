@@ -27,8 +27,9 @@ class IllustrationService:
             .replace(" ", "_")
         )
 
-        species_path = f"generated/species/{filename}.webp"
-        habitat_path = f"generated/habitats/{filename}.webp"
+        species_id = species["id"]
+        species_path = f"generated/species/{species_id}.webp"
+        habitat_path = f"generated/habitats/{species_id}.webp"
 
         prompt = ""
 

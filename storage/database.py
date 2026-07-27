@@ -6,6 +6,9 @@ from datetime import datetime
 from config import BASE_DIR
 from config import DATABASE_PATH
 
+import os
+print("DATABASE FILE:", os.path.abspath("veldassistent.db"))
+
 class Database:
 
     def __init__(self, db_name="veldassistent.db"):
@@ -425,7 +428,7 @@ class Database:
         self,
         observation_id,
         confirmed,
-        confirmed_species=None,
+        confirmed_species_id=None,
         comment=None,
         reviewed_by=None
     ):
@@ -437,7 +440,7 @@ class Database:
             (
                 observation_id,
                 confirmed,
-                confirmed_species,
+                confirmed_species_id,
                 comment,
                 reviewed_by,
                 reviewed_at
@@ -445,11 +448,11 @@ class Database:
             VALUES (?, ?, ?, ?, ?, ?)
         """, (
             observation_id,
-            int(confirmed),
-            confirmed_species,
+            confirmed,
+            confirmed_species_id,
             comment,
             reviewed_by,
-            datetime.utcnow().isoformat()
+            datetime.now().isoformat()
         ))
 
         self.commit()
@@ -540,6 +543,18 @@ class Database:
             FROM species
             WHERE id = ?
         """, (species_id,))
+
+        return cursor.fetchone()
+
+    def get_species_by_english(self, english):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM species
+            WHERE english = ?
+        """, (english,))
 
         return cursor.fetchone()
 

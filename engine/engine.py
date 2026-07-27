@@ -5,6 +5,8 @@ from domain.photo import Photo
 from utils.photo_utils import get_photo_timestamp
 from storage.archive import archive_photo
 
+API_VERSION = "1.0"
+
 class Engine:
 
     def __init__(self):

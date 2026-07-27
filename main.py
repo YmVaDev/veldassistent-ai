@@ -11,8 +11,11 @@ from engine.loader import load_models
 from storage.database import Database
 from api.models import ReviewRequest
 
+from services.illustration_service import IllustrationService
+
 db = Database()
 app = FastAPI()
+illustration_service = IllustrationService(db)
 
 # -------------------------
 # Engine initialiseren
@@ -119,23 +122,41 @@ def review(
             detail="Observation has already been reviewed."
         )
 
-        review_id = db.save_review(
-            observation_id=observation_id,
-            confirmed=body.confirmed,
-            confirmed_species=body.confirmed_species,
-            comment=body.comment,
-            reviewed_by=body.reviewed_by
-        )
+    print("CONFIRMED:", body.confirmed_species_id)
 
-        db.update_observation_status(
-            observation_id,
-            "reviewed"
-        )
+    review_id = db.save_review(
+        observation_id=observation_id,
+        confirmed=body.confirmed,
+        confirmed_species_id=body.confirmed_species_id,
+        comment=body.comment,
+        reviewed_by=body.reviewed_by
+    )
 
-        return {
-            "success": True,
-            "review_id": review_id
-        }
+    db.update_observation_status(
+        observation_id,
+        "reviewed"
+    )
+
+    species = db.get_species(
+        body.confirmed_species_id
+    )
+
+    if species:
+        print(dict(species))
+    else:
+        print("Species not found:", body.confirmed_species_id)
+
+    print("CONFIRMED ID:", body.confirmed_species_id)
+
+    print("FOUND SPECIES:", species)
+
+    illustration_service.generate_if_missing(
+        species
+    )
+    return {
+        "success": True,
+        "review_id": review_id
+    }
 
 @app.get("/health")
 def health():
