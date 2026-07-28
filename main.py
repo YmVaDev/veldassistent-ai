@@ -4,7 +4,15 @@ from pathlib import Path
 import os
 import time
 from fastapi import FastAPI
+
+from fastapi.exceptions import RequestValidationError
 from fastapi import HTTPException
+
+from api.errors import (
+    http_error_handler,
+    validation_error_handler
+)
+
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
 from engine.engine import Engine
@@ -15,12 +23,68 @@ from services.illustration_service import IllustrationService
 from api.serializers import serialize_observation
 from fastapi import Query
 from api.serializers import serialize_species
+from api.errors import general_error_handler
+
+from fastapi import Depends
+from api.security import verify_api_key
+from fastapi.middleware.cors import CORSMiddleware
+from config import BASE_URL
+from config import API_VERSION
+
+from logger import logger
+
+from config import (
+    DATABASE_PATH,
+    MODEL_DIR,
+    GENERATED_SPECIES_DIR
+)
 
 db = Database()
-app = FastAPI()
+illustration_service = IllustrationService(db)
+
+app = FastAPI(
+    title="Veldassistent 24/7 API",
+    description="""
+    API voor automatische soortherkenning,
+    waarnemingen en natuurmonitoring.
+
+    Gebruikt door WordPress voor publieke
+    waarnemingen en beheer.
+    """,
+    version=API_VERSION
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=[
+        BASE_URL
+    ],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.add_exception_handler(
+    HTTPException,
+    http_error_handler
+)
+
+app.add_exception_handler(
+    RequestValidationError,
+    validation_error_handler
+)
+
+app.add_exception_handler(
+    Exception,
+    general_error_handler
+)
+
 app.include_router(public_router)
 
-illustration_service = IllustrationService(db)
+app.include_router(
+    public_router,
+    prefix="/api/v1"
+)
 
 # -------------------------
 # Engine initialiseren
@@ -30,16 +94,18 @@ engine = Engine()
 for model in load_models():
     engine.add_model(model)
 
-
 # -------------------------
 # Analysefunctie
 # -------------------------
 def process_incoming(src_path: str):
-    print(f"New photo: {src_path}")
+    logger.info(f"New photo recieved: {src_path}")
 
     result = engine.process(src_path)
 
-    print(result)
+    logger.info(
+        f"Analysis completed: {result}"
+    )
+
     return result
 
 
@@ -60,7 +126,7 @@ class FotoHandler(FileSystemEventHandler):
         try:
             process_incoming(event.src_path)
         except Exception as e:
-            print(f"Exception while analyzing: {e}")
+            logger.exception(f"Exception while analyzing: {e}")
 
 
 # -------------------------
@@ -71,22 +137,46 @@ incoming_map.mkdir(exist_ok=True)
 
 observer = Observer()
 
-
 @app.on_event("startup")
 def startup():
-    print("Start monitoring...")
+
+    logger.info("Starting Veldassistent 24/7")
+
+    if not DATABASE_PATH.exists():
+        logger.error("Database not found")
+
+    if not MODEL_DIR.exists():
+        logger.error("Model directory missing")
+
+    if not GENERATED_SPECIES_DIR.exists():
+        GENERATED_SPECIES_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+        logger.info(
+            "Created species image directory"
+        )
+
+    logger.info(
+        f"Models loaded: {len(engine.models)}"
+    )
 
     observer.schedule(
         FotoHandler(),
         str(incoming_map),
         recursive=False
     )
+
     observer.start()
+
+    logger.info(
+        "Monitoring started"
+    )
 
 
 @app.on_event("shutdown")
 def shutdown():
-    print("Stop monitoring...")
+    logger.info("Stop monitoring...")
 
     observer.stop()
     observer.join()
@@ -115,7 +205,10 @@ def review(observation_id: int):
     return db.get_review(observation_id)
 
 
-@app.post("/review/{observation_id}")
+@app.post(
+    "/review/{observation_id}",
+    dependencies=[Depends(verify_api_key)]
+)
 def review(
     observation_id: int,
     body: ReviewRequest
@@ -127,7 +220,9 @@ def review(
             detail="Observation has already been reviewed."
         )
 
-    print("CONFIRMED:", body.confirmed_species_id)
+    logger.info(
+        f"Review confirmed: {body.confirmed_species_id}"
+    )
 
     review_id = db.save_review(
         observation_id=observation_id,
@@ -166,9 +261,20 @@ def review(
 @app.get("/health")
 def health():
 
+    try:
+        db_status = "ok"
+
+        db.get_latest_observations(1)
+
+    except Exception:
+        db_status = "error"
+
+
     return {
         "status": "ok",
-        "version": API_VERSION
+        "version": API_VERSION,
+        "database": db_status,
+        "models": len(engine.models)
     }
 
 @app.get("/api/observations")

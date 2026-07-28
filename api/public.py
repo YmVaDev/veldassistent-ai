@@ -22,14 +22,25 @@ def get_species(species_id: int):
             status_code=404,
             detail="Species not found"
         )
-
-    return dict(species)
+    return {
+    "success": True,
+    "data": dict(species)
+    }
 
 
 @router.get("/observations/latest")
 def latest_observations(limit: int = 20):
 
-    return db.get_latest_observations(limit)
+    rows = db.get_latest_observations(limit)
+
+    return {
+        "success": True,
+        "count": len(rows),
+        "data": [
+            dict(row)
+            for row in rows
+        ]
+    }
 
 
 @router.get("/observations/{observation_id}")
@@ -49,10 +60,13 @@ def get_observation(observation_id: int):
         observation_id
     )
 
-    return observation_to_public(
-        observation,
-        species
-    )
+    return {
+        "success": True,
+        "data": observation_to_public(
+            observation,
+            species
+        )
+    }
 
 @router.get("/species/{species_id}/observations")
 def species_observations(species_id: int):
@@ -62,8 +76,12 @@ def species_observations(species_id: int):
     for row in rows:
         print(dict(row))
 
-    return [
-        serialize_species_observation(row)
-        for row in rows
-    ]
+    return {
+        "success": True,
+        "count": len(rows),
+        "data": [
+            serialize_species_observation(row)
+            for row in rows
+        ]
+    }
 
