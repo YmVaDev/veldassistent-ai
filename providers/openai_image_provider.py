@@ -2,13 +2,20 @@
 import base64
 from pathlib import Path
 from openai import OpenAI
+import os
 
 class OpenAIImageProvider:
 
     def __init__(self):
+        api_key = os.getenv("OPENAI_API_KEY")
+
+        if not api_key:
+            raise RuntimeError(
+                "OPENAI_API_KEY is not configured"
+            )
 
         self.client = OpenAI(
-            api_key="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"
+            api_key=api_key
         )
 
     def generate(

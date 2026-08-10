@@ -2,6 +2,10 @@
 from pathlib import Path
 import os
 
+from dotenv import load_dotenv
+
+load_dotenv()
+
 API_VERSION = "1.0.0"
 APP_NAME = "Veldassistent 24/7"
 
@@ -21,7 +25,26 @@ MEDIA_URL = "https://oostakkerbos.be/media/"
 ENVIRONMENT = "development"
 
 API_PREFIX = "/api/v1"
-API_KEY = "test123"
+API_KEY = os.getenv("API_KEY")
 
 SPECIES_MEDIA_URL = MEDIA_URL + "species/"
 HABITAT_MEDIA_URL = MEDIA_URL + "habitats/"
+
+
+# -------------------------
+# RTSP configuratie
+# -------------------------
+
+RTSP_ENABLED = True
+
+RTSP_URL = os.getenv(
+    "RTSP_URL",
+    "rtsp://admin:VUL_HIER_JE_WACHTWOORD_IN@192.168.129.66:554/Preview_01_main"
+)
+
+RTSP_INTERVAL = 30
+
+RTSP_OUTPUT_DIR = BASE_DIR / "rtsp_frames"
+
+
+

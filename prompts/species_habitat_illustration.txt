@@ -35,5 +35,6 @@ Avoid placing important elements near the edges.
 Leave sufficient negative space for optional page titles or text overlays.
 Calm composition with generous negative space.
 Create depth using overlapping simplified shapes.
+Doe not include the attached illustration! 
 
 

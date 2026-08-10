@@ -42,6 +42,13 @@ from config import (
 import threading
 from services.rtsp_source import RTSPSource
 
+from config import (
+    RTSP_ENABLED,
+    RTSP_URL,
+    RTSP_INTERVAL,
+    RTSP_OUTPUT_DIR,
+)
+
 db = Database()
 illustration_service = IllustrationService(db)
 
@@ -114,49 +121,35 @@ def process_incoming(src_path: str):
 
     return result
 
-
-# -------------------------
-# RTSP configuratie
-# -------------------------
-
-RTSP_ENABLED = True
-
-RTSP_URL = (
-    "rtsp://admin:YmkeV6581**!"
-    "@192.168.129.66:554/Preview_01_main"
-)
-
-RTSP_INTERVAL = 30
-
-RTSP_OUTPUT_DIR = Path("rtsp_frames")
-
 rtsp_source = None
 rtsp_thread = None
+
 
 def process_rtsp_frame(src_path: str):
 
     try:
-        result = process_incoming(src_path)
+        process_incoming(src_path)
 
-        print(
-            f"!!! RTSP ANALYSIS RESULT: {result} !!!"
+    except Exception:
+        logger.exception(
+            f"Exception while analyzing RTSP frame: {src_path}"
         )
 
-    except Exception as e:
-
-        print(
-            f"!!! RTSP ANALYSIS ERROR: {repr(e)} !!!"
-        )
 
 # -------------------------
 # Watchdog handler
 # -------------------------
+
 class FotoHandler(FileSystemEventHandler):
+
     def on_created(self, event):
+
         if event.is_directory:
             return
 
-        if not event.src_path.lower().endswith((".jpg", ".jpeg", ".png")):
+        if not event.src_path.lower().endswith(
+            (".jpg", ".jpeg", ".png")
+        ):
             return
 
         # Wacht even zodat het bestand volledig is gekopieerd
@@ -164,17 +157,25 @@ class FotoHandler(FileSystemEventHandler):
 
         try:
             process_incoming(event.src_path)
-        except Exception as e:
-            logger.exception(f"Exception while analyzing: {e}")
+
+        except Exception:
+            logger.exception(
+                f"Exception while analyzing: {event.src_path}"
+            )
 
 
 # -------------------------
 # Observer
 # -------------------------
+
 incoming_map = Path("incoming")
 incoming_map.mkdir(exist_ok=True)
 
 observer = Observer()
+
+rtsp_source = None
+rtsp_thread = None
+
 
 @app.on_event("startup")
 def startup():
@@ -192,6 +193,7 @@ def startup():
             parents=True,
             exist_ok=True
         )
+
         logger.info(
             "Created species image directory"
         )
@@ -199,6 +201,10 @@ def startup():
     logger.info(
         f"Models loaded: {len(engine.models)}"
     )
+
+    # -------------------------
+    # FTP / incoming monitoring
+    # -------------------------
 
     observer.schedule(
         FotoHandler(),
@@ -212,56 +218,68 @@ def startup():
         "Monitoring started"
     )
 
-    if RTSP_ENABLED:
+    # -------------------------
+    # RTSP monitoring
+    # -------------------------
 
-        rtsp_source = RTSPSource(
-            url=RTSP_URL,
-            output_dir=RTSP_OUTPUT_DIR,
-            interval=RTSP_INTERVAL
+    global rtsp_source
+    global rtsp_thread
+
+    if not RTSP_ENABLED:
+        logger.info(
+            "RTSP monitoring disabled"
         )
+        return
 
+    rtsp_source = RTSPSource(
+        url=RTSP_URL,
+        output_dir=RTSP_OUTPUT_DIR,
+        interval=RTSP_INTERVAL
+    )
 
-        def run_rtsp():
+    rtsp_thread = threading.Thread(
+        target=rtsp_source.start,
+        args=(process_rtsp_frame,),
+        daemon=True
+    )
 
-            try:
+    rtsp_thread.start()
 
-                rtsp_source.start(
-                    process_rtsp_frame
-                )
-
-            except Exception as e:
-
-                print(
-                    repr(e)
-                )
-
-
-        rtsp_thread = threading.Thread(
-            target=run_rtsp,
-            daemon=True
-        )
-
-        rtsp_thread.start()
+    logger.info(
+        "RTSP monitoring started"
+    )
 
 
 @app.on_event("shutdown")
 def shutdown():
 
     logger.info(
-        "Stop monitoring..."
+        "Stopping Veldassistent 24/7"
     )
 
-    observer.stop()
-    observer.join()
+    # -------------------------
+    # Stop RTSP
+    # -------------------------
 
+    global rtsp_source
 
     if rtsp_source:
-
         rtsp_source.stop()
 
         logger.info(
             "RTSP monitoring stopped"
         )
+
+    # -------------------------
+    # Stop incoming monitoring
+    # -------------------------
+
+    observer.stop()
+    observer.join()
+
+    logger.info(
+        "Monitoring stopped"
+    )
 
 
 # -------------------------
