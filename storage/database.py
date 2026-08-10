@@ -334,41 +334,28 @@ class Database:
 
         self.commit()
 
-
-    def get_pending_observations(self):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT *
-            FROM observations
-            WHERE status = 'pending'
-            ORDER BY id DESC
-        """)
-
-        return [
-            dict(row)
-            for row in cursor.fetchall()
-        ]
-
     def get_pending_review(self):
 
         cursor = self.cursor()
 
         cursor.execute("""
             SELECT
-
                 o.id,
                 o.crop_path,
                 o.status,
 
                 p.species,
-                p.score
+                p.score,
+
+                s.id AS species_id
 
             FROM observations o
 
             JOIN predictions p
                 ON p.observation_id = o.id
+
+            JOIN species s
+                ON s.english = p.species
 
             WHERE
                 o.status = 'pending'
@@ -383,9 +370,12 @@ class Database:
         ]
 
         for row in rows:
-            row["crop_url"] = f"https://oostakkerbos.be/{row['crop_path']}"
+            row["crop_url"] = (
+                f"https://oostakkerbos.be/{row['crop_path']}"
+            )
 
         return rows
+
 
     def get_review(self, observation_id):
 

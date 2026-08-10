@@ -39,6 +39,9 @@ from config import (
     GENERATED_SPECIES_DIR
 )
 
+import threading
+from services.rtsp_source import RTSPSource
+
 db = Database()
 illustration_service = IllustrationService(db)
 
@@ -98,7 +101,10 @@ for model in load_models():
 # Analysefunctie
 # -------------------------
 def process_incoming(src_path: str):
-    logger.info(f"New photo recieved: {src_path}")
+
+    logger.info(
+        f"New photo recieved: {src_path}"
+    )
 
     result = engine.process(src_path)
 
@@ -108,6 +114,39 @@ def process_incoming(src_path: str):
 
     return result
 
+
+# -------------------------
+# RTSP configuratie
+# -------------------------
+
+RTSP_ENABLED = True
+
+RTSP_URL = (
+    "rtsp://admin:YmkeV6581**!"
+    "@192.168.129.66:554/Preview_01_main"
+)
+
+RTSP_INTERVAL = 30
+
+RTSP_OUTPUT_DIR = Path("rtsp_frames")
+
+rtsp_source = None
+rtsp_thread = None
+
+def process_rtsp_frame(src_path: str):
+
+    try:
+        result = process_incoming(src_path)
+
+        print(
+            f"!!! RTSP ANALYSIS RESULT: {result} !!!"
+        )
+
+    except Exception as e:
+
+        print(
+            f"!!! RTSP ANALYSIS ERROR: {repr(e)} !!!"
+        )
 
 # -------------------------
 # Watchdog handler
@@ -173,13 +212,56 @@ def startup():
         "Monitoring started"
     )
 
+    if RTSP_ENABLED:
+
+        rtsp_source = RTSPSource(
+            url=RTSP_URL,
+            output_dir=RTSP_OUTPUT_DIR,
+            interval=RTSP_INTERVAL
+        )
+
+
+        def run_rtsp():
+
+            try:
+
+                rtsp_source.start(
+                    process_rtsp_frame
+                )
+
+            except Exception as e:
+
+                print(
+                    repr(e)
+                )
+
+
+        rtsp_thread = threading.Thread(
+            target=run_rtsp,
+            daemon=True
+        )
+
+        rtsp_thread.start()
+
 
 @app.on_event("shutdown")
 def shutdown():
-    logger.info("Stop monitoring...")
+
+    logger.info(
+        "Stop monitoring..."
+    )
 
     observer.stop()
     observer.join()
+
+
+    if rtsp_source:
+
+        rtsp_source.stop()
+
+        logger.info(
+            "RTSP monitoring stopped"
+        )
 
 
 # -------------------------
@@ -237,7 +319,7 @@ def review(
         "reviewed"
     )
 
-    species = db.get_species(
+    species = db.get_species_by_id(
         body.confirmed_species_id
     )
 
