@@ -126,16 +126,23 @@ for model in load_models():
 # Analyse
 # =========================================================
 
-def process_incoming(src_path: str):
+def process_incoming(
+    src_path: str,
+    camera_key: str
+):
     """
     Analyseer een binnengekomen afbeelding.
     """
 
     logger.info(
-        f"New photo received: {src_path}"
+        f"New photo received from "
+        f"{camera_key}: {src_path}"
     )
 
-    result = engine.process(src_path)
+    result = engine.process(
+        src_path,
+        camera_key
+    )
 
     logger.info(
         f"Analysis completed: {result}"
@@ -144,13 +151,19 @@ def process_incoming(src_path: str):
     return result
 
 
-def process_rtsp_frame(src_path: str):
+def process_rtsp_frame(
+    src_path: str,
+    camera_key: str
+):
     """
-    Analyseer een frame afkomstig van de statische camera.
+    Analyseer een frame afkomstig van een camera.
     """
 
     try:
-        process_incoming(src_path)
+        process_incoming(
+            src_path,
+            camera_key
+        )
 
     except Exception:
         logger.exception(
@@ -282,6 +295,7 @@ def startup():
         url=RTSP_URL,
         output_dir=RTSP_OUTPUT_DIR,
         interval=RTSP_INTERVAL,
+        camera_key="lumus",
     )
 
     camera_thread = threading.Thread(
@@ -370,12 +384,6 @@ def health():
 # =========================================================
 # Review endpoints
 # =========================================================
-
-@app.get("/observations/pending")
-def get_pending_observations():
-
-    return db.get_pending_observations()
-
 
 @app.get("/review/pending")
 def review_pending():

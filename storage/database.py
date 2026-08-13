@@ -780,9 +780,16 @@ class Database:
         cursor = self.cursor()
 
         cursor.execute("""
-            SELECT *
-            FROM observations
-            ORDER BY id DESC
+            SELECT
+                o.*,
+                p.world
+            FROM observations o
+
+            JOIN photos p
+                ON p.id = o.photo_id
+
+            ORDER BY o.id DESC
+
             LIMIT ? OFFSET ?
         """, (limit, offset))
 
@@ -813,18 +820,28 @@ class Database:
 
         return cursor.fetchone()
 
-
     def get_observation(self, observation_id):
 
         cursor = self.cursor()
 
         cursor.execute("""
-            SELECT *
-            FROM observations
-            WHERE id = ?
+            SELECT
+                o.*,
+                p.world
+            FROM observations o
+
+            JOIN photos p
+                ON p.id = o.photo_id
+
+            WHERE o.id = ?
         """, (observation_id,))
 
-        return cursor.fetchone()
+        row = cursor.fetchone()
+
+        if row is None:
+            return None
+
+        return dict(row)
 
     def get_species(self):
 
@@ -858,6 +875,7 @@ class Database:
             SELECT
                 o.id AS observation_id,
                 p.relative_path AS photo_path,
+                p.world,
                 o.created_at,
                 r.confirmed_species_id,
                 s.english,

@@ -47,4 +47,17 @@ RTSP_INTERVAL = 30
 RTSP_OUTPUT_DIR = BASE_DIR / "rtsp_frames"
 
 
+CAMERAS = {
+    "ranger": {
+        "name": "Ranger",
+        "location": "Oostakkerbos",
+        "world": "bos",
+    },
 
+    "lumus": {
+        "name": "Lumus",
+        "location": "Tuin",
+        "world": "tuin",
+    },
+
+}

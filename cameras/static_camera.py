@@ -2,9 +2,7 @@
 import cv2
 import time
 from pathlib import Path
-
 from logger import logger
-
 
 class StaticCamera:
 
@@ -12,11 +10,13 @@ class StaticCamera:
         self,
         url: str,
         output_dir: Path,
-        interval: float = 10.0
+        interval: float = 10.0,
+        camera_key: str = "ranger"
     ):
         self.url = url
         self.output_dir = Path(output_dir)
         self.interval = interval
+        self.camera_key = camera_key
 
         self.output_dir.mkdir(
             parents=True,
@@ -101,7 +101,8 @@ class StaticCamera:
                     )
 
                     callback(
-                        str(frame_path)
+                        str(frame_path),
+                        self.camera_key
                     )
 
                     time.sleep(

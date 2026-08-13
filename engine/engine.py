@@ -5,6 +5,9 @@ from domain.photo import Photo
 from utils.photo_utils import get_photo_timestamp
 from storage.archive import archive_photo
 
+from config import CAMERAS
+
+
 API_VERSION = "1.0"
 
 class Engine:
@@ -18,7 +21,7 @@ class Engine:
         model.database_id = self.db.sync_model(model)
         self.models.append(model)
 
-    def process(self, src_path):
+    def process(self, src_path, camera_key):
 
         objects = []
         detections = []
@@ -34,27 +37,27 @@ class Engine:
             detections.extend(result["detections"])
             objects.extend(result["objects"])
 
-        camera_id = self.db.get_or_create_camera(
-            "Ranger",
-            "Oostakkerbos",
-            "bos"
-        )
+            camera = CAMERAS[camera_key]
 
-        camera = self.db.get_camera(camera_id)
+            camera_id = self.db.get_or_create_camera(
+                camera["name"],
+                camera["location"],
+                camera["world"]
+            )
 
-        world = camera["world"] if camera else None
+            camera = self.db.get_camera(camera_id)
 
-        image = cv2.imread(src_path)
-        height, width = image.shape[:2]
+            image = cv2.imread(src_path)
+            height, width = image.shape[:2]
 
-        photo = Photo(
-            camera_id=camera_id,
-            relative_path=src_path.replace("\\", "/"),
-            width=width,
-            height=height,
-            taken_at=get_photo_timestamp(src_path),
-            world=world
-        )
+            photo = Photo(
+                camera_id=camera_id,
+                relative_path=src_path.replace("\\", "/"),
+                width=width,
+                height=height,
+                taken_at=get_photo_timestamp(src_path),
+                world=camera["world"]
+            )
 
         self.db.save_photo(photo)
 

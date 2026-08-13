@@ -32,7 +32,8 @@ def serialize_observation(row, db):
     data = {
         "id": row["id"],
         "status": row["status"],
-        "created_at": row["created_at"]
+        "created_at": row["created_at"],
+        "world": row["world"]
     }
 
     # afbeelding
@@ -86,6 +87,7 @@ def serialize_species_observation(row):
     return {
         "id": row["observation_id"],
         "photo": row["photo_path"],
+        "world": row["world"],
         "species_id": row["confirmed_species_id"],
         "species": row["english"],
         "species_image": row["species_image_path"],
