@@ -14,10 +14,12 @@ class Engine:
         self.models = []
 
     def add_model(self, model):
+        model.database = self.db
         model.database_id = self.db.sync_model(model)
         self.models.append(model)
 
     def process(self, src_path):
+
         objects = []
         detections = []
         observation = None
@@ -34,8 +36,13 @@ class Engine:
 
         camera_id = self.db.get_or_create_camera(
             "Ranger",
-            "Oostakkerbos"
+            "Oostakkerbos",
+            "bos"
         )
+
+        camera = self.db.get_camera(camera_id)
+
+        world = camera["world"] if camera else None
 
         image = cv2.imread(src_path)
         height, width = image.shape[:2]
@@ -45,10 +52,11 @@ class Engine:
             relative_path=src_path.replace("\\", "/"),
             width=width,
             height=height,
-            taken_at=get_photo_timestamp(src_path)
+            taken_at=get_photo_timestamp(src_path),
+            world=world
         )
 
-        self.db.save_photo(photo)         
+        self.db.save_photo(photo)
 
         for observation in objects:
 

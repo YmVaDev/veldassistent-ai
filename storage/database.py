@@ -95,7 +95,12 @@ class Database:
 
         return model_id
 
-    def get_or_create_camera(self, name, location=None):
+    def get_or_create_camera(
+        self,
+        name,
+        location=None,
+        world=None
+    ):
 
         cursor = self.cursor()
 
@@ -108,23 +113,54 @@ class Database:
         row = cursor.fetchone()
 
         if row:
+
+            if world is not None:
+
+                cursor.execute("""
+                    UPDATE cameras
+                    SET world = ?
+                    WHERE id = ?
+                """, (
+                    world,
+                    row["id"]
+                ))
+
+                self.commit()
+
             return row["id"]
 
         cursor.execute("""
             INSERT INTO cameras
             (
                 name,
-                location
+                location,
+                world
             )
-            VALUES (?, ?)
+            VALUES (?, ?, ?)
         """, (
             name,
-            location
+            location,
+            world
         ))
 
         self.commit()
 
         return cursor.lastrowid
+
+    def update_camera_world(self, camera_id, world):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            UPDATE cameras
+            SET world = ?
+            WHERE id = ?
+        """, (
+            world,
+            camera_id
+        ))
+
+        self.commit()
 
     def get_cameras(self):
 
@@ -137,6 +173,18 @@ class Database:
         """)
 
         return cursor.fetchall()
+
+    def get_camera(self, camera_id):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT *
+            FROM cameras
+            WHERE id = ?
+        """, (camera_id,))
+
+        return cursor.fetchone()
 
     def add_photo(
         self,
@@ -185,15 +233,17 @@ class Database:
                 taken_at,
                 width,
                 height,
+                world,
                 created_at
             )
-            VALUES (?, ?, ?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
         """, (
             photo.camera_id,
             photo.relative_path,
             photo.taken_at,
             photo.width,
             photo.height,
+            photo.world,
             datetime.utcnow().isoformat()
         ))
 
@@ -265,25 +315,59 @@ class Database:
 
     def import_species(self, model_id, model_name):
 
-        species_file = (
+        species_dir = (
             BASE_DIR
             / "models"
             / model_name
             / "classifier"
-            / "species.json"
         )
+
+        species_file = species_dir / "species.json"
+        settings_file = species_dir / "species_settings.json"
 
         if not species_file.exists():
             raise FileNotFoundError(species_file)
 
+        if not settings_file.exists():
+            raise FileNotFoundError(settings_file)
+
+        # -------------------------------------------------------------
+        # species.json laden
+        # -------------------------------------------------------------
+
         with open(species_file, encoding="utf-8") as f:
             species_map = json.load(f)
+
+        # -------------------------------------------------------------
+        # species_settings.json laden
+        # -------------------------------------------------------------
+
+        with open(settings_file, encoding="utf-8") as f:
+            settings_map = json.load(f)
 
         cursor = self.cursor()
 
         imported = 0
+        updated = 0
+
+        # -------------------------------------------------------------
+        # Soorten verwerken
+        # -------------------------------------------------------------
 
         for english, data in species_map.items():
+
+            # ---------------------------------------------------------
+            # Instellingen ophalen
+            # ---------------------------------------------------------
+
+            settings = settings_map.get(english, {})
+
+            priority = settings.get("priority", "interesting")
+            clip_duration = settings.get("clip_duration", 30)
+
+            # ---------------------------------------------------------
+            # Bestaat de soort al?
+            # ---------------------------------------------------------
 
             cursor.execute("""
                 SELECT id
@@ -292,32 +376,74 @@ class Database:
                 AND english = ?
             """, (model_id, english))
 
-            if cursor.fetchone():
-                continue
+            row = cursor.fetchone()
 
-            cursor.execute("""
-                INSERT INTO species
-                (
+            # ---------------------------------------------------------
+            # Nieuwe soort
+            # ---------------------------------------------------------
+
+            if row is None:
+
+                cursor.execute("""
+                    INSERT INTO species
+                    (
+                        model_id,
+                        english,
+                        scientific,
+                        external_id,
+                        habitat,
+                        diet,
+                        priority,
+                        clip_duration
+                    )
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
                     model_id,
                     english,
-                    scientific,
-                    external_id,
-                    habitat,
-                    diet
-                )
-                VALUES (?, ?, ?, ?, ?, ?)
-            """, (
-                model_id,
-                english,
-                data.get("scientificName"),
-                data.get("birdbaseId"),
-                data.get("habitat"),
-                data.get("diet")
-            ))
+                    data.get("scientificName"),
+                    data.get("birdbaseId"),
+                    data.get("habitat"),
+                    data.get("diet"),
+                    priority,
+                    clip_duration
+                ))
 
-            imported += 1
+                imported += 1
+
+            # ---------------------------------------------------------
+            # Bestaande soort
+            # ---------------------------------------------------------
+
+            else:
+
+                species_id = row[0]
+
+                cursor.execute("""
+                    UPDATE species
+                    SET
+                        scientific = ?,
+                        external_id = ?,
+                        habitat = ?,
+                        diet = ?,
+                        priority = ?,
+                        clip_duration = ?
+                    WHERE id = ?
+                """, (
+                    data.get("scientificName"),
+                    data.get("birdbaseId"),
+                    data.get("habitat"),
+                    data.get("diet"),
+                    priority,
+                    clip_duration,
+                    species_id
+                ))
+
+                updated += 1
 
         self.commit()
+
+        print(f"Species imported: {imported}")
+        print(f"Species updated: {updated}")
 
     def update_photo(self, photo):
 
@@ -536,7 +662,7 @@ class Database:
 
         return cursor.fetchone()
 
-    def get_species_by_english(self, english):
+    def get_species_by_english(self, english, model_id):
 
         cursor = self.cursor()
 
@@ -544,10 +670,10 @@ class Database:
             SELECT *
             FROM species
             WHERE english = ?
-        """, (english,))
+            AND model_id = ?
+        """, (english, model_id))
 
         return cursor.fetchone()
-
 
     def update_species_image_path(
         self,

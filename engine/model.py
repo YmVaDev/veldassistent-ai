@@ -36,6 +36,16 @@ class AIModel:
         ) as f:
             self.species_map = json.load(f)
 
+        settings_path = (
+            MODEL_DIR
+            / self.model_name
+            / "classifier"
+            / "species_settings.json"
+        )
+
+        with open(settings_path, encoding="utf-8") as f:
+            self.species_settings = json.load(f)
+
     def process(self, src_path):
 
         observations = []
@@ -76,6 +86,18 @@ class AIModel:
             prediction.score = round(float(prediction.score), 1)
 
             english = prediction.species
+
+            db_species = self.database.get_species_by_english(
+                english,
+                self.database_id
+            )
+
+            if db_species:
+                priority = db_species["priority"]
+                clip_duration = db_species["clip_duration"]
+            else:
+                priority = "interesting"
+                clip_duration = 30
 
             box = BoundingBox(*det["box"])
 
@@ -145,6 +167,8 @@ class AIModel:
                     "last_seen": species.get("last_seen"),
                 },
                 "score": prediction.score,
+                "priority": priority,
+                "clip_duration": clip_duration,
                 "box": det["box"],
                 "crop_path": filename,
                 "crop_url": f"https://oostakkerbos.be/{filename}",

@@ -1,4 +1,5 @@
 
+```python
 from pathlib import Path
 import json
 
@@ -24,13 +25,13 @@ for row in ws.iter_rows(min_row=3, values_only=True):
 
     english = str(row[1]).strip()
 
-    habitat = row[48]
-
     birdbase[english] = {
         "birdbaseId": row[0],
         "scientificName": row[2],
         "habitat": row[48],
         "diet": row[50],
+        "priority": "normal",
+        "clip_duration": 0,
         "count": 0,
         "best_score": 0,
         "first_seen": None,
@@ -74,6 +75,8 @@ for i, label in enumerate(labels, start=1):
             "scientificName": None,
             "habitat": None,
             "diet": None,
+            "priority": "normal",
+            "clip_duration": 0,
             "count": None,
             "best_score": None,
             "first_seen": None,
@@ -103,6 +106,8 @@ for i, label in enumerate(labels, start=1):
             "scientificName": None,
             "habitat": None,
             "diet": None,
+            "priority": "normal",
+            "clip_duration": 0,
             "count": None,
             "best_score": None,
             "first_seen": None,
@@ -130,8 +135,8 @@ print()
 print("================================")
 print(f"Species loaded : {len(species)}")
 print(f"Found          : {matched}")
-print(f"Not found     : {len(missing)}")
-print(f"Saved to JSON   : {OUTPUT}")
+print(f"Not found      : {len(missing)}")
+print(f"Saved to JSON  : {OUTPUT}")
 print("================================")
 
 if missing:
@@ -140,3 +145,4 @@ if missing:
 
     for s in missing:
         print(" -", s)
+```

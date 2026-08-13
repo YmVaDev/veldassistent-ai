@@ -1,53 +1,60 @@
 
-from api.public import router as public_router
 from pathlib import Path
-import os
+import threading
 import time
-from fastapi import FastAPI
 
-from fastapi.exceptions import RequestValidationError
-from fastapi import HTTPException
-
-from api.errors import (
-    http_error_handler,
-    validation_error_handler
+from fastapi import (
+    Depends,
+    FastAPI,
+    HTTPException,
+    Query,
 )
+from fastapi.exceptions import RequestValidationError
+from fastapi.middleware.cors import CORSMiddleware
 
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
+
+from api.errors import (
+    general_error_handler,
+    http_error_handler,
+    validation_error_handler,
+)
+from api.models import ReviewRequest
+from api.public import router as public_router
+from api.security import verify_api_key
+from api.serializers import (
+    serialize_observation,
+    serialize_species,
+)
+
+from cameras.static_camera import StaticCamera
+
+from config import (
+    API_VERSION,
+    BASE_URL,
+    DATABASE_PATH,
+    GENERATED_SPECIES_DIR,
+    MODEL_DIR,
+    RTSP_ENABLED,
+    RTSP_INTERVAL,
+    RTSP_OUTPUT_DIR,
+    RTSP_URL,
+)
+
 from engine.engine import Engine
 from engine.loader import load_models
-from storage.database import Database
-from api.models import ReviewRequest
-from services.illustration_service import IllustrationService
-from api.serializers import serialize_observation
-from fastapi import Query
-from api.serializers import serialize_species
-from api.errors import general_error_handler
-
-from fastapi import Depends
-from api.security import verify_api_key
-from fastapi.middleware.cors import CORSMiddleware
-from config import BASE_URL
-from config import API_VERSION
 
 from logger import logger
 
-from config import (
-    DATABASE_PATH,
-    MODEL_DIR,
-    GENERATED_SPECIES_DIR
-)
+from services.illustration_service import IllustrationService
 
-import threading
-from services.rtsp_source import RTSPSource
+from storage.database import Database
 
-from config import (
-    RTSP_ENABLED,
-    RTSP_URL,
-    RTSP_INTERVAL,
-    RTSP_OUTPUT_DIR,
-)
+
+# =========================================================
+# Applicatie-initialisatie
+# =========================================================
 
 db = Database()
 illustration_service = IllustrationService(db)
@@ -61,56 +68,71 @@ app = FastAPI(
     Gebruikt door WordPress voor publieke
     waarnemingen en beheer.
     """,
-    version=API_VERSION
+    version=API_VERSION,
 )
+
+
+# =========================================================
+# Middleware
+# =========================================================
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        BASE_URL
-    ],
+    allow_origins=[BASE_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
+
+# =========================================================
+# Exception handlers
+# =========================================================
+
 app.add_exception_handler(
     HTTPException,
-    http_error_handler
+    http_error_handler,
 )
 
 app.add_exception_handler(
     RequestValidationError,
-    validation_error_handler
+    validation_error_handler,
 )
 
 app.add_exception_handler(
     Exception,
-    general_error_handler
+    general_error_handler,
 )
+
+
+# =========================================================
+# Routers
+# =========================================================
 
 app.include_router(public_router)
 
-app.include_router(
-    public_router,
-    prefix="/api/v1"
-)
 
-# -------------------------
-# Engine initialiseren
-# -------------------------
+# =========================================================
+# Engine
+# =========================================================
+
 engine = Engine()
 
 for model in load_models():
     engine.add_model(model)
 
-# -------------------------
-# Analysefunctie
-# -------------------------
+
+# =========================================================
+# Analyse
+# =========================================================
+
 def process_incoming(src_path: str):
+    """
+    Analyseer een binnengekomen afbeelding.
+    """
 
     logger.info(
-        f"New photo recieved: {src_path}"
+        f"New photo received: {src_path}"
     )
 
     result = engine.process(src_path)
@@ -121,11 +143,11 @@ def process_incoming(src_path: str):
 
     return result
 
-rtsp_source = None
-rtsp_thread = None
-
 
 def process_rtsp_frame(src_path: str):
+    """
+    Analyseer een frame afkomstig van de statische camera.
+    """
 
     try:
         process_incoming(src_path)
@@ -136,11 +158,22 @@ def process_rtsp_frame(src_path: str):
         )
 
 
-# -------------------------
-# Watchdog handler
-# -------------------------
+# =========================================================
+# Camera state
+# =========================================================
+
+camera_source = None
+camera_thread = None
+
+
+# =========================================================
+# Watchdog
+# =========================================================
 
 class FotoHandler(FileSystemEventHandler):
+    """
+    Verwerkt nieuwe afbeeldingen in de incoming-map.
+    """
 
     def on_created(self, event):
 
@@ -152,7 +185,8 @@ class FotoHandler(FileSystemEventHandler):
         ):
             return
 
-        # Wacht even zodat het bestand volledig is gekopieerd
+        # Wacht even zodat het bestand volledig
+        # naar de map gekopieerd kan worden.
         time.sleep(1)
 
         try:
@@ -164,34 +198,48 @@ class FotoHandler(FileSystemEventHandler):
             )
 
 
-# -------------------------
-# Observer
-# -------------------------
-
-incoming_map = Path("incoming")
-incoming_map.mkdir(exist_ok=True)
+incoming_dir = Path("incoming")
+incoming_dir.mkdir(
+    parents=True,
+    exist_ok=True,
+)
 
 observer = Observer()
 
-rtsp_source = None
-rtsp_thread = None
 
+# =========================================================
+# Startup
+# =========================================================
 
 @app.on_event("startup")
 def startup():
 
-    logger.info("Starting Veldassistent 24/7")
+    global camera_source
+    global camera_thread
+
+    logger.info(
+        "Starting Veldassistent 24/7"
+    )
+
+    # -----------------------------------------------------
+    # Controleer bestanden en mappen
+    # -----------------------------------------------------
 
     if not DATABASE_PATH.exists():
-        logger.error("Database not found")
+        logger.error(
+            f"Database not found: {DATABASE_PATH}"
+        )
 
     if not MODEL_DIR.exists():
-        logger.error("Model directory missing")
+        logger.error(
+            f"Model directory missing: {MODEL_DIR}"
+        )
 
     if not GENERATED_SPECIES_DIR.exists():
+
         GENERATED_SPECIES_DIR.mkdir(
             parents=True,
-            exist_ok=True
+            exist_ok=True,
         )
 
         logger.info(
@@ -202,122 +250,159 @@ def startup():
         f"Models loaded: {len(engine.models)}"
     )
 
-    # -------------------------
-    # FTP / incoming monitoring
-    # -------------------------
+    # -----------------------------------------------------
+    # Incoming monitoring
+    # -----------------------------------------------------
 
     observer.schedule(
         FotoHandler(),
-        str(incoming_map),
-        recursive=False
+        str(incoming_dir),
+        recursive=False,
     )
 
     observer.start()
 
     logger.info(
-        "Monitoring started"
+        "Incoming monitoring started"
     )
 
-    # -------------------------
-    # RTSP monitoring
-    # -------------------------
-
-    global rtsp_source
-    global rtsp_thread
+    # -----------------------------------------------------
+    # Static camera monitoring
+    # -----------------------------------------------------
 
     if not RTSP_ENABLED:
+
         logger.info(
-            "RTSP monitoring disabled"
+            "Static camera monitoring disabled"
         )
+
         return
 
-    rtsp_source = RTSPSource(
+    camera_source = StaticCamera(
         url=RTSP_URL,
         output_dir=RTSP_OUTPUT_DIR,
-        interval=RTSP_INTERVAL
+        interval=RTSP_INTERVAL,
     )
 
-    rtsp_thread = threading.Thread(
-        target=rtsp_source.start,
+    camera_thread = threading.Thread(
+        target=camera_source.start,
         args=(process_rtsp_frame,),
-        daemon=True
+        daemon=True,
     )
 
-    rtsp_thread.start()
+    camera_thread.start()
 
     logger.info(
-        "RTSP monitoring started"
+        "Static camera monitoring started"
     )
 
+
+# =========================================================
+# Shutdown
+# =========================================================
 
 @app.on_event("shutdown")
 def shutdown():
+
+    global camera_source
 
     logger.info(
         "Stopping Veldassistent 24/7"
     )
 
-    # -------------------------
-    # Stop RTSP
-    # -------------------------
+    # -----------------------------------------------------
+    # Stop static camera
+    # -----------------------------------------------------
 
-    global rtsp_source
+    if camera_source:
 
-    if rtsp_source:
-        rtsp_source.stop()
+        camera_source.stop()
 
         logger.info(
-            "RTSP monitoring stopped"
+            "Static camera monitoring stopped"
         )
 
-    # -------------------------
+    # -----------------------------------------------------
     # Stop incoming monitoring
-    # -------------------------
+    # -----------------------------------------------------
 
     observer.stop()
     observer.join()
 
     logger.info(
-        "Monitoring stopped"
+        "Incoming monitoring stopped"
     )
 
 
-# -------------------------
-# API-endpoints
-# -------------------------
+# =========================================================
+# Basic endpoints
+# =========================================================
+
 @app.get("/")
 def root():
-    return {"status": "running"}
 
+    return {
+        "status": "running"
+    }
+
+
+@app.get("/health")
+def health():
+
+    try:
+
+        db_status = "ok"
+
+        db.get_latest_observations(1)
+
+    except Exception:
+
+        db_status = "error"
+
+    return {
+        "status": "ok",
+        "version": API_VERSION,
+        "database": db_status,
+        "models": len(engine.models),
+    }
+
+
+# =========================================================
+# Review endpoints
+# =========================================================
 
 @app.get("/observations/pending")
 def get_pending_observations():
+
     return db.get_pending_observations()
 
 
 @app.get("/review/pending")
 def review_pending():
+
     return db.get_pending_review()
 
 
 @app.get("/review/{observation_id}")
-def review(observation_id: int):
+def get_review(observation_id: int):
+
     return db.get_review(observation_id)
 
 
 @app.post(
     "/review/{observation_id}",
-    dependencies=[Depends(verify_api_key)]
+    dependencies=[Depends(verify_api_key)],
 )
-def review(
+def submit_review(
     observation_id: int,
-    body: ReviewRequest
+    body: ReviewRequest,
 ):
 
     if db.has_review(observation_id):
+
         raise HTTPException(
             status_code=409,
-            detail="Observation has already been reviewed."
+            detail="Observation has already been reviewed.",
         )
 
     logger.info(
@@ -329,12 +414,12 @@ def review(
         confirmed=body.confirmed,
         confirmed_species_id=body.confirmed_species_id,
         comment=body.comment,
-        reviewed_by=body.reviewed_by
+        reviewed_by=body.reviewed_by,
     )
 
     db.update_observation_status(
         observation_id,
-        "reviewed"
+        "reviewed",
     )
 
     species = db.get_species_by_id(
@@ -342,52 +427,39 @@ def review(
     )
 
     if species:
-        print(dict(species))
+
+        illustration_service.generate_if_missing(
+            species
+        )
+
     else:
-        print("Species not found:", body.confirmed_species_id)
 
-    print("CONFIRMED ID:", body.confirmed_species_id)
+        logger.warning(
+            f"Species not found: "
+            f"{body.confirmed_species_id}"
+        )
 
-    print("FOUND SPECIES:", species)
-
-    illustration_service.generate_if_missing(
-        species
-    )
     return {
         "success": True,
-        "review_id": review_id
+        "review_id": review_id,
     }
 
-@app.get("/health")
-def health():
 
-    try:
-        db_status = "ok"
-
-        db.get_latest_observations(1)
-
-    except Exception:
-        db_status = "error"
-
-
-    return {
-        "status": "ok",
-        "version": API_VERSION,
-        "database": db_status,
-        "models": len(engine.models)
-    }
+# =========================================================
+# Public observation endpoints
+# =========================================================
 
 @app.get("/api/observations")
 def observations(
     page: int = Query(1, ge=1),
-    limit: int = Query(20, ge=1, le=100)
+    limit: int = Query(20, ge=1, le=100),
 ):
 
     offset = (page - 1) * limit
 
     rows = db.get_public_observations(
         limit,
-        offset
+        offset,
     )
 
     total = db.count_public_observations()
@@ -399,21 +471,33 @@ def observations(
         "items": [
             serialize_observation(row, db)
             for row in rows
-        ]
+        ],
     }
+
 
 @app.get("/api/observations/{observation_id}")
 def observation_detail(observation_id: int):
 
-    row = db.get_observation(observation_id)
+    row = db.get_observation(
+        observation_id
+    )
 
     if not row:
+
         raise HTTPException(
             status_code=404,
-            detail="Observation not found"
+            detail="Observation not found",
         )
 
-    return serialize_observation(row, db)
+    return serialize_observation(
+        row,
+        db,
+    )
+
+
+# =========================================================
+# Species endpoints
+# =========================================================
 
 @app.get("/api/species")
 def species():
@@ -425,15 +509,21 @@ def species():
         for row in rows
     ]
 
+
 @app.get("/api/species/{species_id}")
 def species_detail(species_id: int):
 
-    row = db.get_species_by_id(species_id)
+    row = db.get_species_by_id(
+        species_id
+    )
 
     if not row:
+
         raise HTTPException(
             status_code=404,
-            detail="Species not found"
+            detail="Species not found",
         )
 
-    return serialize_species(row)
+    return serialize_species(
+        row
+    )

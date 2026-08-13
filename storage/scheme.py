@@ -1,6 +1,7 @@
 
 from storage.database import Database
 
+
 def create_cameras(cursor):
 
     cursor.execute("""
@@ -12,10 +13,13 @@ def create_cameras(cursor):
 
             location TEXT,
 
+            world TEXT,
+
             active INTEGER DEFAULT 1
 
         )
     """)
+
 
 def create_models(cursor):
 
@@ -34,6 +38,7 @@ def create_models(cursor):
 
         )
     """)
+
 
 def create_species(cursor):
 
@@ -55,11 +60,43 @@ def create_species(cursor):
             diet TEXT,
 
             species_image_path TEXT,
-            
+
             habitat_image_path TEXT,
 
+            priority TEXT DEFAULT 'normal',
+
+            clip_duration INTEGER DEFAULT 0,
+
             FOREIGN KEY(model_id)
-            REFERENCES models(id)
+                REFERENCES models(id)
+
+        )
+    """)
+
+
+def create_photos(cursor):
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS photos (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            camera_id INTEGER NOT NULL,
+
+            relative_path TEXT NOT NULL,
+
+            taken_at TEXT,
+
+            width INTEGER,
+
+            height INTEGER,
+
+            world TEXT,
+
+            created_at TEXT NOT NULL,
+
+            FOREIGN KEY(camera_id)
+                REFERENCES cameras(id)
 
         )
     """)
@@ -95,31 +132,6 @@ def create_observations(cursor):
         )
     """)
 
-
-def create_photos(cursor):
-
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS photos (
-
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-
-            camera_id INTEGER NOT NULL,
-
-            relative_path TEXT NOT NULL,
-
-            taken_at TEXT,
-
-            width INTEGER,
-
-            height INTEGER,
-
-            created_at TEXT NOT NULL,
-
-            FOREIGN KEY(camera_id)
-                REFERENCES cameras(id)
-
-        )
-    """)
 
 def create_predictions(cursor):
 
@@ -163,7 +175,7 @@ def create_reviews(cursor):
             reviewed_at TEXT NOT NULL,
 
             FOREIGN KEY(observation_id)
-                REFERENCES observations(id)
+                REFERENCES observations(id),
 
             FOREIGN KEY(confirmed_species_id)
                 REFERENCES species(id)
@@ -171,11 +183,67 @@ def create_reviews(cursor):
         )
     """)
 
+
+def create_clips(cursor):
+
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS clips (
+
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+
+            observation_id INTEGER NOT NULL,
+
+            file_path TEXT NOT NULL,
+
+            duration INTEGER,
+
+            created_at TEXT NOT NULL,
+
+            FOREIGN KEY(observation_id)
+                REFERENCES observations(id)
+
+        )
+    """)
+
+
+# =========================================================
+# Database migrations
+# =========================================================
+
+def migrate_camera_world(cursor):
+
+    cursor.execute("""
+        PRAGMA table_info(cameras)
+    """)
+
+    columns = [
+        row["name"]
+        for row in cursor.fetchall()
+    ]
+
+    if "world" not in columns:
+
+        cursor.execute("""
+            ALTER TABLE cameras
+            ADD COLUMN world TEXT
+        """)
+
+        print("Added 'world' column to cameras")
+
+
+# =========================================================
+# Database schema
+# =========================================================
+
 def create_scheme():
 
     db = Database()
 
     cursor = db.cursor()
+
+    # -----------------------------------------------------
+    # Tables
+    # -----------------------------------------------------
 
     create_cameras(cursor)
     create_models(cursor)
@@ -184,14 +252,19 @@ def create_scheme():
     create_observations(cursor)
     create_predictions(cursor)
     create_reviews(cursor)
+    create_clips(cursor)
+
+    # -----------------------------------------------------
+    # Migrations
+    # -----------------------------------------------------
+
+    migrate_camera_world(cursor)
+
+    # -----------------------------------------------------
+    # Save
+    # -----------------------------------------------------
 
     db.commit()
-
     db.close()
 
     print("Database scheme ready")
-
-
-
-
-

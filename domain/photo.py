@@ -10,6 +10,7 @@ class Photo:
         taken_at=None,
         width=None,
         height=None,
+        world=None,
         id=None,
         created_at=None
     ):
@@ -25,5 +26,7 @@ class Photo:
         self.width = width
 
         self.height = height
+
+        self.world = world
 
         self.created_at = created_at or datetime.utcnow()
