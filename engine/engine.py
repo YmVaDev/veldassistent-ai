@@ -4,11 +4,7 @@ from storage.database import Database
 from domain.photo import Photo
 from utils.photo_utils import get_photo_timestamp
 from storage.archive import archive_photo
-
-from config import CAMERAS
-
-
-API_VERSION = "1.0"
+from config import API_VERSION, CAMERAS
 
 class Engine:
 
@@ -23,41 +19,37 @@ class Engine:
 
     def process(self, src_path, camera_key):
 
-        objects = []
         detections = []
-        observation = None
+        objects = []
+
+        camera = CAMERAS[camera_key]
+
+        camera_id = self.db.get_or_create_camera(
+            camera["name"],
+            camera["location"],
+            camera["world"]
+        )
+
+        camera = self.db.get_camera(camera_id)
+
+        image = cv2.imread(src_path)
+        height, width = image.shape[:2]
+
+        photo = Photo(
+            camera_id=camera_id,
+            relative_path=src_path.replace("\\", "/"),
+            width=width,
+            height=height,
+            taken_at=get_photo_timestamp(src_path),
+            world=camera["world"]
+        )
 
         for model in self.models:
 
             result = model.process(src_path)
 
-            if observation is None:
-                observation = result["observation"]
-
             detections.extend(result["detections"])
             objects.extend(result["objects"])
-
-            camera = CAMERAS[camera_key]
-
-            camera_id = self.db.get_or_create_camera(
-                camera["name"],
-                camera["location"],
-                camera["world"]
-            )
-
-            camera = self.db.get_camera(camera_id)
-
-            image = cv2.imread(src_path)
-            height, width = image.shape[:2]
-
-            photo = Photo(
-                camera_id=camera_id,
-                relative_path=src_path.replace("\\", "/"),
-                width=width,
-                height=height,
-                taken_at=get_photo_timestamp(src_path),
-                world=camera["world"]
-            )
 
         self.db.save_photo(photo)
 
@@ -82,7 +74,6 @@ class Engine:
         return {
             "success": True,
             "api_version": API_VERSION,
-            "observation": observation,
             "summary": {
                 "count": len(detections)
             },

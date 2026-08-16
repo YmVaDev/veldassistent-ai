@@ -1,5 +1,4 @@
 
-from pathlib import Path
 from config import BASE_DIR
 
 class PromptBuilder:

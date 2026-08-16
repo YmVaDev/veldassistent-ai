@@ -39,7 +39,12 @@ class StaticCamera:
             try:
 
                 self.capture = cv2.VideoCapture(
-                    self.url
+                    self.url,
+                    cv2.CAP_FFMPEG,
+                    [
+                        cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 5000,
+                        cv2.CAP_PROP_READ_TIMEOUT_MSEC, 5000,
+                    ]
                 )
 
                 if not self.capture.isOpened():
@@ -51,7 +56,6 @@ class StaticCamera:
                     self.capture.release()
                     self.capture = None
 
-                    time.sleep(5)
                     continue
 
                 logger.info(

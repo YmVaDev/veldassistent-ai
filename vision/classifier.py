@@ -28,9 +28,12 @@ class Classifier:
 
         img = Image.fromarray(image)
 
-        self.input_size = self.config["classifier"]["size"]
+        input_size = self.config["classifier"]["size"]
 
-        img = img.resize((self.input_size, self.input_size), Image.Resampling.BICUBIC)
+        img = img.resize(
+            (input_size, input_size),
+            Image.Resampling.BICUBIC
+        )
 
         x = np.asarray(img).astype(np.float32)
 
@@ -47,25 +50,32 @@ class Classifier:
             }
         )
 
-        for i, out in enumerate(outputs):
-            print(i, out.shape, out.dtype)
-
         logits = outputs[0][0]
 
-        exp = np.exp(logits - np.max(logits))
-        probs = exp / np.sum(exp)
-
-        idx = int(np.argmax(probs))
-
-        score = float(probs[idx]) * 100
-
-        english = self.labels[idx]
-
-        return Prediction(
-            species=english,
-            score=score
+        exp = np.exp(
+            logits - np.max(logits)
         )
 
+        probs = exp / np.sum(exp)
+
+        indices = np.argsort(probs)[::-1][:5]
+
+        predictions = []
+
+        for rank, idx in enumerate(indices, start=1):
+
+            predictions.append(
+                Prediction(
+                    species=self.labels[idx],
+                    score=round(
+                        float(probs[idx]) * 100,
+                        1
+                    ),
+                    rank=rank
+                )
+            )
+
+        return predictions
 
 
 

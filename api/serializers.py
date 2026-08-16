@@ -43,7 +43,7 @@ def serialize_observation(row, db):
         }
 
     # soort ophalen
-    species = db.get_species_by_observation(
+    species = db.get_species_for_observation(
         row["id"]
     )
 

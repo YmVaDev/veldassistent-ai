@@ -186,41 +186,6 @@ class Database:
 
         return cursor.fetchone()
 
-    def add_photo(
-        self,
-        camera_id,
-        relative_path,
-        taken_at=None,
-        width=None,
-        height=None
-    ):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            INSERT INTO photos
-            (
-                camera_id,
-                relative_path,
-                taken_at,
-                width,
-                height,
-                created_at
-            )
-            VALUES (?, ?, ?, ?, ?, ?)
-        """, (
-            camera_id,
-            relative_path,
-            taken_at,
-            width,
-            height,
-            datetime.utcnow().isoformat()
-        ))
-
-        self.commit()
-
-        return cursor.lastrowid
-
     def save_photo(self, photo):
 
         cursor = self.cursor()
@@ -244,7 +209,7 @@ class Database:
             photo.width,
             photo.height,
             photo.world,
-            datetime.utcnow().isoformat()
+            photo.created_at.isoformat()
         ))
 
         self.commit()
@@ -482,6 +447,7 @@ class Database:
 
             JOIN species s
                 ON s.english = p.species
+                AND s.model_id = o.model_id
 
             WHERE
                 o.status = 'pending'
@@ -502,28 +468,36 @@ class Database:
 
         return rows
 
-
     def get_review(self, observation_id):
 
         cursor = self.cursor()
+
         cursor.execute("""
             SELECT
-
                 o.id,
                 o.crop_path,
                 o.status,
 
                 p.species,
                 p.score,
-                p.rank
+                p.rank,
+
+                s.id AS species_id,
+                s.scientific,
+                s.priority
 
             FROM observations o
 
             JOIN predictions p
                 ON p.observation_id = o.id
 
+            LEFT JOIN species s
+                ON s.english = p.species
+                AND s.model_id = o.model_id
+
             WHERE
                 o.id = ?
+                AND p.rank <= 5
 
             ORDER BY
                 p.rank
@@ -535,10 +509,13 @@ class Database:
         ]
 
         for row in rows:
-            row["crop_url"] = f"https://oostakkerbos.be/{row['crop_path']}"
+
+            row["crop_url"] = (
+                f"https://oostakkerbos.be/"
+                f"{row['crop_path']}"
+            )
 
         return rows
-
 
     def save_review(
         self,
@@ -607,61 +584,6 @@ class Database:
 
         return cursor.fetchone() is not None
 
-    def get_species_image(self, species):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT image_path
-            FROM species
-            WHERE english = ?
-        """, (species,))
-
-        row = cursor.fetchone()
-
-        if row is None:
-            return None
-
-        return row["image_path"]
-
-        print(species)
-        print(species["id"])
-        print(species["english"])
-        print(image_path)
-
-    def update_species_images(
-        self,
-        species_id,
-        species_image_path,
-        habitat_image_path
-    ):
-        cursor = self.cursor()
-
-        cursor.execute("""
-            UPDATE species
-            SET image_path = ?
-            WHERE id = ?
-        """, (
-            image_path,
-            species_id
-        ))
-
-        print("Updated rows:", cursor.rowcount)
-        self.commit()
-
-
-    def get_species(self, species_id):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT *
-            FROM species
-            WHERE id = ?
-        """, (species_id,))
-
-        return cursor.fetchone()
-
     def get_species_by_english(self, english, model_id):
 
         cursor = self.cursor()
@@ -719,9 +641,15 @@ class Database:
         cursor = self.cursor()
 
         cursor.execute("""
-            SELECT *
-            FROM observations
-            WHERE id = ?
+            SELECT
+                o.*,
+                p.world
+            FROM observations o
+
+            JOIN photos p
+                ON p.id = o.photo_id
+
+            WHERE o.id = ?
         """, (observation_id,))
 
         row = cursor.fetchone()
@@ -730,7 +658,6 @@ class Database:
             return None
 
         return dict(row)
-
 
     def get_latest_observations(self, limit=20):
 
@@ -759,18 +686,6 @@ class Database:
             JOIN species
                 ON reviews.confirmed_species_id = species.id
             WHERE reviews.observation_id = ?
-        """, (observation_id,))
-
-        return cursor.fetchone()
-
-    def get_observation_image(self, observation_id):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT crop_path
-            FROM observations
-            WHERE id = ?
         """, (observation_id,))
 
         return cursor.fetchone()
@@ -805,43 +720,6 @@ class Database:
         """)
 
         return cursor.fetchone()[0]
-
-    def get_species_by_observation(self, observation_id):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT s.*
-            FROM species s
-            JOIN reviews r
-            ON r.confirmed_species_id = s.id
-            WHERE r.observation_id = ?
-        """, (observation_id,))
-
-        return cursor.fetchone()
-
-    def get_observation(self, observation_id):
-
-        cursor = self.cursor()
-
-        cursor.execute("""
-            SELECT
-                o.*,
-                p.world
-            FROM observations o
-
-            JOIN photos p
-                ON p.id = o.photo_id
-
-            WHERE o.id = ?
-        """, (observation_id,))
-
-        row = cursor.fetchone()
-
-        if row is None:
-            return None
-
-        return dict(row)
 
     def get_species(self):
 

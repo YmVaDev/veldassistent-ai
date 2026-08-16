@@ -1,5 +1,4 @@
 
-from pathlib import Path
 import threading
 import time
 
@@ -35,6 +34,7 @@ from config import (
     BASE_URL,
     DATABASE_PATH,
     GENERATED_SPECIES_DIR,
+    INCOMING_DIR,
     MODEL_DIR,
     RTSP_ENABLED,
     RTSP_INTERVAL,
@@ -198,12 +198,13 @@ class FotoHandler(FileSystemEventHandler):
         ):
             return
 
-        # Wacht even zodat het bestand volledig
-        # naar de map gekopieerd kan worden.
         time.sleep(1)
 
         try:
-            process_incoming(event.src_path)
+            process_incoming(
+                event.src_path,
+                "ranger"
+            )
 
         except Exception:
             logger.exception(
@@ -211,8 +212,7 @@ class FotoHandler(FileSystemEventHandler):
             )
 
 
-incoming_dir = Path("incoming")
-incoming_dir.mkdir(
+INCOMING_DIR.mkdir(
     parents=True,
     exist_ok=True,
 )
@@ -228,7 +228,6 @@ observer = Observer()
 def startup():
 
     global camera_source
-    global camera_thread
 
     logger.info(
         "Starting Veldassistent 24/7"
@@ -269,7 +268,7 @@ def startup():
 
     observer.schedule(
         FotoHandler(),
-        str(incoming_dir),
+        str(INCOMING_DIR),
         recursive=False,
     )
 
@@ -298,13 +297,11 @@ def startup():
         camera_key="lumus",
     )
 
-    camera_thread = threading.Thread(
+    threading.Thread(
         target=camera_source.start,
         args=(process_rtsp_frame,),
         daemon=True,
-    )
-
-    camera_thread.start()
+    ).start()
 
     logger.info(
         "Static camera monitoring started"

@@ -22,7 +22,10 @@ GENERATED_SPECIES_DIR = BASE_DIR / "generated" / "species"
 GENERATED_SPECIESHABITAT_DIR = BASE_DIR / "generated" / "habitats"
 MEDIA_URL = "https://oostakkerbos.be/media/"
 
-ENVIRONMENT = "development"
+ENVIRONMENT = os.getenv(
+    "ENVIRONMENT",
+    "development"
+)
 
 API_PREFIX = "/api/v1"
 API_KEY = os.getenv("API_KEY")
@@ -30,17 +33,16 @@ API_KEY = os.getenv("API_KEY")
 SPECIES_MEDIA_URL = MEDIA_URL + "species/"
 HABITAT_MEDIA_URL = MEDIA_URL + "habitats/"
 
-
 # -------------------------
 # RTSP configuratie
 # -------------------------
 
-RTSP_ENABLED = True
+RTSP_ENABLED = os.getenv(
+    "RTSP_ENABLED",
+    "true"
+).lower() == "true"
 
-RTSP_URL = os.getenv(
-    "RTSP_URL",
-    "rtsp://admin:VUL_HIER_JE_WACHTWOORD_IN@192.168.129.66:554/Preview_01_main"
-)
+RTSP_URL = os.getenv("RTSP_URL")
 
 RTSP_INTERVAL = 30
 

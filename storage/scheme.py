@@ -1,7 +1,6 @@
 
 from storage.database import Database
 
-
 def create_cameras(cursor):
 
     cursor.execute("""
@@ -19,7 +18,6 @@ def create_cameras(cursor):
 
         )
     """)
-
 
 def create_models(cursor):
 
@@ -63,7 +61,7 @@ def create_species(cursor):
 
             habitat_image_path TEXT,
 
-            priority TEXT DEFAULT 'normal',
+            priority TEXT DEFAULT 'interesting',
 
             clip_duration INTEGER DEFAULT 0,
 
