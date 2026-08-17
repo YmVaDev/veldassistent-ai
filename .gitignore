@@ -24,3 +24,12 @@ logs/
 .DS_Store
 Thumbs.db
 .env
+
+# Database
+*.db
+*.db-wal
+*.db-shm
+
+# Test artifacts
+test_rtsp.jpg
+test_rtsp.py
