@@ -1,8 +1,10 @@
 
-import cv2
+import subprocess
 import time
 from pathlib import Path
+
 from logger import logger
+
 
 class StaticCamera:
 
@@ -24,7 +26,6 @@ class StaticCamera:
         )
 
         self.running = False
-        self.capture = None
 
     def start(self, callback):
 
@@ -36,82 +37,85 @@ class StaticCamera:
 
         while self.running:
 
+            frame_path = None
+
             try:
 
-                self.capture = cv2.VideoCapture(
-                    self.url,
-                    cv2.CAP_FFMPEG,
-                    [
-                        cv2.CAP_PROP_OPEN_TIMEOUT_MSEC, 5000,
-                        cv2.CAP_PROP_READ_TIMEOUT_MSEC, 5000,
-                    ]
+                timestamp = int(
+                    time.time() * 1000
                 )
 
-                if not self.capture.isOpened():
+                frame_path = (
+                    self.output_dir
+                    / f"static_{timestamp}.jpg"
+                )
+
+                command = [
+                    "ffmpeg",
+                    "-rtsp_transport",
+                    "tcp",
+                    "-i",
+                    self.url,
+                    "-frames:v",
+                    "1",
+                    "-q:v",
+                    "2",
+                    "-y",
+                    str(frame_path),
+                ]
+
+                logger.info(
+                    "Capturing static camera frame with FFmpeg"
+                )
+
+                result = subprocess.run(
+                    command,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    timeout=20,
+                )
+
+                if result.returncode != 0:
 
                     logger.error(
-                        "Could not open camera stream"
+                        "FFmpeg failed to capture camera frame: "
+                        f"{result.stderr[-1000:]}"
                     )
 
-                    self.capture.release()
-                    self.capture = None
+                    if frame_path.exists():
+                        frame_path.unlink()
 
+                    time.sleep(5)
+                    continue
+
+                if not frame_path.exists():
+
+                    logger.error(
+                        "FFmpeg completed but no frame was created"
+                    )
+
+                    time.sleep(5)
                     continue
 
                 logger.info(
-                    "Static camera connected"
+                    f"Static camera frame captured: "
+                    f"{frame_path}"
                 )
 
-                while self.running:
+                callback(
+                    str(frame_path),
+                    self.camera_key
+                )
 
-                    success, frame = (
-                        self.capture.read()
-                    )
+            except subprocess.TimeoutExpired:
 
-                    if not success:
+                logger.warning(
+                    "FFmpeg camera capture timed out"
+                )
 
-                        logger.warning(
-                            "Failed to read camera frame"
-                        )
-
-                        break
-
-                    timestamp = int(
-                        time.time() * 1000
-                    )
-
-                    frame_path = (
-                        self.output_dir
-                        / f"static_{timestamp}.jpg"
-                    )
-
-                    saved = cv2.imwrite(
-                        str(frame_path),
-                        frame
-                    )
-
-                    if not saved:
-
-                        logger.error(
-                            f"Could not save frame: "
-                            f"{frame_path}"
-                        )
-
-                        continue
-
-                    logger.info(
-                        f"Static camera frame captured: "
-                        f"{frame_path}"
-                    )
-
-                    callback(
-                        str(frame_path),
-                        self.camera_key
-                    )
-
-                    time.sleep(
-                        self.interval
-                    )
+                if frame_path and frame_path.exists():
+                    frame_path.unlink()
 
             except Exception:
 
@@ -119,20 +123,14 @@ class StaticCamera:
                     "Static camera error"
                 )
 
-            finally:
+                if frame_path and frame_path.exists():
+                    frame_path.unlink()
 
-                if self.capture:
+            if self.running:
 
-                    self.capture.release()
-                    self.capture = None
-
-                if self.running:
-
-                    logger.info(
-                        "Reconnecting to static camera..."
-                    )
-
-                    time.sleep(5)
+                time.sleep(
+                    self.interval
+                )
 
     def stop(self):
 
@@ -141,9 +139,4 @@ class StaticCamera:
         )
 
         self.running = False
-
-        if self.capture:
-
-            self.capture.release()
-            self.capture = None
 
