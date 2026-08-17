@@ -8,17 +8,17 @@ from fastapi import (
     HTTPException,
     Query,
 )
+
 from fastapi.exceptions import RequestValidationError
 from fastapi.middleware.cors import CORSMiddleware
-
 from watchdog.events import FileSystemEventHandler
 from watchdog.observers import Observer
-
 from api.errors import (
     general_error_handler,
     http_error_handler,
     validation_error_handler,
 )
+
 from api.models import ReviewRequest
 from api.public import router as public_router
 from api.security import verify_api_key
@@ -28,7 +28,6 @@ from api.serializers import (
 )
 
 from cameras.static_camera import StaticCamera
-
 from config import (
     API_VERSION,
     BASE_URL,
@@ -40,16 +39,23 @@ from config import (
     RTSP_INTERVAL,
     RTSP_OUTPUT_DIR,
     RTSP_URL,
+    PTZ_ENABLED,
+    PTZ_RTSP_URL,
+    PTZ_ONVIF_HOST,
+    PTZ_ONVIF_PORT,
+    PTZ_ONVIF_USERNAME,
+    PTZ_ONVIF_PASSWORD,
+    PTZ_OUTPUT_DIR,
+    PTZ_INTERVAL,
+    PTZ_SETTLE_TIME,
 )
 
 from engine.engine import Engine
 from engine.loader import load_models
-
 from logger import logger
-
 from services.illustration_service import IllustrationService
-
 from storage.database import Database
+from cameras.ptz_camera import PTZCamera
 
 
 # =========================================================
@@ -177,6 +183,7 @@ def process_rtsp_frame(
 
 camera_source = None
 camera_thread = None
+ptz_camera = None
 
 
 # =========================================================
@@ -228,6 +235,8 @@ observer = Observer()
 def startup():
 
     global camera_source
+    global camera_thread
+    global ptz_camera
 
     logger.info(
         "Starting Veldassistent 24/7"
@@ -306,6 +315,34 @@ def startup():
     logger.info(
         "Static camera monitoring started"
     )
+
+    # -----------------------------------------------------
+    # PTZ camera monitoring
+    # -----------------------------------------------------
+
+    if not PTZ_ENABLED:
+
+        logger.info(
+            "PTZ camera monitoring disabled"
+        )
+
+    else:
+
+        ptz_camera = PTZCamera(
+            rtsp_url=PTZ_RTSP_URL,
+            onvif_host=PTZ_ONVIF_HOST,
+            onvif_port=PTZ_ONVIF_PORT,
+            username=PTZ_ONVIF_USERNAME,
+            password=PTZ_ONVIF_PASSWORD,
+            output_dir=PTZ_OUTPUT_DIR,
+            camera_key="wz520",
+            interval=PTZ_INTERVAL,
+            settle_time=PTZ_SETTLE_TIME,
+        )
+
+        logger.info(
+            "PTZ camera configured"
+        )
 
 
 # =========================================================

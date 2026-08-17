@@ -49,6 +49,36 @@ RTSP_INTERVAL = 30
 RTSP_OUTPUT_DIR = BASE_DIR / "rtsp_frames"
 
 
+# -------------------------
+# PTZ configuratie
+# -------------------------
+
+PTZ_ENABLED = os.getenv(
+    "PTZ_ENABLED",
+    "false"
+).lower() == "true"
+
+PTZ_RTSP_URL = os.getenv("PTZ_RTSP_URL")
+
+PTZ_ONVIF_HOST = os.getenv("PTZ_ONVIF_HOST")
+PTZ_ONVIF_PORT = int(
+    os.getenv("PTZ_ONVIF_PORT", "80")
+)
+
+PTZ_ONVIF_USERNAME = os.getenv(
+    "PTZ_ONVIF_USERNAME"
+)
+
+PTZ_ONVIF_PASSWORD = os.getenv(
+    "PTZ_ONVIF_PASSWORD"
+)
+
+PTZ_OUTPUT_DIR = BASE_DIR / "ptz_frames"
+
+PTZ_INTERVAL = 30
+PTZ_SETTLE_TIME = 3
+
+
 CAMERAS = {
     "ranger": {
         "name": "Ranger",
@@ -60,6 +90,12 @@ CAMERAS = {
         "name": "Lumus",
         "location": "Tuin",
         "world": "tuin",
+    },
+
+    "wz520": {
+        "name": "ANNKE WZ520",
+        "location": "Oostakkerbos",
+        "world": "bos",
     },
 
 }
