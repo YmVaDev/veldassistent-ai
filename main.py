@@ -519,6 +519,11 @@ def observation_detail(observation_id: int):
         db,
     )
 
+@app.get("/api/observations/today")
+def observations_today():
+
+    return db.get_today_observations()
+
 
 # =========================================================
 # Species endpoints

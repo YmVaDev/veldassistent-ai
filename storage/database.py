@@ -749,6 +749,29 @@ class Database:
 
         return cursor.fetchone()[0]
 
+    def get_today_observations(self):
+
+        cursor = self.cursor()
+
+        cursor.execute("""
+            SELECT
+                o.*,
+                p.world
+            FROM observations o
+
+            JOIN photos p
+                ON p.id = o.photo_id
+
+            WHERE
+                o.status = 'confirmed'
+                AND date(o.created_at) = date('now', 'localtime')
+
+            ORDER BY
+                o.created_at DESC
+        """)
+
+        return cursor.fetchall()
+
     def get_species(self):
 
         cursor = self.cursor()
