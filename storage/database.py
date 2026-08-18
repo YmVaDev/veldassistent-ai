@@ -749,7 +749,6 @@ class Database:
 
         return cursor.fetchone()[0]
 
-
     def get_today_observations(self):
 
         cursor = self.cursor()
