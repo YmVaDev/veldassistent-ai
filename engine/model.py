@@ -259,8 +259,8 @@ class AIModel:
 
                 # Eén keer tellen per soort per foto
                 species["count"] = (
-                    species.get("count", 0) + 1
-                )
+                    species.get("count") or 0
+                ) + 1
 
                 # Eerste waarneming
                 if not species.get(
