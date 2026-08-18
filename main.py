@@ -499,11 +499,6 @@ def observations(
         ],
     }
 
-@app.get("/api/observations/today")
-def observations_today():
-
-    return db.get_today_observations()
-
 @app.get("/api/observations/{observation_id}")
 def observation_detail(observation_id: int):
 

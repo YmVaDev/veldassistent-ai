@@ -42,6 +42,19 @@ def latest_observations(limit: int = 20):
         ]
     }
 
+@router.get("/observations/today")
+def today_observations():
+
+    rows = db.get_today_observations()
+
+    return {
+        "success": True,
+        "count": len(rows),
+        "data": [
+            dict(row)
+            for row in rows
+        ]
+    }
 
 @router.get("/observations/{observation_id}")
 def get_observation(observation_id: int):
