@@ -755,16 +755,34 @@ class Database:
 
         cursor.execute("""
             SELECT
-                o.*,
-                p.world
+                o.id AS observation_id,
+                o.created_at,
+                o.crop_path,
+
+                p.world,
+
+                r.confirmed_species_id,
+
+                s.english AS species,
+                s.scientific,
+                s.species_image_path,
+                s.habitat_image_path
+
             FROM observations o
 
             JOIN photos p
                 ON p.id = o.photo_id
 
+            JOIN reviews r
+                ON r.observation_id = o.id
+
+            JOIN species s
+                ON s.id = r.confirmed_species_id
+
             WHERE
                 o.status = 'confirmed'
-                AND date(o.created_at) = date('now', 'localtime')
+                AND date(o.created_at) =
+                    date('now', 'localtime')
 
             ORDER BY
                 o.created_at DESC
