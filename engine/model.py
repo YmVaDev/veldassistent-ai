@@ -273,9 +273,8 @@ class AIModel:
                 species["last_seen"] = now
 
                 # Hoogste AI-score ooit
-                if prediction.score > species.get(
-                    "best_score",
-                    0
+                if prediction.score > (
+                    species.get("best_score") or 0
                 ):
 
                     species["best_score"] = (
