@@ -138,15 +138,6 @@ class AIModel:
             crops
         ):
 
-            filename = (
-                f"crops/{uuid.uuid4().hex}.jpg"
-            )
-
-            cv2.imwrite(
-                filename,
-                crop
-            )
-
             # -------------------------------------------------
             # Top-5 classificatie
             # -------------------------------------------------
@@ -160,7 +151,26 @@ class AIModel:
             # Top-1
             prediction = predictions[0]
 
+            # Alleen echte herkenningen worden observations
+            OBSERVATION_THRESHOLD = 50.0
+
+            if prediction.score < OBSERVATION_THRESHOLD:
+                continue
+
             english = prediction.species
+
+            # -------------------------------------------------
+            # Crop alleen bewaren bij geldige observation
+            # -------------------------------------------------
+
+            filename = (
+                f"crops/{uuid.uuid4().hex}.jpg"
+            )
+
+            cv2.imwrite(
+                filename,
+                crop
+            )
 
             # -------------------------------------------------
             # Species uit database
