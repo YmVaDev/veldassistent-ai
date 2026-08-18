@@ -749,6 +749,7 @@ class Database:
 
         return cursor.fetchone()[0]
 
+
     def get_today_observations(self):
 
         cursor = self.cursor()
@@ -780,7 +781,8 @@ class Database:
                 ON s.id = r.confirmed_species_id
 
             WHERE
-                o.status = 'confirmed'
+                o.status = 'reviewed'
+                AND r.confirmed = 1
                 AND date(o.created_at) =
                     date('now', 'localtime')
 
