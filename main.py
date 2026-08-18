@@ -464,23 +464,6 @@ def submit_review(
         "reviewed",
     )
 
-    species = db.get_species_by_id(
-        body.confirmed_species_id
-    )
-
-    if species:
-
-        illustration_service.generate_if_missing(
-            species
-        )
-
-    else:
-
-        logger.warning(
-            f"Species not found: "
-            f"{body.confirmed_species_id}"
-        )
-
     return {
         "success": True,
         "review_id": review_id,

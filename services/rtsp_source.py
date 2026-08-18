@@ -1,5 +1,5 @@
 
-import cv2
+import subprocess
 import time
 from pathlib import Path
 
@@ -23,7 +23,6 @@ class RTSPSource:
         )
 
         self.running = False
-        self.capture = None
 
     def start(self, callback):
 
@@ -35,77 +34,85 @@ class RTSPSource:
 
         while self.running:
 
+            frame_path = None
+
             try:
 
-                self.capture = cv2.VideoCapture(
-                    self.url
+                timestamp = int(
+                    time.time() * 1000
                 )
 
-                if not self.capture.isOpened():
+                frame_path = (
+                    self.output_dir
+                    / f"rtsp_{timestamp}.jpg"
+                )
+
+                command = [
+                    "ffmpeg",
+                    "-rtsp_transport",
+                    "tcp",
+                    "-i",
+                    self.url,
+                    "-frames:v",
+                    "1",
+                    "-q:v",
+                    "2",
+                    "-y",
+                    str(frame_path),
+                ]
+
+                logger.info(
+                    "Capturing RTSP frame with FFmpeg"
+                )
+
+                result = subprocess.run(
+                    command,
+                    stdout=subprocess.DEVNULL,
+                    stderr=subprocess.PIPE,
+                    text=True,
+                    timeout=20,
+                )
+
+                if result.returncode != 0:
 
                     logger.error(
-                        "Could not open RTSP stream"
+                        "FFmpeg failed to capture RTSP frame: "
+                        f"{result.stderr[-1000:]}"
                     )
 
-                    self.capture.release()
-                    self.capture = None
+                    if frame_path.exists():
+                        frame_path.unlink()
+
+                    time.sleep(5)
+                    continue
+
+                if not frame_path.exists():
+
+                    logger.error(
+                        "FFmpeg completed but no frame was created"
+                    )
 
                     time.sleep(5)
                     continue
 
                 logger.info(
-                    "RTSP stream connected"
+                    f"RTSP frame captured: {frame_path}"
                 )
 
-                while self.running:
+                callback(
+                    str(frame_path)
+                )
 
-                    success, frame = (
-                        self.capture.read()
-                    )
+            except subprocess.TimeoutExpired:
 
-                    if not success:
+                logger.warning(
+                    "FFmpeg RTSP capture timed out"
+                )
 
-                        logger.warning(
-                            "Failed to read RTSP frame"
-                        )
+                if frame_path and frame_path.exists():
+                    frame_path.unlink()
 
-                        break
-
-                    timestamp = int(
-                        time.time() * 1000
-                    )
-
-                    frame_path = (
-                        self.output_dir
-                        / f"rtsp_{timestamp}.jpg"
-                    )
-
-                    saved = cv2.imwrite(
-                        str(frame_path),
-                        frame
-                    )
-
-                    if not saved:
-
-                        logger.error(
-                            f"Could not save frame: "
-                            f"{frame_path}"
-                        )
-
-                        continue
-
-                    logger.info(
-                        f"RTSP frame captured: "
-                        f"{frame_path}"
-                    )
-
-                    callback(
-                        str(frame_path)
-                    )
-
-                    time.sleep(
-                        self.interval
-                    )
+                time.sleep(5)
 
             except Exception:
 
@@ -113,20 +120,16 @@ class RTSPSource:
                     "RTSP source error"
                 )
 
-            finally:
+                if frame_path and frame_path.exists():
+                    frame_path.unlink()
 
-                if self.capture:
+                time.sleep(5)
 
-                    self.capture.release()
-                    self.capture = None
+            if self.running:
 
-                if self.running:
-
-                    logger.info(
-                        "Reconnecting to RTSP stream..."
-                    )
-
-                    time.sleep(5)
+                time.sleep(
+                    self.interval
+                )
 
     def stop(self):
 
@@ -136,7 +139,3 @@ class RTSPSource:
 
         self.running = False
 
-        if self.capture:
-
-            self.capture.release()
-            self.capture = None

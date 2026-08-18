@@ -425,76 +425,76 @@ class Database:
 
         self.commit()
 
-    def get_pending_review(self):
+	def get_pending_review(self):
 
-        cursor = self.cursor()
+    	cursor = self.cursor()
 
-        cursor.execute("""
-            SELECT
-                o.id,
-                o.crop_path,
-                o.status,
+    	cursor.execute("""
+        	SELECT
+            	o.id,
+            	o.crop_path,
+            	o.status,
 
-                p.species,
-                p.score,
-                p.rank,
+            	p.species,
+            	p.score,
+            	p.rank,
 
-                s.id AS species_id,
-                s.scientific,
-                s.priority
+            	s.id AS species_id,
+            	s.scientific,
+            	s.priority
 
-            FROM observations o
+        	FROM observations o
 
-            JOIN predictions p
-                ON p.observation_id = o.id
+        	JOIN predictions p
+            	ON p.observation_id = o.id
 
-            LEFT JOIN species s
-                ON s.english = p.species
-                AND s.model_id = o.model_id
+        	LEFT JOIN species s
+            	ON s.english = p.species
+            	AND s.model_id = o.model_id
 
-            WHERE
-                o.status = 'pending'
-                AND p.rank <= 5
+        	WHERE
+            	o.status = 'pending'
+            	AND p.rank <= 5
 
-            ORDER BY
-                o.id DESC,
-                p.rank
-        """)
+        	ORDER BY
+            	o.id DESC,
+            	p.rank
+    	""")
 
-        rows = [
-            dict(row)
-            for row in cursor.fetchall()
-        ]
+    	rows = [
+        	dict(row)
+        	for row in cursor.fetchall()
+    	]
 
-        reviews = {}
+    	reviews = {}
 
-        for row in rows:
+    	for row in rows:
 
-            observation_id = row["id"]
+        	observation_id = row["id"]
 
-            if observation_id not in reviews:
+        	if observation_id not in reviews:
 
-                reviews[observation_id] = {
-                    "id": observation_id,
-                    "crop_path": row["crop_path"],
-                    "status": row["status"],
-                    "crop_url": (
-                        f"https://oostakkerbos.be/"
-                        f"{row['crop_path']}"
-                    ),
-                    "predictions": []
-                }
+            	reviews[observation_id] = {
+                	"id": observation_id,
+                	"crop_path": row["crop_path"],
+                	"status": row["status"],
+                	"crop_url": (
+                    	f"https://oostakkerbos.be/"
+                    	f"{row['crop_path']}"
+                	),
+                	"predictions": []
+            	}
 
-            reviews[observation_id]["predictions"].append({
-                "species": row["species"],
-                "score": row["score"],
-                "rank": row["rank"],
-                "species_id": row["species_id"],
-                "scientific": row["scientific"],
-                "priority": row["priority"],
-            })
+        	reviews[observation_id]["predictions"].append({
+            	"species": row["species"],
+            	"score": row["score"],
+            	"rank": row["rank"],
+            	"species_id": row["species_id"],
+            	"scientific": row["scientific"],
+            	"priority": row["priority"],
+        	})
 
-        return list(reviews.values())
+    	return list(reviews.values())
 
     def get_review(self, observation_id):
 
