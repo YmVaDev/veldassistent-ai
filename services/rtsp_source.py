@@ -5,7 +5,6 @@ from pathlib import Path
 
 from logger import logger
 
-
 class RTSPSource:
 
     def __init__(
