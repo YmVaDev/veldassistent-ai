@@ -155,6 +155,14 @@ class AIModel:
                 f"{prediction.score:.2f}%"
             )
 
+            print(
+                "CLASSIFIER TOP-5: "
+                + " | ".join(
+                    f"{p.species} {p.score:.2f}%"
+                    for p in predictions
+                )
+            )
+
             OBSERVATION_THRESHOLD = 50.0
 
             if prediction.score < OBSERVATION_THRESHOLD:
