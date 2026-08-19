@@ -45,6 +45,9 @@ RTSP_ENABLED = os.getenv(
 RTSP_URL = os.getenv("RTSP_URL")
 RTSP_LIVE_URL = os.getenv("RTSP_LIVE_URL")
 
+LIVE_STREAM_DIR = BASE_DIR / "live"
+LIVE_STREAM_PLAYLIST = LIVE_STREAM_DIR / "lumus.m3u8"
+
 RTSP_INTERVAL = 30
 
 RTSP_OUTPUT_DIR = BASE_DIR / "rtsp_frames"

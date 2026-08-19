@@ -48,6 +48,8 @@ from config import (
     PTZ_OUTPUT_DIR,
     PTZ_INTERVAL,
     PTZ_SETTLE_TIME,
+    LIVE_STREAM_DIR,
+    LIVE_STREAM_PLAYLIST,
 )
 
 from engine.engine import Engine
@@ -57,6 +59,8 @@ from services.illustration_service import IllustrationService
 from storage.database import Database
 from cameras.ptz_camera import PTZCamera
 
+import subprocess
+from fastapi.responses import HTMLResponse
 
 # =========================================================
 # Applicatie-initialisatie
@@ -184,6 +188,7 @@ def process_rtsp_frame(
 camera_source = None
 camera_thread = None
 ptz_camera = None
+live_process = None
 
 
 # =========================================================
@@ -344,6 +349,44 @@ def startup():
             "PTZ camera configured"
         )
 
+    # -----------------------------------------------------
+    # Live stream
+    # -----------------------------------------------------
+
+    if RTSP_LIVE_URL:
+
+        LIVE_STREAM_DIR.mkdir(
+            parents=True,
+            exist_ok=True
+        )
+
+        live_process = subprocess.Popen([
+            "ffmpeg",
+            "-rtsp_transport", "tcp",
+            "-i", RTSP_LIVE_URL,
+
+            "-c:v", "copy",
+            "-an",
+
+            "-f", "hls",
+            "-hls_time", "2",
+            "-hls_list_size", "5",
+            "-hls_flags",
+            "delete_segments+append_list",
+
+            str(LIVE_STREAM_PLAYLIST)
+        ])
+
+        logger.info(
+            "Lumus live stream started"
+        )
+
+    else:
+
+        logger.warning(
+            "RTSP_LIVE_URL not configured"
+        )
+
 
 # =========================================================
 # Shutdown
@@ -353,6 +396,7 @@ def startup():
 def shutdown():
 
     global camera_source
+    global live_process
 
     logger.info(
         "Stopping Veldassistent 24/7"
@@ -380,6 +424,25 @@ def shutdown():
     logger.info(
         "Incoming monitoring stopped"
     )
+
+    # -----------------------------------------------------
+    # Stop live stream
+    # -----------------------------------------------------
+
+    if live_process:
+
+        live_process.terminate()
+
+        try:
+            live_process.wait(timeout=5)
+
+        except subprocess.TimeoutExpired:
+
+            live_process.kill()
+
+        logger.info(
+            "Lumus live stream stopped"
+        )
 
 
 # =========================================================
@@ -561,3 +624,104 @@ def species_detail(species_id: int):
     return serialize_species(
         row
     )
+
+@app.get(
+    "/camera",
+    response_class=HTMLResponse
+)
+def camera_page():
+
+    return """
+    <!DOCTYPE html>
+    <html lang="nl">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>Oostakkerbos - Live camera</title>
+
+        <style>
+            body {
+                margin: 0;
+                background: #111;
+                color: white;
+                font-family: Arial, sans-serif;
+            }
+
+            .container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 20px;
+            }
+
+            h1 {
+                margin-bottom: 15px;
+            }
+
+            video {
+                width: 100%;
+                max-height: 80vh;
+                background: black;
+                display: block;
+            }
+        </style>
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <h1>Oostakkerbos — live camera</h1>
+
+            <video
+                id="video"
+                controls
+                autoplay
+                muted
+                playsinline>
+            </video>
+
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+        <script>
+
+            const video = document.getElementById("video");
+            const stream = "/camera/stream/lumus.m3u8";
+
+            if (Hls.isSupported()) {
+
+                const hls = new Hls();
+
+                hls.loadSource(stream);
+                hls.attachMedia(video);
+
+                hls.on(Hls.Events.MANIFEST_PARSED, function () {
+                    video.play();
+                });
+
+            }
+
+            else if (
+                video.canPlayType(
+                    "application/vnd.apple.mpegurl"
+                )
+            ) {
+
+                video.src = stream;
+
+                video.addEventListener(
+                    "loadedmetadata",
+                    function () {
+                        video.play();
+                    }
+                );
+
+            }
+
+        </script>
+
+    </body>
+    </html>
+    """
