@@ -43,6 +43,7 @@ RTSP_ENABLED = os.getenv(
 ).lower() == "true"
 
 RTSP_URL = os.getenv("RTSP_URL")
+RTSP_LIVE_URL = os.getenv("RTSP_LIVE_URL")
 
 RTSP_INTERVAL = 30
 
