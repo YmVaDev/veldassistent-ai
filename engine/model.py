@@ -148,10 +148,13 @@ class AIModel:
                 )
             )
 
-            # Top-1
             prediction = predictions[0]
 
-            # Alleen echte herkenningen worden observations
+            print(
+                f"CLASSIFIER: {prediction.species} "
+                f"{prediction.score:.2f}%"
+            )
+
             OBSERVATION_THRESHOLD = 50.0
 
             if prediction.score < OBSERVATION_THRESHOLD:
