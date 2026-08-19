@@ -58,12 +58,6 @@ class Engine:
         # maar niet als observation.
         for observation in objects:
 
-            if not observation.predictions:
-                continue
-
-            if observation.predictions[0].species == "unknown":
-                continue
-
             observation.photo = photo
 
             self.db.save_observation(observation)
@@ -73,8 +67,6 @@ class Engine:
                     observation.id,
                     prediction
                 )
-
-        new_path = archive_photo(src_path)
 
         new_path = archive_photo(src_path)
 
