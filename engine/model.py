@@ -170,6 +170,9 @@ class AIModel:
 
             english = prediction.species
 
+            if english.strip().lower() == "unknown":
+                continue
+
             # -------------------------------------------------
             # Crop alleen bewaren bij geldige observation
             # -------------------------------------------------
