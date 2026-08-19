@@ -165,10 +165,10 @@ class AIModel:
 
             OBSERVATION_THRESHOLD = 50.0
 
-            english = prediction.species
-
-            if english.strip().lower() == "unknown":
+            if prediction.score < OBSERVATION_THRESHOLD:
                 continue
+
+            english = prediction.species
 
             # -------------------------------------------------
             # Crop alleen bewaren bij geldige observation
