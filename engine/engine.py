@@ -53,17 +53,16 @@ class Engine:
 
         self.db.save_photo(photo)
 
-        # Unknown niet als observation opslaan
-        objects = [
-            observation
-            for observation in objects
-            if any(
-                prediction.species != "unknown"
-                for prediction in observation.predictions
-            )
-        ]
-
+        # Alleen echte herkenningen opslaan.
+        # Unknown wordt wel als foto bewaard,
+        # maar niet als observation.
         for observation in objects:
+
+            if not observation.predictions:
+                continue
+
+            if observation.predictions[0].species == "unknown":
+                continue
 
             observation.photo = photo
 
@@ -74,6 +73,8 @@ class Engine:
                     observation.id,
                     prediction
                 )
+
+        new_path = archive_photo(src_path)
 
         new_path = archive_photo(src_path)
 
