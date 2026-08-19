@@ -518,6 +518,16 @@ def observation_detail(observation_id: int):
         db,
     )
 
+@app.get("/api/observations/today")
+def observations_today():
+
+    rows = db.get_today_observations()
+
+    return [
+        serialize_observation(row, db)
+        for row in rows
+    ]
+
 
 # =========================================================
 # Species endpoints
