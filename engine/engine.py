@@ -53,6 +53,16 @@ class Engine:
 
         self.db.save_photo(photo)
 
+        # Unknown niet als observation opslaan
+        objects = [
+            observation
+            for observation in objects
+            if any(
+                prediction.species != "unknown"
+                for prediction in observation.predictions
+            )
+        ]
+
         for observation in objects:
 
             observation.photo = photo
