@@ -493,7 +493,6 @@ def get_review(observation_id: int):
 
     return db.get_review(observation_id)
 
-
 @app.post(
     "/review/{observation_id}",
     dependencies=[Depends(verify_api_key)],
@@ -527,11 +526,47 @@ def submit_review(
         "reviewed",
     )
 
+    # -------------------------------------------------
+    # Illustratie genereren voor bevestigde soort
+    # -------------------------------------------------
+
+    if body.confirmed and body.confirmed_species_id:
+
+        species = db.get_species_by_id(
+            body.confirmed_species_id
+        )
+
+        if species:
+
+            try:
+
+                illustration_service.generate_if_missing(
+                    species
+                )
+
+                logger.info(
+                    f"Illustration check completed for species "
+                    f"{body.confirmed_species_id}"
+                )
+
+            except Exception:
+
+                logger.exception(
+                    f"Failed to generate illustration for species "
+                    f"{body.confirmed_species_id}"
+                )
+
+        else:
+
+            logger.warning(
+                f"Confirmed species not found: "
+                f"{body.confirmed_species_id}"
+            )
+
     return {
         "success": True,
         "review_id": review_id,
     }
-
 
 # =========================================================
 # Public observation endpoints
