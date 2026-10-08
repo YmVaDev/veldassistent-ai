@@ -1,6 +1,7 @@
 
 import time
 import cv2
+import subprocess
 
 from pathlib import Path
 from logger import logger
@@ -76,60 +77,47 @@ class PTZCamera:
         )
 
     def capture_frame(self):
-
-        if self.capture is None:
-
-            self.capture = cv2.VideoCapture(
-                self.rtsp_url,
-                cv2.CAP_FFMPEG,
-                [
-                    cv2.CAP_PROP_OPEN_TIMEOUT_MSEC,
-                    5000,
-                    cv2.CAP_PROP_READ_TIMEOUT_MSEC,
-                    5000,
-                ]
-            )
-
-        if not self.capture.isOpened():
-
-            self.capture.release()
-            self.capture = None
-
-            raise RuntimeError(
-                "Could not open PTZ camera RTSP stream"
-            )
-
-        success, frame = self.capture.read()
-
-        if not success:
-
-            self.capture.release()
-            self.capture = None
-
-            raise RuntimeError(
-                "Could not read PTZ camera frame"
-            )
-
-        timestamp = int(
-            time.time() * 1000
-        )
+        timestamp = int(time.time() * 1000)
 
         frame_path = (
-            self.output_dir
-            / f"ptz_{timestamp}.jpg"
+            self.output_dir / f"ptz_{timestamp}.jpg"
         )
 
-        if not cv2.imwrite(
+        command = [
+            "ffmpeg",
+            "-rtsp_transport", "tcp",
+            "-i", self.rtsp_url,
+            "-frames:v", "1",
+            "-q:v", "2",
+            "-y",
             str(frame_path),
-            frame
-        ):
+        ]
+
+        try:
+            result = subprocess.run(
+                command,
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.PIPE,
+                text=True,
+                timeout=15,
+            )
+        except subprocess.TimeoutExpired:
             raise RuntimeError(
-                f"Could not save frame: {frame_path}"
+                "FFmpeg timed out while capturing PTZ frame"
             )
 
-        logger.info(
-            f"PTZ frame captured: {frame_path}"
-        )
+        if result.returncode != 0:
+            raise RuntimeError(
+                f"FFmpeg failed to capture PTZ frame: "
+                f"{result.stderr[-2000:]}"
+            )
+
+        if not frame_path.exists() or frame_path.stat().st_size == 0:
+            raise RuntimeError(
+                f"FFmpeg did not create a valid frame: {frame_path}"
+            )
+
+        logger.info(f"PTZ frame captured: {frame_path}")
 
         return frame_path
 
