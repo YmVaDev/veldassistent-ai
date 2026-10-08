@@ -40,6 +40,7 @@ from config import (
     RTSP_OUTPUT_DIR,
     RTSP_URL,
     RTSP_LIVE_URL,
+    PTZ_RTSP_URL,
     PTZ_ENABLED,
     PTZ_ONVIF_HOST,
     PTZ_ONVIF_PORT,
@@ -293,35 +294,6 @@ def startup():
     )
 
     # -----------------------------------------------------
-    # Static camera monitoring
-    # -----------------------------------------------------
-
-    if not RTSP_ENABLED:
-
-        logger.info(
-            "Static camera monitoring disabled"
-        )
-
-        return
-
-    camera_source = StaticCamera(
-        url=RTSP_URL,
-        output_dir=RTSP_OUTPUT_DIR,
-        interval=RTSP_INTERVAL,
-        camera_key="lumus",
-    )
-
-    threading.Thread(
-        target=camera_source.start,
-        args=(process_rtsp_frame,),
-        daemon=True,
-    ).start()
-
-    logger.info(
-        "Static camera monitoring started"
-    )
-
-    # -----------------------------------------------------
     # PTZ camera monitoring
     # -----------------------------------------------------
 
@@ -345,8 +317,14 @@ def startup():
             settle_time=PTZ_SETTLE_TIME,
         )
 
+        threading.Thread(
+            target=ptz_camera.start,
+            args=(process_rtsp_frame,),
+            daemon=True,
+        ).start()
+
         logger.info(
-            "PTZ camera configured"
+            "PTZ camera monitoring started"
         )
 
     # -----------------------------------------------------

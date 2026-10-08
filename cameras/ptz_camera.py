@@ -92,6 +92,9 @@ class PTZCamera:
 
         if not self.capture.isOpened():
 
+            self.capture.release()
+            self.capture = None
+
             raise RuntimeError(
                 "Could not open PTZ camera RTSP stream"
             )
@@ -99,6 +102,9 @@ class PTZCamera:
         success, frame = self.capture.read()
 
         if not success:
+
+            self.capture.release()
+            self.capture = None
 
             raise RuntimeError(
                 "Could not read PTZ camera frame"
@@ -126,6 +132,70 @@ class PTZCamera:
         )
 
         return frame_path
+
+    def start(self, process_callback):
+
+        logger.info(
+            f"Starting PTZ camera monitoring: "
+            f"{self.camera_key}"
+        )
+
+        self.running = True
+
+        # -------------------------------------------------
+        # ONVIF verbinding
+        # -------------------------------------------------
+
+        try:
+
+            self.connect()
+
+        except Exception:
+
+            logger.exception(
+                "Failed to connect to PTZ camera via ONVIF"
+            )
+
+        # -------------------------------------------------
+        # Monitoring loop
+        # -------------------------------------------------
+
+        while self.running:
+
+            cycle_start = time.time()
+
+            try:
+
+                frame_path = self.capture_frame()
+
+                process_callback(
+                    str(frame_path),
+                    self.camera_key
+                )
+
+            except Exception:
+
+                logger.exception(
+                    "Exception while capturing/analyzing "
+                    "PTZ camera frame"
+                )
+
+            elapsed = time.time() - cycle_start
+
+            sleep_time = max(
+                0,
+                self.interval - elapsed
+            )
+
+            if sleep_time > 0:
+
+                time.sleep(
+                    sleep_time
+                )
+
+        logger.info(
+            "PTZ camera monitoring loop stopped"
+        )
 
     def stop(self):
 

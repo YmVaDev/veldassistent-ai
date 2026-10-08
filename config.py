@@ -98,8 +98,8 @@ CAMERAS = {
 
     "wz520": {
         "name": "ANNKE WZ520",
-        "location": "Oostakkerbos",
-        "world": "bos",
+        "location": "RodeDel",
+        "world": "moeras",
     },
 
 }
