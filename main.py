@@ -297,6 +297,8 @@ def startup():
     # PTZ camera monitoring
     # -----------------------------------------------------
 
+    logger.info(f"PTZ BLOCK REACHED — PTZ_ENABLED={PTZ_ENABLED}")
+
     if not PTZ_ENABLED:
 
         logger.info(
